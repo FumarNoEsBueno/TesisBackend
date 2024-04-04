@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class almacen extends Model
 {
+    protected $table='almacen';
     protected $fillable = ['almacen_nombre','direccion_id'];
     use HasFactory;
 }

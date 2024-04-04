@@ -4,14 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\direccion;
 
 class seeder_direccion extends Seeder
 {
     public function run(): void
     {
         $direcciones = [
-            ['Calle falsa 123',0],
-            ['Caller real 321',1]
+            ['Calle falsa 123',1],
+            ['Caller real 321',2],
         ];
 
         $direcciones = array_map(function ($direccion) {

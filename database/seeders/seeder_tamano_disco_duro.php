@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\tamano;
 
 class seeder_tamano_disco_duro extends Seeder
 {
@@ -24,6 +25,6 @@ class seeder_tamano_disco_duro extends Seeder
             ];
         }, $tamanos);
 
-        tamano_disco_duro::insert($tamanos);
+        tamano::insert($tamanos);
     }
 }

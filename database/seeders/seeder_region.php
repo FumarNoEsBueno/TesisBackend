@@ -34,7 +34,7 @@ class seeder_region extends Seeder
 
         $regiones = array_map(function ($region) {
             return [
-                'region_nombre' => $region
+                'region_nombre' => $region,
             ];
         }, $regiones);
 

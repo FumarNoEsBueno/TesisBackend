@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class direccion extends Model
 {
+    protected $table='direccion';
     protected $fillable = ['direccion_nombre','ciudad_id'];
     use HasFactory;
 }
