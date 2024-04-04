@@ -12,6 +12,20 @@ class seeder_tipo_periferico extends Seeder
      */
     public function run(): void
     {
-        //
+        $tipos = [
+            'Teclado',
+            'Microfono',
+            'Audifonos',
+            'Cable',
+            'Mouse'
+        ];
+
+        $tipos = array_map(function ($tipo) {
+            return [
+                'nombre_tipo_periferico' => $tipo,
+            ];
+        }, $tipos);
+
+        tipo_periferico::insert($tipos);
     }
 }

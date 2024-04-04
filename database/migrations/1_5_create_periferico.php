@@ -22,14 +22,14 @@ return new class extends Migration
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('tipo_entrada_id');
-            $table->unsignedBigInteger('tipo_objeto_id');
+            $table->unsignedBigInteger('tipo_periferico_id');
 
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');
             $table->foreign('marca_id')->references('id')->on('marca');
             $table->foreign('tipo_entrada_id')->references('id')->on('tipo_entrada');
-            $table->foreign('tipo_objeto_id')->references('id')->on('tipo_objeto');
+            $table->foreign('tipo_periferico_id')->references('id')->on('tipo_periferico');
         });
     }
 

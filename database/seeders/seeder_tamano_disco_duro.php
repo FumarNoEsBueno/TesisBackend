@@ -12,6 +12,18 @@ class seeder_tamano_disco_duro extends Seeder
      */
     public function run(): void
     {
-        //
+        $tamanos = [
+            ['3.5','Descripcion'],
+            ['2.5','Descripcion']
+        ];
+
+        $tamanos = array_map(function ($tamano) {
+            return [
+                'tamano_nombre' => $tamano[0],
+                'tamano_descripcion' => $tamano[1],
+            ];
+        }, $tamanos);
+
+        tamano_disco_duro::insert($tamanos);
     }
 }

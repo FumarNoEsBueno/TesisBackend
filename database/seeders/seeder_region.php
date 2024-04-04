@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\region;
 
 class seeder_region extends Seeder
 {
@@ -33,7 +34,7 @@ class seeder_region extends Seeder
 
         $regiones = array_map(function ($region) {
             return [
-                'region_nombre' => $region,
+                'region_nombre' => $region
             ];
         }, $regiones);
 

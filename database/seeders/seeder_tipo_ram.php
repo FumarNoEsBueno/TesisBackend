@@ -12,6 +12,20 @@ class seeder_tipo_ram extends Seeder
      */
     public function run(): void
     {
-        //
+        $tipos = [
+            'DDR1',
+            'DDR2',
+            'DDR3',
+            'DDR4',
+            'DDR5'
+        ];
+
+        $tipos = array_map(function ($tipo) {
+            return [
+                'tipo_ram_nombre' => $tipo,
+            ];
+        }, $tipos);
+
+        tipo_ram::insert($tipos);
     }
 }

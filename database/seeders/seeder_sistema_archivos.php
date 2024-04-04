@@ -12,6 +12,19 @@ class seeder_sistema_archivos extends Seeder
      */
     public function run(): void
     {
-        //
+        $sistemas = [
+            'NTFS',
+            'Ext4',
+            'Fat32',
+            'ExFat'
+        ];
+
+        $sistemas = array_map(function ($sistema) {
+            return [
+                'sistema_archivos_nombre' => $sistema,
+            ];
+        }, $sistemas);
+
+        sistema_archivos::insert($sistemas);
     }
 }

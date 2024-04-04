@@ -12,6 +12,17 @@ class seeder_tamano_ram extends Seeder
      */
     public function run(): void
     {
-        //
+        $tamanos = [
+            'PC',
+            'Notebook'
+        ];
+
+        $tamanos = array_map(function ($tamano) {
+            return [
+                'tamano_ram_nombre' => $tamano,
+            ];
+        }, $tamanos);
+
+        tamano_ram::insert($tamanos);
     }
 }

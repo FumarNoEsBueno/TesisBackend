@@ -8,16 +8,26 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(seeder_region::class);
+        $this->call(seeder_provincia::class);
+        $this->call(seeder_ciudad::class);
+        $this->call(seeder_direccion::class);
+        $this->call(seeder_almacen::class);
+        $this->call(seeder_tamano_disco_duro::class);
+        $this->call(seeder_tamano_ram::class);
+        $this->call(seeder_tipo_entrada::class);
+        $this->call(seeder_tipo_periferico::class);
+        $this->call(seeder_tipo_ram::class);
+        $this->call(seeder_velocidad_ram::class);
+        $this->call(seeder_sistema_archivos::class);
+        $this->call(seeder_marca::class);
+        $this->call(seeder_estado::class);
+        $this->call(seeder_disponibilidad::class);
+        $this->call(seeder_periferico::class);
+        $this->call(seeder_disco_duro::class);
+        $this->call(seeder_ram::class);
     }
 }

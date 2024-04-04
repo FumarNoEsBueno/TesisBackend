@@ -12,6 +12,19 @@ class seeder_disponibilidad extends Seeder
      */
     public function run(): void
     {
-        //
+        $disponibilidades = [
+            ['Disponible','Descripcion'],
+            ['Servicio tecnico','Descripcion'],
+            ['Vendido','Descripcion']
+        ];
+
+        $disponibilidades = array_map(function ($disponibilidad) {
+            return [
+                'disponibilidad_nombre' => $disponibilidad[0],
+                'disponibilidad_descripcion' => $disponibilidad[1],
+            ];
+        }, $disponibilidades);
+
+        disponibilidad::insert($disponibilidades);
     }
 }
