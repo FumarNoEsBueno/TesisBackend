@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('disco_duro_crystaldisk');
             $table->string('disco_duro_horas_encendido');
             $table->string('disco_duro_esperanza_vida');
+            $table->integer('disco_duro_precio');
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');

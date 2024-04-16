@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('periferico_descripcion');
+            $table->integer('periferico_precio');
 
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
