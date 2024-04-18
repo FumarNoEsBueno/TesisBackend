@@ -16,6 +16,7 @@ class seeder_estado extends Seeder
         $estados = [
             ['Nuevo','Descripcion'],
             ['Usado','Descripcion'],
+            ['Para repuesto','Descripcion'],
             ['Por revisar','Descripcion']
         ];
 

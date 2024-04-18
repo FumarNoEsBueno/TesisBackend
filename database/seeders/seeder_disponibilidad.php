@@ -14,8 +14,8 @@ class seeder_disponibilidad extends Seeder
     public function run(): void
     {
         $disponibilidades = [
-            ['Disponible','Descripcion'],
-            ['Servicio tecnico','Descripcion'],
+            ['En bodega','Descripcion'],
+            ['Reparacion pendiente','Descripcion'],
             ['Vendido','Descripcion']
         ];
 
