@@ -10,6 +10,7 @@ class disco_duro extends Model
     protected $table='disco_duro';
     protected $fillable = ['disco_duro_memoria',
         'disco_duro_nombre',
+        'disco_duro_foto',
         'disco_duro_crystaldisk',
         'disco_duro_horas_encendido',
         'disco_duro_esperanza_vida',

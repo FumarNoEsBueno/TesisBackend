@@ -388,22 +388,23 @@ class seeder_disco_duro extends Seeder
             1]
         ];
 
-        $discos = array_map(function ($disco) {
-            return [
-                'disco_duro_memoria' => $disco[0],
-                'disco_duro_nombre' => $disco[1],
-                'disco_duro_crystaldisk' => $disco[2],
-                'disco_duro_horas_encendido' => $disco[3],
-                'disco_duro_esperanza_vida' => $disco[4],
-                'disco_duro_precio' => $disco[5],
-                'disponibilidad_id' => $disco[6],
-                'almacen_id' => $disco[7],
-                'estado_id' => $disco[8],
-                'tamano_id' => $disco[9],
-                'marca_id' => $disco[10],
-                'sistema_archivos_id' => $disco[11],
-            ];
-        }, $discos);
+    $discos = array_map(function ($disco, $index) {
+        return [
+            'disco_duro_memoria' => $disco[0],
+            'disco_duro_nombre' => $disco[1] . ($index + 1),
+            'disco_duro_foto' => (string)rand(1,3) . '.jpg',
+            'disco_duro_crystaldisk' => (string)rand(1,3) . '.jpg',
+            'disco_duro_horas_encendido' => $disco[3],
+            'disco_duro_esperanza_vida' => $disco[4],
+            'disco_duro_precio' => $disco[5],
+            'disponibilidad_id' => rand(1,3),
+            'almacen_id' => $disco[7],
+            'estado_id' => rand(1,4),
+            'tamano_id' => rand(1,2),
+            'marca_id' => rand(1,7),
+            'sistema_archivos_id' => rand(1,2),
+        ];
+    }, $discos, array_keys($discos));
 
         disco_duro::insert($discos);
     }

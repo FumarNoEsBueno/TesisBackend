@@ -11,6 +11,9 @@ Route::get('/parametros/marca',[controller_parametros::class, 'marca']);
 Route::get('/parametros/disponibilidad',[controller_parametros::class, 'disponibilidad']);
 Route::get('/parametros/sistema-archivos',[controller_parametros::class, 'sistemaArchivos']);
 Route::get('/parametros/tamano',[controller_parametros::class, 'tamano']);
+Route::get('/images/{nombreImagen}', function ($nombreImagen) {
+    return response()->file(public_path('images/' . $nombreImagen));
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();

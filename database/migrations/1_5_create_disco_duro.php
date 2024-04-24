@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('disco_duro_memoria');
             $table->string('disco_duro_nombre');
-            $table->string('disco_duro_crystaldisk');
+            $table->binary('disco_duro_foto');
+            $table->binary('disco_duro_crystaldisk');
             $table->string('disco_duro_horas_encendido');
             $table->string('disco_duro_esperanza_vida');
             $table->integer('disco_duro_precio');
