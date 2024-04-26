@@ -18,7 +18,22 @@ class controller_disco_duro extends Controller
             ->join('tamano','tamano.id','=','disco_duro.tamano_id')
             ->join('marca','marca.id','=','disco_duro.marca_id')
             ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
-            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido');
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->select('disco_duro.id',
+                'disco_duro.disco_duro_memoria',
+                'disco_duro.disco_duro_precio',
+                'disco_duro.disco_duro_nombre',
+                'disco_duro.disco_duro_foto',
+                'disco_duro.disco_duro_horas_encendido',
+                'disco_duro.disco_duro_esperanza_vida',
+                'disco_duro.disco_duro_crystaldisk',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'estado.estado_nombre',
+                'tamano.tamano_nombre',
+                'tamano.tamano_descripcion',
+                'marca.marca_nombre',
+                'sistema_archivos.sistema_archivos_nombre');
 
         if($request->disponibilidad != null) $coso = $coso->whereIn('disponibilidad.id',$request->disponibilidad);
         if($request->estado != null) $coso = $coso->whereIn('estado.id',$request->estado);

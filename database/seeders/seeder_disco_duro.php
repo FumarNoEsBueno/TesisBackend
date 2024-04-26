@@ -390,13 +390,13 @@ class seeder_disco_duro extends Seeder
 
     $discos = array_map(function ($disco, $index) {
         return [
-            'disco_duro_memoria' => $disco[0],
+            'disco_duro_memoria' => rand(1,8)*1000,
             'disco_duro_nombre' => $disco[1] . ($index + 1),
             'disco_duro_foto' => (string)rand(1,3) . '.jpg',
             'disco_duro_crystaldisk' => (string)rand(1,3) . '.jpg',
             'disco_duro_horas_encendido' => $disco[3],
             'disco_duro_esperanza_vida' => $disco[4],
-            'disco_duro_precio' => $disco[5],
+            'disco_duro_precio' => rand(1,100)*500 + 10000,
             'disponibilidad_id' => rand(1,3),
             'almacen_id' => $disco[7],
             'estado_id' => rand(1,4),

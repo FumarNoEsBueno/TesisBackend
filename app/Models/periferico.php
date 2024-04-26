@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class periferico extends Model
 {
     protected $table='periferico';
-    protected $fillable = ['periferico_descripcion','periferico_precio','disponibilidad_id','almacen_id','estado_id','marca_id','tipo_entrada_id','tipo_periferico_id'];
+    protected $fillable = ['periferico_descripcion',
+        'periferico_precio',
+        'compra_id',
+        'disponibilidad_id',
+        'almacen_id',
+        'estado_id',
+        'marca_id',
+        'tipo_entrada_id',
+        'tipo_periferico_id'];
     use HasFactory;
 }
