@@ -2,12 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\compra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class controller_compra extends Controller
 {
+    public function compras(Request $request)
+    {
+        return DB::table('compra')
+            ->where('compra_codigo','=',$request->codigo)
+            ->join('disco_duro','disco_duro.compra_id','=','compra.id')
+            ->get();
+    }
+
     public function comprar(Request $request)
     {
-        return http_response_code(200);
+        $discos = DB::table('disco_duro')
+            ->whereIn('id',$request)
+            ->whereNull('compra_id');
+
+        if($discos->count() <= 0) return response()->json("Discos duro/s no disponibles", 500);
+
+        $compra = new compra();
+        $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+        $compra->compra_codigo = $randomCode;
+        $compra->compra_email = "Emal de testeo";
+
+        $compra->save();
+
+        $discos->update(['compra_id' => $compra->id]);
+
+        return response()->json($compra, 200);
     }
 }

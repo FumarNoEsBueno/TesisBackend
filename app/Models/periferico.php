@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class periferico extends Model
 {
     protected $table='periferico';
-    protected $fillable = ['periferico_descripcion',
+    protected $fillable = [
+        'periferico_nombre',
+        'periferico_foto',
+        'periferico_descripcion',
         'periferico_precio',
         'compra_id',
         'disponibilidad_id',

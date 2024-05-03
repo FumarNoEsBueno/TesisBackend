@@ -19,6 +19,7 @@ class seeder_tipo_entrada extends Seeder
             'VGA',
             'HDMI',
             'DP',
+            'SATA-3',
             'PS2'
         ];
 

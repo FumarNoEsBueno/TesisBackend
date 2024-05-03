@@ -16,6 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('compra_codigo');
             $table->string('compra_email');
+            $table->string('direccion_id')->nullable();
+            $table->string('metodo_pago_id')->nullable();
+            $table->string('metodo_despacho_id')->nullable();
         });
     }
 

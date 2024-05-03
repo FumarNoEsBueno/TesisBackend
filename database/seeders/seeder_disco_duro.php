@@ -403,6 +403,7 @@ class seeder_disco_duro extends Seeder
             'tamano_id' => rand(1,2),
             'marca_id' => rand(1,7),
             'sistema_archivos_id' => rand(1,2),
+            'tipo_entrada_id' => 6,
         ];
     }, $discos, array_keys($discos));
 

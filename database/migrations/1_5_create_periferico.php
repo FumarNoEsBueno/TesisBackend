@@ -6,17 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('periferico', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
+            $table->string('periferico_nombre');
             $table->string('periferico_descripcion');
             $table->integer('periferico_precio');
+            $table->binary('periferico_foto');
 
             $table->unsignedBigInteger('compra_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');

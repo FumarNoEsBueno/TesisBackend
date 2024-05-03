@@ -21,6 +21,7 @@ class disco_duro extends Model
         'estado_id',
         'tamano_id',
         'marca_id',
-        'sistema_archivos_id'];
+        'sistema_archivos_id',
+        'tipo_entrada_id'];
     use HasFactory;
 }

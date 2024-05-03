@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('sistema_archivos_id');
+            $table->unsignedBigInteger('tipo_entrada_id');
 
             $table->foreign('compra_id')->references('id')->on('compra');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->foreign('tamano_id')->references('id')->on('tamano');
             $table->foreign('marca_id')->references('id')->on('marca');
             $table->foreign('sistema_archivos_id')->references('id')->on('sistema_archivos');
+            $table->foreign('tipo_entrada_id')->references('id')->on('tipo_entrada');
         });
     }
 
