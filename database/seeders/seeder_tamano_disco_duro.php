@@ -8,9 +8,6 @@ use App\Models\tamano;
 
 class seeder_tamano_disco_duro extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $tamanos = [
