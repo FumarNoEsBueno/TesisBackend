@@ -19,15 +19,18 @@ class controller_compra extends Controller
     public function comprar(Request $request)
     {
         $discos = DB::table('disco_duro')
-            ->whereIn('id',$request)
+            ->whereIn('id',$request->discos)
             ->whereNull('compra_id');
 
-        if($discos->count() <= 0) return response()->json("Discos duro/s no disponibles", 500);
+        if($discos->count() == 0) return response()->json("Discos duro/s no disponibles", 500);
 
         $compra = new compra();
         $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
         $compra->compra_codigo = $randomCode;
         $compra->compra_email = "Emal de testeo";
+        $compra->compra_direccion = "Dirección de testeo";
+        $compra->metodo_despacho_id = 1;
+        $compra->metodo_pago_id = 1;
 
         $compra->save();
 
