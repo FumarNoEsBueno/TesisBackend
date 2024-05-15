@@ -9,7 +9,9 @@ use App\Http\Controllers\controller_periferico;
 use App\Http\Controllers\controller_profile;
 use App\Http\Controllers\controller_ram;
 
-Route::post('/comprar',[controller_compra::class, 'comprar']);
+Route::middleware('auth:api')->post('/comprar',[controller_compra::class, 'comprar']);
+Route::middleware('auth:api')->post('/get_compras_by_user_id',[controller_compra::class, 'get_compras_by_user_id']);
+Route::middleware('auth:api')->post('/testeo',[controller_profile::class, 'testeo']);
 Route::post('/perfil',[controller_profile::class, 'profile']);
 Route::get('/compras',[controller_compra::class, 'compras']);
 Route::get('/discosDuros',[controller_disco_duro::class, 'discosDurosPaginated']);

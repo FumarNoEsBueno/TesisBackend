@@ -29,5 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_periferico::class);
         $this->call(seeder_disco_duro::class);
         $this->call(seeder_ram::class);
+        $this->call(seeder_metodo_pago::class);
+        $this->call(seeder_metodo_despacho::class);
+        $this->call(seeder_user::class);
     }
 }

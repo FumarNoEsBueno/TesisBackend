@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('direccion', function (Blueprint $table) {
@@ -16,13 +13,12 @@ return new class extends Migration
             $table->timestamps();
             $table->string('direccion_nombre');
             $table->unsignedBigInteger('ciudad_id');
+            $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('ciudad_id')->references('id')->on('ciudad');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('direccion');

@@ -14,15 +14,16 @@ return new class extends Migration
             $table->timestamps();
             $table->string('compra_codigo');
             $table->string('compra_email');
-            $table->string('compra_direccion');
 
-            $table->unsignedBigInteger('ciudad_id')->nullable();
+            $table->unsignedBigInteger('direccion_id')->nullable();
             $table->unsignedBigInteger('metodo_pago_id');
             $table->unsignedBigInteger('metodo_despacho_id');
+            $table->unsignedBigInteger('users_id');
 
-            $table->foreign('ciudad_id')->references('id')->on('ciudad');
+            $table->foreign('direccion_id')->references('id')->on('direccion');
             $table->foreign('metodo_pago_id')->references('id')->on('metodo_pago');
             $table->foreign('metodo_despacho_id')->references('id')->on('metodo_despacho');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

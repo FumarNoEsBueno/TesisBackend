@@ -10,8 +10,7 @@ class compra extends Model
     protected $table='compra';
     protected $fillable = ['compra_codigo',
         'compra_email',
-        'compra_direccion',
-        'ciudad_id',
+        'direccion_id',
         'medoto_pago_id',
         'medoto_despacho_id'];
     use HasFactory;

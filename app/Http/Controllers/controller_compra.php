@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\compra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class controller_compra extends Controller
@@ -31,11 +32,18 @@ class controller_compra extends Controller
         $compra->compra_direccion = "Dirección de testeo";
         $compra->metodo_despacho_id = 1;
         $compra->metodo_pago_id = 1;
+        $compra->users_id = $request->user()->id;
 
         $compra->save();
-
         $discos->update(['compra_id' => $compra->id]);
 
         return response()->json($compra, 200);
+    }
+
+    public function get_compras_by_user_id(Request $request){
+        return DB::table('compra')
+            ->where('users_id','=',$request->user()->id)
+            ->join('disco_duro','disco_duro.compra_id','=','compra.id')
+            ->get();
     }
 }
