@@ -11,13 +11,14 @@ class seeder_metodo_despacho extends Seeder
     public function run(): void
     {
         $metodos = [
-            'Retiro en tienda',
-            'Javier express'
+            ['Retiro en tienda','retiro'],
+            ['Javier express','despacho']
         ];
 
         $metodos = array_map(function ($metodo) {
             return [
                 'metodo_despacho_nombre' => $metodo[0],
+                'metodo_despacho_slug' => $metodo[1],
             ];
         }, $metodos);
 

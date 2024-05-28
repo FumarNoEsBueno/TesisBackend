@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class model_metodo_pago extends Model
+class model_descuento extends Model
 {
-    protected $table='metodo_pago';
-    protected $fillable = ['metodo_pago_nombre', 'metodo_pago_slug'];
+    protected $table='descuento';
+    protected $fillable = ['descuento_porcentaje'];
     use HasFactory;
 }

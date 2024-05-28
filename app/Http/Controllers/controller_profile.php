@@ -2,25 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class controller_profile extends Controller
 {
-    public function testeo(Request $request)
+    public function get_direcciones_by_user(Request $request)
+    {
+        $direcciones = DB::table('direccion')
+            ->where('users_id','=',$request->user()->id)
+            ->join('ciudad','ciudad.id','=','direccion.ciudad_id')
+            ->join('provincia','provincia.id','=','ciudad.provincia_id')
+            ->join('region','region.id','=','provincia.region_id')
+            ->select('direccion.id',
+                'direccion.direccion_nombre',
+                'ciudad.ciudad_nombre',
+                'provincia.provincia_nombre',
+                'region.region_nombre'
+                )->get();
+        return $direcciones;
+    }
+
+    public function revoke_token(Request $request)
+    {
+        $request->user()->token()->revoke();
+        return response()->json("Todo bien", 200);
+    }
+
+    public function checkLogin(Request $request)
     {
         return response()->json($request->user());
     }
 
-    public function profile(Request $request)
+    public function register(Request $request)
+    {//TODO: el email de verificación no funca
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return response()->json("Cuenta registrada correctamente", 200);
+    }
+
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
         ]);
-        if(!Auth::attempt($credentials))
-            return response()->json("Credenciales no validas", 500);
+        if(!Auth::attempt($credentials)) return response()->json("Credenciales no validas", 500);
+
         $user = $request->user();
 
         $token = $user->createToken('auth-token');

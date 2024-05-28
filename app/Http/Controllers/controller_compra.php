@@ -25,13 +25,23 @@ class controller_compra extends Controller
 
         if($discos->count() == 0) return response()->json("Discos duro/s no disponibles", 500);
 
+        $despacho = DB::table('metodo_despacho')
+            ->where('metodo_despacho_slug','=',$request->metodoDespacho)
+            ->first();
+
+        $pago = DB::table('metodo_pago')
+            ->where('metodo_pago_slug','=',$request->metodoPago)
+            ->first();
+
         $compra = new compra();
+
         $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
         $compra->compra_codigo = $randomCode;
-        $compra->compra_email = "Emal de testeo";
-        $compra->compra_direccion = "Dirección de testeo";
-        $compra->metodo_despacho_id = 1;
-        $compra->metodo_pago_id = 1;
+        $compra->compra_email = $request->user()->email;
+        $compra->estado_compra_id = 1;
+        $compra->direccion_id = $request->direccionId;
+        $compra->metodo_despacho_id = $despacho->id;
+        $compra->metodo_pago_id = $pago->id;
         $compra->users_id = $request->user()->id;
 
         $compra->save();
@@ -40,10 +50,23 @@ class controller_compra extends Controller
         return response()->json($compra, 200);
     }
 
-    public function get_compras_by_user_id(Request $request){
-        return DB::table('compra')
-            ->where('users_id','=',$request->user()->id)
-            ->join('disco_duro','disco_duro.compra_id','=','compra.id')
+    public function get_all_compras(Request $request){
+        $compras = Compra::with('discos')
+            ->with('estado_compra')
+            ->with('metodo_despacho')
+            ->with('metodo_pago')
             ->get();
+
+        return $compras;
+    }
+    public function get_compras_by_user_id(Request $request){
+        $compras = Compra::where('users_id', $request->user()->id)
+            ->with('discos')
+            ->with('estado_compra')
+            ->with('metodo_despacho')
+            ->with('metodo_pago')
+            ->get();
+
+        return $compras;
     }
 }

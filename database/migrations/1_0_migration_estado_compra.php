@@ -8,15 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('sistema_archivos', function (Blueprint $table) {
+        Schema::create('estado_compra', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('sistema_archivos_nombre');
+            $table->string('estado_compra_nombre');
+            $table->string('estado_compra_slug');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sistema_archivos');
+        Schema::dropIfExists('estado_compra');
     }
 };

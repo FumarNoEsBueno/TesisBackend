@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\disponibilidad;
 use App\Models\estado;
 use App\Models\marca;
+use App\Models\model_estado_compra;
 use App\Models\sistema_archivos;
 use App\Models\tamano;
 use Illuminate\Http\Request;
@@ -16,10 +17,16 @@ class controller_parametros extends Controller
         return marca::all();
     }
 
+    public function estado_compra()
+    {
+        return model_estado_compra::all();
+    }
+
     public function disponibilidad()
     {
         return disponibilidad::all();
     }
+
     public function sistemaArchivos()
     {
         return sistema_archivos::all();

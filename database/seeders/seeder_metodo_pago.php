@@ -11,14 +11,15 @@ class seeder_metodo_pago extends Seeder
     public function run(): void
     {
         $metodos = [
-            'Transferencia',
-            'Pago en tienda',
-            'WebPay'
+            ['Transferencia','transferencia'],
+            ['Pago en tienda','enTienda'],
+            ['WebPay','webpay']
         ];
 
         $metodos = array_map(function ($metodo) {
             return [
                 'metodo_pago_nombre' => $metodo[0],
+                'metodo_pago_slug' => $metodo[1],
             ];
         }, $metodos);
 

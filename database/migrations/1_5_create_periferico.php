@@ -18,6 +18,7 @@ return new class extends Migration
             $table->binary('periferico_foto');
 
             $table->unsignedBigInteger('compra_id')->nullable();
+            $table->unsignedBigInteger('descuento_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tipo_periferico_id');
 
             $table->foreign('compra_id')->references('id')->on('compra');
+            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

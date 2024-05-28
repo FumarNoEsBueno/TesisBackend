@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('metodo_pago_nombre');
+            $table->string('metodo_pago_slug');
         });
     }
 

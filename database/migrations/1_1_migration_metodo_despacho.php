@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('metodo_despacho_nombre');
+            $table->string('metodo_despacho_slug');
         });
     }
 
