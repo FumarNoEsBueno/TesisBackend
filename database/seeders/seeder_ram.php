@@ -8,9 +8,6 @@ use App\Models\ram;
 
 class seeder_ram extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $rams = [
@@ -315,7 +312,9 @@ class seeder_ram extends Seeder
         $rams = array_map(function ($ram) {
             return [
                 'ram_descripcion' => $ram[0],
-                'ram_precio' => $ram[1],
+                'ram_nombre' => "Ram pulenta",
+                'ram_foto' => 'ram_'.(string)rand(1,4) . '.jpg',
+                'ram_precio' => rand(1,100)*500 + 10000,
                 'disponibilidad_id' => $ram[2],
                 'almacen_id' => $ram[3],
                 'estado_id' => $ram[4],

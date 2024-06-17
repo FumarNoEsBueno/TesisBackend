@@ -159,10 +159,10 @@ class seeder_periferico extends Seeder
 
         $perifericos = array_map(function ($periferico) {
             return [
-                'periferico_nombre' => "",
+                'periferico_nombre' => "Periferico pulento",
                 'periferico_foto' => 'periferico'.(string)rand(1,3) . '.jpg',
                 'periferico_descripcion' => $periferico[0],
-                'periferico_precio' => $periferico[1],
+                'periferico_precio' => rand(1,100)*500 + 10000,
                 'disponibilidad_id' => $periferico[2],
                 'almacen_id' => $periferico[3],
                 'estado_id' => $periferico[4],

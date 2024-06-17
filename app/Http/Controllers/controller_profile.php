@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\direccion;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,6 +11,46 @@ use Illuminate\Support\Facades\DB;
 
 class controller_profile extends Controller
 {
+    public function get_provincias_por_region(Request $request)
+    {
+        return DB::table('provincia')
+            ->where('id','=',$request->id)
+            ->get();
+    }
+
+    public function get_ciudades_por_provincia(Request $request)
+    {
+        return DB::table('ciudad')
+            ->where('id','=',$request->id)
+            ->get();
+    }
+
+    public function get_regiones(Request $request)
+    {
+        return DB::table('region')->get();
+    }
+
+    public function delete_direccion(Request $request)
+    {
+
+        $direccion = DB::table('direccion')
+            ->where('id','=',$request->id)
+            ->delete();
+
+        return $direccion;
+    }
+
+    public function create_direccion(Request $request)
+    {
+        $direccion = direccion::create([
+            'direccion_nombre' => $request->calle_nombre,
+            'ciudad_id' => $request->id,
+            'users_id' => $request->user()->id,
+        ]);
+
+        return $direccion;
+    }
+
     public function get_direcciones_by_user(Request $request)
     {
         $direcciones = DB::table('direccion')
@@ -29,7 +70,7 @@ class controller_profile extends Controller
     public function revoke_token(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json("Todo bien", 200);
+        return response()->json("Token revocado correctamente", 200);
     }
 
     public function checkLogin(Request $request)

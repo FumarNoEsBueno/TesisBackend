@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\compra;
+use App\Models\disco_duro;
+use App\Models\disco_duro_compra;
+use App\Models\periferico;
+use App\Models\periferico_compra;
+use App\Models\ram_compra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class controller_compra extends Controller
 {
@@ -19,11 +25,36 @@ class controller_compra extends Controller
 
     public function comprar(Request $request)
     {
-        $discos = DB::table('disco_duro')
-            ->whereIn('id',$request->discos)
-            ->whereNull('compra_id');
+        $disponibilidad = DB::table('disponibilidad')
+            ->where('disponibilidad_nombre','=','Vendido')
+            ->first();
 
-        if($discos->count() == 0) return response()->json("Discos duro/s no disponibles", 500);
+        if($request->discos != []){
+            $discos = DB::table('disco_duro')
+                ->where('disponibilidad_id', '!=', $disponibilidad->id)
+                ->whereIn('id',$request->discos);
+
+            if($discos->count() != count($request->discos))
+                return response()->json("Discos duro/s no disponibles", 500);
+        }
+
+        if($request->perifericos != []){
+            $perifericos = DB::table('periferico')
+                ->where('disponibilidad_id', '!=', $disponibilidad->id)
+                ->whereIn('id',$request->perifericos);
+
+            if($perifericos->count() != count($request->perifericos))
+                return response()->json("Periferico no disponible", 500);
+        }
+
+        if($request->rams != []){
+            $rams = DB::table('ram')
+                ->where('disponibilidad_id', '!=', $disponibilidad->id)
+                ->whereIn('id',$request->rams);
+
+            if($rams->count() != count($request->rams))
+                return response()->json("Ram/s no disponibles", 500);
+        }
 
         $despacho = DB::table('metodo_despacho')
             ->where('metodo_despacho_slug','=',$request->metodoDespacho)
@@ -45,28 +76,76 @@ class controller_compra extends Controller
         $compra->users_id = $request->user()->id;
 
         $compra->save();
-        $discos->update(['compra_id' => $compra->id]);
+
+        if($request->discos != []){
+            foreach($discos->get() as $disco){
+                disco_duro_compra::create([
+                    'disco_duro_id' => $disco->id,
+                    'compra_id' => $compra->id
+                ]);
+            }
+            $discos->update(['disponibilidad_id' => $disponibilidad->id]);
+        }
+
+        if($request->perifericos != []){
+            foreach($perifericos->get() as $periferico){
+                periferico_compra::create([
+                    'periferico_id' => $periferico->id,
+                    'compra_id' => $compra->id
+                ]);
+            }
+            $perifericos->update(['disponibilidad_id' => $disponibilidad->id]);
+        }
+
+        if($request->rams != []){
+            foreach($rams->get() as $ram){
+                ram_compra::create([
+                    'ram_id' => $ram->id,
+                    'compra_id' => $compra->id
+                ]);
+            }
+            $rams->update(['disponibilidad_id' => $disponibilidad->id]);
+        }
 
         return response()->json($compra, 200);
     }
 
     public function get_all_compras(Request $request){
         $compras = Compra::with('discos')
+            ->with('perifericos')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
-            ->get();
+            ->paginate(12);
 
         return $compras;
     }
+
     public function get_compras_by_user_id(Request $request){
         $compras = Compra::where('users_id', $request->user()->id)
             ->with('discos')
+            ->with('perifericos')
+            ->with('rams')
+            ->with('estado_compra')
+            ->with('metodo_despacho')
+            ->with('metodo_pago')
+            ->paginate(12);
+
+        return $compras;
+    }
+
+    public function get_ventas_para_estadisticas(Request $request){
+        $compras = Compra::
+            with('discos')
+            ->with('perifericos')
+            ->with('rams')
+            ->with('usuario')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
             ->get();
 
-        return $compras;
+        return response()->json($compras, 200);
     }
+
 }

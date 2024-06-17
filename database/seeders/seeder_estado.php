@@ -8,16 +8,13 @@ use App\Models\estado;
 
 class seeder_estado extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $estados = [
-            ['Nuevo','Descripcion'],
-            ['Usado','Descripcion'],
-            ['Para repuesto','Descripcion'],
-            ['Por revisar','Descripcion']
+            ['Nuevo','nuevo'],
+            ['Usado','usado'],
+            ['Para repuesto','repuesto'],
+            ['Por revisar','revisar']
         ];
 
         $estados = array_map(function ($estado) {

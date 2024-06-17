@@ -9,10 +9,12 @@ class ram extends Model
 {
     protected $table='ram';
     protected $fillable = ['ram_descripcion',
+        'ram_nombre',
+        'ram_foto',
         'ram_precio',
-        'compra_id',
         'disponibilidad_id',
         'almacen_id',
+        'descuento_id',
         'estado_id',
         'marca_id',
         'tipo_ram_id',

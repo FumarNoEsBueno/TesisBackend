@@ -17,7 +17,6 @@ class controller_disco_duro extends Controller
             ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
             ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
             ->leftJoin('descuento','descuento.id','=','disco_duro.descuento_id')
-            ->whereNull('compra_id')
             ->select('disco_duro.id',
                 'disco_duro.disco_duro_memoria',
                 'disco_duro.disco_duro_precio',
@@ -54,7 +53,6 @@ class controller_disco_duro extends Controller
             ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
             ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->whereNull('compra_id')
             ->select('disco_duro.id',
                 'disco_duro.disco_duro_memoria',
                 'disco_duro.disco_duro_precio',
@@ -63,6 +61,7 @@ class controller_disco_duro extends Controller
                 'disco_duro.disco_duro_horas_encendido',
                 'disco_duro.disco_duro_esperanza_vida',
                 'disco_duro.disco_duro_crystaldisk',
+                'disco_duro.descuento_id',
                 'disponibilidad.disponibilidad_nombre',
                 'disponibilidad.disponibilidad_descripcion',
                 'estado.estado_nombre',

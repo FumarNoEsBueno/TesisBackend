@@ -7,15 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class compra extends Model
 {
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function rams()
+    {
+        return $this->belongsToMany(ram::class, 'ram_compra', 'compra_id', 'ram_id');
+    }
+
+    public function perifericos()
+    {
+        return $this->belongsToMany(periferico::class, 'periferico_compra', 'compra_id', 'periferico_id');
+    }
+
     public function discos()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->belongsToMany(disco_duro::class, 'disco_duro_compra', 'compra_id', 'disco_duro_id');
     }
 
     public function metodo_pago()
     {
         return $this->belongsTo(model_metodo_pago::class);
     }
+
     public function metodo_despacho()
     {
         return $this->belongsTo(model_metodo_despacho::class);

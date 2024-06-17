@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\compra;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class controller_admin extends Controller
 {
+    public function update_estado_compra(Request $request)
+    {
+        $response = Compra::where('id', $request->compraId)
+            ->with('discos')
+            ->with('estado_compra')
+            ->with('metodo_despacho')
+            ->with('metodo_pago');
+        $response->update(['estado_compra_id' => $request->estadoId]);
+        return response()->json($response->first(), 200);
+    }
+
     public function set_producto(Request $request)
     {
         switch($request->tipoProducto){

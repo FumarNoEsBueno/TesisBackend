@@ -11,9 +11,10 @@ return new class extends Migration
         Schema::create('ram', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('ram_nombre');
             $table->string('ram_descripcion');
+            $table->binary('ram_foto');
             $table->integer('ram_precio');
-            $table->unsignedBigInteger('compra_id')->nullable();
             $table->unsignedBigInteger('descuento_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_ram_id');
             $table->unsignedBigInteger('velocidad_ram_id');
 
-            $table->foreign('compra_id')->references('id')->on('compra');
             $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
@@ -35,9 +35,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('ram');

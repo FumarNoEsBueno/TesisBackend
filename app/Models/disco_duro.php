@@ -56,7 +56,6 @@ class disco_duro extends Model
         'disco_duro_horas_encendido',
         'disco_duro_esperanza_vida',
         'disco_duro_precio',
-        'compra_id',
         'descuento_id',
         'disponibilidad_id',
         'almacen_id',

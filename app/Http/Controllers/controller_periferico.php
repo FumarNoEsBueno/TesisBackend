@@ -16,7 +16,6 @@ class controller_periferico extends Controller
             ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
             ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->whereNull('compra_id')
             ->select('periferico.id',
                 'periferico.periferico_nombre',
                 'periferico.periferico_precio',

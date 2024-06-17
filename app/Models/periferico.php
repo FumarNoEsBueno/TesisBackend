@@ -13,7 +13,6 @@ class periferico extends Model
         'periferico_foto',
         'periferico_descripcion',
         'periferico_precio',
-        'compra_id',
         'disponibilidad_id',
         'almacen_id',
         'estado_id',

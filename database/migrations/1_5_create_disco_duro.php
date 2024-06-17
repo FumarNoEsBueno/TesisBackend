@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('disco_duro', function (Blueprint $table) {
@@ -21,7 +18,6 @@ return new class extends Migration
             $table->string('disco_duro_horas_encendido');
             $table->string('disco_duro_esperanza_vida');
             $table->integer('disco_duro_precio');
-            $table->unsignedBigInteger('compra_id')->nullable();
             $table->unsignedBigInteger('descuento_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
@@ -31,7 +27,6 @@ return new class extends Migration
             $table->unsignedBigInteger('sistema_archivos_id');
             $table->unsignedBigInteger('tipo_entrada_id');
 
-            $table->foreign('compra_id')->references('id')->on('compra');
             $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');

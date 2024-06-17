@@ -8,14 +8,12 @@ use App\Models\disponibilidad;
 
 class seeder_disponibilidad extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $disponibilidades = [
             ['En bodega','Descripcion'],
             ['Reparacion pendiente','Descripcion'],
+            ['Reservado','Descripcion'],
             ['Vendido','Descripcion']
         ];
 

@@ -16,7 +16,8 @@ class seeder_estado_compra extends Seeder
             ['Listo para retirar','listo'],
             ['En transporte','transporte'],
             ['Entregado','entregado'],
-            ['Retirado','retirado']
+            ['Retirado','retirado'],
+            ['Cancelado','cancelado']
         ];
 
         $estados = array_map(function ($estado) {
