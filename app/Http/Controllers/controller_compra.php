@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\compra;
+use App\Models\compra_cable;
 use App\Models\disco_duro;
 use App\Models\disco_duro_compra;
 use App\Models\periferico;
@@ -56,6 +57,15 @@ class controller_compra extends Controller
                 return response()->json("Ram/s no disponibles", 500);
         }
 
+        if($request->cablesId != []){
+            $cables = DB::table('cable')
+                ->where('disponibilidad_id', '!=', $disponibilidad->id)
+                ->whereIn('id',$request->cablesId);
+
+            if($cables->count() != count($request->cablesId))
+                return response()->json("Cables no disponibles", 500);
+        }
+
         $despacho = DB::table('metodo_despacho')
             ->where('metodo_despacho_slug','=',$request->metodoDespacho)
             ->first();
@@ -107,6 +117,18 @@ class controller_compra extends Controller
             $rams->update(['disponibilidad_id' => $disponibilidad->id]);
         }
 
+        if($request->cablesId != []){
+            $index = 0;
+            foreach($cables->get() as $cable){
+                compra_cable::create([
+                    'compra_cable_cantidad' => $request->cablesCantidad[$index],
+                    'cable_id' => $cable->id,
+                    'compra_id' => $compra->id
+                ]);
+                $index++;
+            }
+        }
+
         return response()->json($compra, 200);
     }
 
@@ -116,6 +138,7 @@ class controller_compra extends Controller
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
+            ->latest()
             ->paginate(12);
 
         return $compras;
@@ -126,9 +149,11 @@ class controller_compra extends Controller
             ->with('discos')
             ->with('perifericos')
             ->with('rams')
+            ->with('cables')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
+            ->latest()
             ->paginate(12);
 
         return $compras;

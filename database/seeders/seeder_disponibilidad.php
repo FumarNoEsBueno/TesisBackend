@@ -13,7 +13,6 @@ class seeder_disponibilidad extends Seeder
         $disponibilidades = [
             ['En bodega','Descripcion'],
             ['Reparacion pendiente','Descripcion'],
-            ['Reservado','Descripcion'],
             ['Vendido','Descripcion']
         ];
 

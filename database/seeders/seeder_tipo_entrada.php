@@ -8,9 +8,6 @@ use App\Models\tipo_entrada;
 
 class seeder_tipo_entrada extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $entradas = [

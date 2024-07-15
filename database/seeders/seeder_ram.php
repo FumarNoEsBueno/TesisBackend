@@ -320,6 +320,7 @@ class seeder_ram extends Seeder
                 'estado_id' => $ram[4],
                 'marca_id' => $ram[5],
                 'tipo_ram_id' => $ram[6],
+                'capacidad_ram_id' => rand(1,5),
                 'tamano_ram_id' => $ram[7],
                 'velocidad_ram_id' => $ram[8],
             ];

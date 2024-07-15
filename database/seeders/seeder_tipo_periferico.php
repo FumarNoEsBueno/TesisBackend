@@ -8,16 +8,12 @@ use App\Models\tipo_periferico;
 
 class seeder_tipo_periferico extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $tipos = [
             'Teclado',
             'Microfono',
             'Audifonos',
-            'Cable',
             'Mouse'
         ];
 

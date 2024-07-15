@@ -6,6 +6,7 @@ use App\Models\disponibilidad;
 use App\Models\estado;
 use App\Models\marca;
 use App\Models\model_estado_compra;
+use App\Models\model_metodo_despacho;
 use App\Models\sistema_archivos;
 use App\Models\tamano;
 use App\Models\tamano_ram;
@@ -16,6 +17,11 @@ use Illuminate\Http\Request;
 
 class controller_parametros extends Controller
 {
+    public function despacho()
+    {
+        return model_metodo_despacho::all();
+    }
+
     public function tipo_periferico()
     {
         return tipo_periferico::all();

@@ -11,8 +11,8 @@ class seeder_metodo_despacho extends Seeder
     public function run(): void
     {
         $metodos = [
-            ['Retiro en tienda','retiro'],
-            ['Javier express','despacho']
+            ['En tienda','retiro'],
+            ['A domicilio','despacho']
         ];
 
         $metodos = array_map(function ($metodo) {

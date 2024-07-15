@@ -16,7 +16,9 @@ class controller_ram extends Controller
             ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
             ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
+            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
             ->select('ram.id',
                 'ram.ram_nombre',
                 'ram.ram_precio',
@@ -24,6 +26,7 @@ class controller_ram extends Controller
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
+                'capacidad_ram.capacidad_ram_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
                 'marca.marca_nombre');

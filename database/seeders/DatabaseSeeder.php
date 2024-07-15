@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(seeder_user::class);
+        $this->call(seeder_capacidad_ram::class);
         $this->call(seeder_descuento::class);
         $this->call(seeder_estado_compra::class);
         $this->call(seeder_region::class);
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_disponibilidad::class);
         $this->call(seeder_periferico::class);
         $this->call(seeder_disco_duro::class);
+        $this->call(seeder_cable::class);
         $this->call(seeder_ram::class);
         $this->call(seeder_metodo_pago::class);
         $this->call(seeder_metodo_despacho::class);
