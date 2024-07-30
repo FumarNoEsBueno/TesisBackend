@@ -14,7 +14,9 @@ return new class extends Migration
             $table->integer('compra_cable_cantidad');
             $table->unsignedBigInteger('cable_id');
             $table->unsignedBigInteger('compra_id');
+            $table->unsignedBigInteger('descuento_id')->nullable();
 
+            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('cable_id')->references('id')->on('cable');
             $table->foreign('compra_id')->references('id')->on('compra');
         });

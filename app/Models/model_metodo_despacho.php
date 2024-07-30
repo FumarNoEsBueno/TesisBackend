@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class model_metodo_despacho extends Model
 {
     protected $table='metodo_despacho';
-    protected $fillable = ['metodo_despacho_nombre','metodo_despacho_slug'];
+    protected $fillable = ['metodo_despacho_nombre',
+        'metodo_recepcion_nombre',
+        'metodo_despacho_slug'];
     use HasFactory;
 }

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ram extends Model
 {
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'ram_compra');
+    }
+
     protected $table='ram';
     protected $fillable = ['ram_descripcion',
         'ram_nombre',

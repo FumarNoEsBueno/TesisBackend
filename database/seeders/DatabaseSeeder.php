@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_user::class);
         $this->call(seeder_capacidad_ram::class);
         $this->call(seeder_descuento::class);
+        $this->call(seeder_recepcion_estado::class);
         $this->call(seeder_estado_compra::class);
         $this->call(seeder_region::class);
         $this->call(seeder_provincia::class);

@@ -79,10 +79,11 @@ class controller_profile extends Controller
     }
 
     public function register(Request $request)
-    {//TODO: el email de verificación no funca
+    {
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'number' => $request->number,
             'password' => bcrypt($request->password),
         ]);
 
@@ -107,5 +108,20 @@ class controller_profile extends Controller
         return response()->json(
             $tokenResult,
         );
+    }
+
+
+    public function update_password(Request $request)
+    {
+        $user = DB::table('users')
+            ->where('id','=', $request->user()->id);
+        return bcrypt($request->actual);
+
+        if(bcrypt($request->actual) != $user->first()->password){
+            return response()->json("Contraseña mal proporcionada", 500);
+        }
+        $user->update(['password' => bcrypt($request->contreasena_nueva)]);
+
+        return response()->json("Contraseña cambiada correctamente", 200);
     }
 }

@@ -7,6 +7,45 @@ use Illuminate\Support\Facades\DB;
 
 class controller_periferico extends Controller
 {
+    private $intervalo_precio = 10000;
+
+    public function get_all_perifericos(Request $request)
+    {
+        $perifericos = DB::table('periferico')
+            ->join('disponibilidad','disponibilidad.id','=','periferico.disponibilidad_id')
+            ->join('estado','estado.id','=','periferico.estado_id')
+            ->join('marca','marca.id','=','periferico.marca_id')
+            ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
+            ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->leftJoin('descuento','descuento.id','=','periferico.descuento_id')
+            ->select('periferico.id',
+                'periferico.periferico_nombre',
+                'periferico.periferico_precio',
+                'periferico.periferico_foto',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'tipo_periferico.nombre_tipo_periferico',
+                'tipo_entrada.tipo_entrada_nombre',
+                'descuento.descuento_porcentaje',
+                'estado.estado_nombre',
+                'marca.marca_nombre');
+
+        if($request->estado != null) $perifericos = $perifericos->whereIn('estado.id',$request->estado);
+        if($request->marca != null) $perifericos = $perifericos->whereIn('marca.id',$request->marca);
+        if($request->tipoPeriferico != null) $perifericos = $perifericos->whereIn('tipo_periferico.id',$request->tipoPeriferico);
+        if($request->tipoEntrada != null) $perifericos = $perifericos->whereIn('tipo_entrada.id',$request->tipoEntrada);
+        if($request->precio != null){
+            foreach ($request->precio as $precio) {
+                $perifericos = $perifericos->where('periferico_precio','>', ($precio - 1) * $this->intervalo_precio);
+                $perifericos = $perifericos->where('periferico_precio','<', $precio * $this->intervalo_precio);
+            }
+        }
+
+        $perifericos = $perifericos->paginate(12);
+        return $perifericos;
+    }
+
     public function perifericosPaginated(Request $request)
     {
         $perifericos = DB::table('periferico')
@@ -21,6 +60,7 @@ class controller_periferico extends Controller
                 'periferico.periferico_nombre',
                 'periferico.periferico_precio',
                 'periferico.periferico_foto',
+                'periferico.descuento_id',
                 'disponibilidad.disponibilidad_nombre',
                 'disponibilidad.disponibilidad_descripcion',
                 'tipo_periferico.nombre_tipo_periferico',
@@ -28,11 +68,16 @@ class controller_periferico extends Controller
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
-        if($request->disponibilidad != null) $perifericos = $perifericos->whereIn('disponibilidad.id',$request->disponibilidad);
         if($request->estado != null) $perifericos = $perifericos->whereIn('estado.id',$request->estado);
         if($request->marca != null) $perifericos = $perifericos->whereIn('marca.id',$request->marca);
-        if($request->tipo_periferico != null) $perifericos = $perifericos->whereIn('tipo_periferico.id',$request->tipo_periferico);
-        if($request->tipo_entrada != null) $perifericos = $perifericos->whereIn('tipo_entrada.id',$request->tipo_entrada);
+        if($request->tipoPeriferico != null) $perifericos = $perifericos->whereIn('tipo_periferico.id',$request->tipoPeriferico);
+        if($request->tipoEntrada != null) $perifericos = $perifericos->whereIn('tipo_entrada.id',$request->tipoEntrada);
+        if($request->precio != null){
+            foreach ($request->precio as $precio) {
+                $perifericos = $perifericos->where('periferico_precio','>', ($precio - 1) * $this->intervalo_precio);
+                $perifericos = $perifericos->where('periferico_precio','<', $precio * $this->intervalo_precio);
+            }
+        }
 
         $perifericos = $perifericos->paginate(12);
         return $perifericos;

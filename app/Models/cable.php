@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class cable extends Model
 {
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'compra_cable');
+    }
+
     protected $table='cable';
     protected $fillable = [
         'cable_nombre',

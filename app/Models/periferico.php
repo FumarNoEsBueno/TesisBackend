@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class periferico extends Model
 {
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'periferico_compra');
+    }
+
     protected $table='periferico';
     protected $fillable = [
         'periferico_nombre',

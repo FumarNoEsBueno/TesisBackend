@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class disco_duro extends Model
 {
 
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'disco_duro_compra');
+    }
+
     public function disponibilidad()
     {
         return $this->belongsTo(disponibilidad::class);
@@ -41,11 +46,6 @@ class disco_duro extends Model
     public function descuento()
     {
         return $this->belongsTo(model_descuento::class);
-    }
-
-    public function compra()
-    {
-        return $this->belongsTo(compra::class);
     }
 
     protected $table='disco_duro';

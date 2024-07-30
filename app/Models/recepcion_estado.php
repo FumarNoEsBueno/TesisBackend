@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ram_compra extends Model
+class recepcion_estado extends Model
 {
-    protected $table='ram_compra';
-    protected $fillable = ['ram_id',
-        'descuento_id',
-        'compra_id'];
+    protected $table='recepcion_estado';
+    protected $fillable = ['recepcion_estado_nombre'];
     use HasFactory;
 }

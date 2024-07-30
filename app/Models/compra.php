@@ -15,22 +15,22 @@ class compra extends Model
 
     public function cables()
     {
-        return $this->belongsToMany(cable::class, 'compra_cable', 'compra_id', 'cable_id')->withPivot('compra_cable_cantidad');
+        return $this->belongsToMany(cable::class, 'compra_cable', 'compra_id', 'cable_id')->withPivot('compra_cable_cantidad','descuento_id');
     }
 
     public function rams()
     {
-        return $this->belongsToMany(ram::class, 'ram_compra', 'compra_id', 'ram_id');
+        return $this->belongsToMany(ram::class, 'ram_compra', 'compra_id', 'ram_id')->withPivot('descuento_id');
     }
 
     public function perifericos()
     {
-        return $this->belongsToMany(periferico::class, 'periferico_compra', 'compra_id', 'periferico_id');
+        return $this->belongsToMany(periferico::class, 'periferico_compra', 'compra_id', 'periferico_id')->withPivot('descuento_id');
     }
 
     public function discos()
     {
-        return $this->belongsToMany(disco_duro::class, 'disco_duro_compra', 'compra_id', 'disco_duro_id');
+        return $this->belongsToMany(disco_duro::class, 'disco_duro_compra', 'compra_id', 'disco_duro_id')->withPivot('descuento_id');
     }
 
     public function metodo_pago()

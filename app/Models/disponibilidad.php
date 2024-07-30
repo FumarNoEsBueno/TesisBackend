@@ -13,6 +13,7 @@ class disponibilidad extends Model
     }
 
     protected $table='disponibilidad';
-    protected $fillable = ['disponibilidad_nombre','disponibilidad_descripcion'];
+    protected $fillable = ['disponibilidad_nombre'
+        ,'disponibilidad_descripcion'];
     use HasFactory;
 }

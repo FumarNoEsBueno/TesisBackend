@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cable;
 use App\Models\compra;
 use App\Models\compra_cable;
 use App\Models\disco_duro;
@@ -76,7 +77,7 @@ class controller_compra extends Controller
 
         $compra = new compra();
 
-        $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+        $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'), 0, 6);
         $compra->compra_codigo = $randomCode;
         $compra->compra_email = $request->user()->email;
         $compra->estado_compra_id = 1;
@@ -91,6 +92,7 @@ class controller_compra extends Controller
             foreach($discos->get() as $disco){
                 disco_duro_compra::create([
                     'disco_duro_id' => $disco->id,
+                    'descuento_id' => $disco->descuento_id,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -101,6 +103,7 @@ class controller_compra extends Controller
             foreach($perifericos->get() as $periferico){
                 periferico_compra::create([
                     'periferico_id' => $periferico->id,
+                    'descuento_id' => $periferico->descuento_id,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -111,6 +114,7 @@ class controller_compra extends Controller
             foreach($rams->get() as $ram){
                 ram_compra::create([
                     'ram_id' => $ram->id,
+                    'descuento_id' => $ram->descuento_id,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -123,8 +127,12 @@ class controller_compra extends Controller
                 compra_cable::create([
                     'compra_cable_cantidad' => $request->cablesCantidad[$index],
                     'cable_id' => $cable->id,
+                    'descuento_id' => $cable->descuento_id,
                     'compra_id' => $compra->id
                 ]);
+                DB::table('cable')
+                    ->where('id','=',$request->cablesId[$index])
+                    ->decrement('cable_cantidad', $request->cablesCantidad[$index]);
                 $index++;
             }
         }
@@ -135,11 +143,13 @@ class controller_compra extends Controller
     public function get_all_compras(Request $request){
         $compras = Compra::with('discos')
             ->with('perifericos')
+            ->with('rams')
+            ->with('cables')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
             ->latest()
-            ->paginate(12);
+            ->paginate(5);
 
         return $compras;
     }
@@ -154,7 +164,7 @@ class controller_compra extends Controller
             ->with('metodo_despacho')
             ->with('metodo_pago')
             ->latest()
-            ->paginate(12);
+            ->paginate(5);
 
         return $compras;
     }

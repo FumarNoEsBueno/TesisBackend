@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class solicitud_recepcion extends Model
 {
+    public function recepcion_estado()
+    {
+        return $this->belongsTo(recepcion_estado::class);
+    }
+
     protected $table='solicitud_recepción';
     protected $fillable = ['solicitud_recepcion_volumen_aproximado',
         'solicitud_recepcion_peso_aproximado',
@@ -15,6 +20,7 @@ class solicitud_recepcion extends Model
         'solicitud_recepcion_codigo',
         'solicitud_recepcion_descripcion',
         'metodo_recepcion_id',
+        'recepcion_estado_id',
         'user_id'];
     use HasFactory;
 }

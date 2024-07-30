@@ -101,8 +101,8 @@ class seeder_cable extends Seeder
                 'disponibilidad_id' => rand(1,3),
                 'almacen_id' => 1,
                 'estado_id' => rand(1,3),
-                'marca_id' => rand(1,4),
-                'tipo_entrada_id' => rand(1,3),
+                'marca_id' => rand(1,7),
+                'tipo_entrada_id' => rand(1,7),
             ];
         }, $cables);
 

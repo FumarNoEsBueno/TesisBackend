@@ -16,11 +16,14 @@ use App\Http\Controllers\controller_recepcion;
 Route::post('/admin_login',[controller_admin::class, 'admin_login']);
 Route::middleware('auth:api')->post('/check_admin_login',[controller_admin::class, 'check_admin_login']);
 Route::middleware('auth:api')->post('/get_all_compras',[controller_compra::class, 'get_all_compras']);
+Route::middleware('auth:api')->post('/get_all_recepciones',[controller_recepcion::class, 'get_all_recepcion_paginated']);
 Route::get('/get_all_discos_duros',[controller_disco_duro::class, 'get_all_discos_duros']);
 Route::get('/get_descuentos',[controller_admin::class, 'get_descuentos']);
 Route::get('/get_productos_comprados_estadisticas',[controller_compra::class, 'get_productos_comprados_estadisticas']);
 Route::middleware('auth:api')->post('/set_producto',[controller_admin::class, 'set_producto']);
 Route::middleware('auth:api')->post('/update_estado_compra',[controller_admin::class, 'update_estado_compra']);
+Route::middleware('auth:api')->post('/cancelar_recepcion',[controller_recepcion::class, 'cancelar_recepcion']);
+Route::middleware('auth:api')->post('/confirmar_recepcion',[controller_recepcion::class, 'confirmar_recepcion']);
 Route::middleware('auth:api')->get('/get_ventas_para_estadisticas',[controller_compra::class, 'get_ventas_para_estadisticas']);
 
 //User routes
@@ -33,17 +36,22 @@ Route::middleware('auth:api')->get('/direcciones',[controller_profile::class, 'g
 Route::middleware('auth:api')->post('/create_direccion',[controller_profile::class, 'create_direccion']);
 Route::middleware('auth:api')->post('/delete_direccion',[controller_profile::class, 'delete_direccion']);
 Route::middleware('auth:api')->post('/create_recepcion',[controller_recepcion::class, 'create_recepcion']);
+Route::middleware('auth:api')->post('/update_password',[controller_profile::class, 'update_password']);
 Route::post('/login',[controller_profile::class, 'login']);
 Route::post('/register',[controller_profile::class, 'register']);
-Route::get('/compras',[controller_compra::class, 'compras']);
 Route::get('/discosDuros',[controller_disco_duro::class, 'discosDurosPaginated']);
 Route::get('/perifericos',[controller_periferico::class, 'perifericosPaginated']);
+Route::get('/get_all_perifericos',[controller_periferico::class, 'get_all_perifericos']);
 Route::get('/rams',[controller_ram::class, 'ramPaginated']);
+Route::get('/get_all_ram',[controller_ram::class, 'get_all_ram']);
 Route::get('/cables',[controller_cable::class, 'getCablesPaginated']);
+Route::get('/get_all_cable',[controller_cable::class, 'get_all_cable']);
+Route::get('/get_cable_recomendado',[controller_cable::class, 'get_cable_recomendado']);
 Route::get('/get_productos_nuevos',[controller_disco_duro::class, 'get_productos_nuevos']);
 
 Route::get('/parametros/estado',[controller_parametros::class, 'estado']);
 Route::get('/parametros/estado_compra',[controller_parametros::class, 'estado_compra']);
+Route::get('/parametros/estado_recepcion',[controller_parametros::class, 'estado_recepcion']);
 Route::get('/parametros/marca',[controller_parametros::class, 'marca']);
 Route::get('/parametros/disponibilidad',[controller_parametros::class, 'disponibilidad']);
 Route::get('/parametros/sistema-archivos',[controller_parametros::class, 'sistemaArchivos']);
@@ -52,7 +60,9 @@ Route::get('/parametros/tamano_ram',[controller_parametros::class, 'tamano_ram']
 Route::get('/parametros/velocidad_ram',[controller_parametros::class, 'velocidad_ram']);
 Route::get('/parametros/tipo_ram',[controller_parametros::class, 'tipo_ram']);
 Route::get('/parametros/tipo_periferico',[controller_parametros::class, 'tipo_periferico']);
+Route::get('parametros/tipo_entrada',[controller_parametros::class, 'tipo_entrada']);
 Route::get('/parametros/despacho',[controller_parametros::class, 'despacho']);
+Route::get('/parametros/capacidad_ram',[controller_parametros::class, 'capacidad_ram']);
 
 Route::get('/get_ciudades_por_provincia',[controller_profile::class, 'get_ciudades_por_provincia']);
 Route::get('/get_provincias_por_region',[controller_profile::class, 'get_provincias_por_region']);
