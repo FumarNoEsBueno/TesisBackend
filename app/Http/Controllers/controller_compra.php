@@ -142,6 +142,7 @@ class controller_compra extends Controller
 
     public function get_all_compras(Request $request){
         $compras = Compra::with('discos')
+            ->with('usuario')
             ->with('perifericos')
             ->with('rams')
             ->with('cables')
@@ -156,6 +157,7 @@ class controller_compra extends Controller
 
     public function get_compras_by_user_id(Request $request){
         $compras = Compra::where('users_id', $request->user()->id)
+            ->with('usuario')
             ->with('discos')
             ->with('perifericos')
             ->with('rams')
@@ -174,6 +176,7 @@ class controller_compra extends Controller
             with('discos')
             ->with('perifericos')
             ->with('rams')
+            ->with('cables')
             ->with('usuario')
             ->with('estado_compra')
             ->with('metodo_despacho')

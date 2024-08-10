@@ -9,7 +9,7 @@ class cable extends Model
 {
     public function compras()
     {
-        return $this->belongsToMany(Compra::class, 'compra_cable');
+        return $this->belongsToMany(Compra::class, 'compra_cable')->withPivot('compra_cable_cantidad');
     }
 
     protected $table='cable';
