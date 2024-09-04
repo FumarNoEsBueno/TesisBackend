@@ -22,7 +22,6 @@ class controller_disco_duro extends Controller
             ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
             ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->leftJoin('descuento','descuento.id','=','disco_duro.descuento_id')
             ->select('disco_duro.id',
                 'disco_duro.disco_duro_memoria',
                 'disco_duro.disco_duro_precio',
@@ -37,7 +36,7 @@ class controller_disco_duro extends Controller
                 'tamano.tamano_nombre',
                 'tamano.tamano_descripcion',
                 'marca.marca_nombre',
-                'descuento.descuento_porcentaje',
+                'disco_duro.disco_duro_descuento',
                 'sistema_archivos.sistema_archivos_nombre');
 
         if($request->disponibilidad != null) $discos = $discos->whereIn('disponibilidad.id',$request->disponibilidad);

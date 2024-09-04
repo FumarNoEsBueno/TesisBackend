@@ -64,8 +64,8 @@ class controller_admin extends Controller
             case ("disco"):
                 $response = DB::table('disco_duro')->where('id', $request->id)->first();
                 if ($response) {
-                    $response->descuento_id = $request->descuentoId;
-                    DB::table('disco_duro')->where('id', $request->id)->update(['descuento_id' => $request->descuentoId]);
+                    $response->disco_duro_descuento = $request->descuento;
+                    DB::table('disco_duro')->where('id', $request->id)->update(['disco_duro_descuento' => $request->descuento]);
                 }
             break;
             case ("ram"):

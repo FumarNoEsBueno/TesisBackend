@@ -20,7 +20,7 @@ class disco_duro_compra extends Model
 
     protected $table='disco_duro_compra';
     protected $fillable = ['disco_duro_id',
-        'descuento_id',
+        'disco_duro_compra_descuento',
         'compra_id'];
     use HasFactory;
 }

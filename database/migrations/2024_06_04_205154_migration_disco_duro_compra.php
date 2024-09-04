@@ -14,9 +14,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('disco_duro_id');
             $table->unsignedBigInteger('compra_id');
-            $table->unsignedBigInteger('descuento_id')->nullable();
+            $table->integer('disco_duro_compra_descuento')->nullable();
 
-            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disco_duro_id')->references('id')->on('disco_duro');
             $table->foreign('compra_id')->references('id')->on('compra');
         });

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('disco_duro_horas_encendido');
             $table->string('disco_duro_esperanza_vida');
             $table->integer('disco_duro_precio');
-            $table->unsignedBigInteger('descuento_id')->nullable();
+            $table->integer('disco_duro_descuento')->nullable();
+
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('sistema_archivos_id');
             $table->unsignedBigInteger('tipo_entrada_id');
 
-            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

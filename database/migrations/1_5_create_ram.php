@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('ram_descripcion');
             $table->binary('ram_foto');
             $table->integer('ram_precio');
-            $table->unsignedBigInteger('descuento_id')->nullable();
+            $table->integer('ram_descuento')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_ram_id');
             $table->unsignedBigInteger('velocidad_ram_id');
 
-            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

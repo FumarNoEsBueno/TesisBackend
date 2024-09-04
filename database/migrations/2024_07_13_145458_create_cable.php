@@ -15,14 +15,14 @@ return new class extends Migration
             $table->integer('cable_cantidad');
             $table->integer('cable_precio');
             $table->binary('cable_foto');
-            $table->unsignedBigInteger('descuento_id')->nullable();
+            $table->integer('cable_descuento')->nullable();
+
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('tipo_entrada_id');
 
-            $table->foreign('descuento_id')->references('id')->on('descuento');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');
