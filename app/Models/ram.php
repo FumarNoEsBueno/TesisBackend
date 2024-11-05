@@ -18,6 +18,7 @@ class ram extends Model
         'ram_foto',
         'ram_precio',
         'ram_descuento',
+        'ram_destacado',
         'disponibilidad_id',
         'almacen_id',
         'estado_id',

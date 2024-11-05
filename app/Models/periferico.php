@@ -20,6 +20,7 @@ class periferico extends Model
         'periferico_precio',
         'disponibilidad_id',
         'periferico_descuento',
+        'periferico_destacado',
         'almacen_id',
         'estado_id',
         'marca_id',

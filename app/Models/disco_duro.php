@@ -58,6 +58,7 @@ class disco_duro extends Model
         'disco_duro_precio',
         'disponibilidad_id',
         'disco_duro_descuento',
+        'disco_duro_destacado',
         'almacen_id',
         'estado_id',
         'tamano_id',

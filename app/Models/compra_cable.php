@@ -10,7 +10,7 @@ class compra_cable extends Model
     protected $table='compra_cable';
     protected $fillable = [
         'compra_cable_cantidad',
-        'descuento_id',
+        'compra_cable_descuento',
         'cable_id',
         'compra_id',
         ];

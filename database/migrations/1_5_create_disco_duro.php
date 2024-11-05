@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('disco_duro_esperanza_vida');
             $table->integer('disco_duro_precio');
             $table->integer('disco_duro_descuento')->nullable();
+            $table->boolean('disco_duro_destacado')->default(false);
 
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');

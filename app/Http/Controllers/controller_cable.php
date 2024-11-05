@@ -17,15 +17,13 @@ class controller_cable extends Controller
             ->join('marca','marca.id','=','cable.marca_id')
             ->join('tipo_entrada','tipo_entrada.id','=','cable.tipo_entrada_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->leftJoin('descuento','descuento.id','=','cable.descuento_id')
             ->select('cable.id',
                 'cable.cable_nombre',
                 'cable.cable_cantidad',
                 'cable.cable_precio',
                 'cable.cable_foto',
-                'cable.descuento_id',
+                'cable.cable_descuento',
                 'estado.estado_nombre',
-                'descuento.descuento_porcentaje',
                 'tipo_entrada.tipo_entrada_nombre',
                 'marca.marca_nombre',
                 );
@@ -59,7 +57,7 @@ class controller_cable extends Controller
                 'cable.cable_cantidad',
                 'cable.cable_precio',
                 'cable.cable_foto',
-                'cable.descuento_id',
+                'cable.cable_descuento',
                 'estado.estado_nombre',
                 'tipo_entrada.tipo_entrada_nombre',
                 'marca.marca_nombre',

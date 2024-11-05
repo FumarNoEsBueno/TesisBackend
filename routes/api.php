@@ -29,6 +29,7 @@ Route::middleware('auth:api')->get('/get_ventas_para_estadisticas',[controller_c
 //User routes
 Route::middleware('auth:api')->post('/comprar',[controller_compra::class, 'comprar']);
 Route::middleware('auth:api')->post('/get_compras_by_user_id',[controller_compra::class, 'get_compras_by_user_id']);
+Route::middleware('auth:api')->post('/create_user',[controller_admin::class, 'create_user']);
 Route::middleware('auth:api')->post('/get_recepcion_paginated_by_user_id',[controller_recepcion::class, 'get_recepcion_paginated_by_user_id']);
 Route::middleware('auth:api')->post('/check_login',[controller_profile::class, 'checkLogin']);
 Route::middleware('auth:api')->post('/revoke_token',[controller_profile::class, 'revoke_token']);
@@ -47,7 +48,8 @@ Route::get('/get_all_ram',[controller_ram::class, 'get_all_ram']);
 Route::get('/cables',[controller_cable::class, 'getCablesPaginated']);
 Route::get('/get_all_cable',[controller_cable::class, 'get_all_cable']);
 Route::get('/get_cable_recomendado',[controller_cable::class, 'get_cable_recomendado']);
-Route::get('/get_productos_nuevos',[controller_disco_duro::class, 'get_productos_nuevos']);
+Route::get('/get_productos_nuevos',[controller_compra::class, 'get_productos_nuevos']);
+Route::get('/get_productos_destacados',[controller_compra::class, 'get_productos_destacados']);
 
 Route::get('/parametros/estado',[controller_parametros::class, 'estado']);
 Route::get('/parametros/estado_compra',[controller_parametros::class, 'estado_compra']);

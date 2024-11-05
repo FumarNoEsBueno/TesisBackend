@@ -20,18 +20,17 @@ class controller_ram extends Controller
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
             ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->leftJoin('descuento','descuento.id','=','ram.descuento_id')
             ->select('ram.id',
                 'ram.ram_nombre',
                 'ram.ram_precio',
                 'ram.ram_foto',
+                'ram.ram_descuento',
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
                 'capacidad_ram.capacidad_ram_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
-                'descuento.descuento_porcentaje',
                 'marca.marca_nombre');
 
         if($request->estado != null) $rams = $rams->whereIn('estado.id',$request->estado);
@@ -66,7 +65,7 @@ class controller_ram extends Controller
                 'ram.ram_nombre',
                 'ram.ram_precio',
                 'ram.ram_foto',
-                'ram.descuento_id',
+                'ram.ram_descuento',
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',

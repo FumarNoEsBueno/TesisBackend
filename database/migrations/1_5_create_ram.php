@@ -16,6 +16,7 @@ return new class extends Migration
             $table->binary('ram_foto');
             $table->integer('ram_precio');
             $table->integer('ram_descuento')->nullable();
+            $table->boolean('ram_destacado')->default(false);
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');

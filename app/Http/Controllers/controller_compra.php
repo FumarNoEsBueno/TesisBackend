@@ -92,7 +92,7 @@ class controller_compra extends Controller
             foreach($discos->get() as $disco){
                 disco_duro_compra::create([
                     'disco_duro_id' => $disco->id,
-                    'descuento_id' => $disco->descuento_id,
+                    'disco_duro_compra_descuento' => $disco->disco_duro_descuento,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -103,7 +103,7 @@ class controller_compra extends Controller
             foreach($perifericos->get() as $periferico){
                 periferico_compra::create([
                     'periferico_id' => $periferico->id,
-                    'descuento_id' => $periferico->descuento_id,
+                    'periferico_compra_descuento' => $periferico->periferico_descuento,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -114,7 +114,7 @@ class controller_compra extends Controller
             foreach($rams->get() as $ram){
                 ram_compra::create([
                     'ram_id' => $ram->id,
-                    'descuento_id' => $ram->descuento_id,
+                    'ram_compra_descuento' => $ram->ram_descuento,
                     'compra_id' => $compra->id
                 ]);
             }
@@ -127,7 +127,7 @@ class controller_compra extends Controller
                 compra_cable::create([
                     'compra_cable_cantidad' => $request->cablesCantidad[$index],
                     'cable_id' => $cable->id,
-                    'descuento_id' => $cable->descuento_id,
+                    'compra_cable_descuento' => $cable->cable_descuento,
                     'compra_id' => $compra->id
                 ]);
                 DB::table('cable')
@@ -168,7 +168,7 @@ class controller_compra extends Controller
             ->latest()
             ->paginate(5);
 
-        return $compras;
+        return response()->json($compras, 200);
     }
 
     public function get_ventas_para_estadisticas(Request $request){
@@ -184,6 +184,218 @@ class controller_compra extends Controller
             ->get();
 
         return response()->json($compras, 200);
+
     }
 
+    public function get_productos_destacados(Request $request)
+    {
+        $cables = DB::table('cable')
+            ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
+            ->join('estado','estado.id','=','cable.estado_id')
+            ->join('marca','marca.id','=','cable.marca_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('cable.cable_cantidad', '>', 0)
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->orderBy('cable.id', 'desc')
+            ->limit(3)
+            ->get();
+
+        $rams = DB::table('ram')
+            ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
+            ->join('estado','estado.id','=','ram.estado_id')
+            ->join('marca','marca.id','=','ram.marca_id')
+            ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
+            ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
+            ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
+            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->where('ram.ram_destacado', true)
+            ->select('ram.id',
+                'ram.ram_nombre',
+                'ram.ram_precio',
+                'ram.ram_foto',
+                'disponibilidad.disponibilidad_nombre',
+                'tipo_ram.tipo_ram_nombre',
+                'tamano_ram.tamano_ram_nombre',
+                'capacidad_ram.capacidad_ram_capacidad',
+                'velocidad_ram.velocidad_ram_velocidad',
+                'estado.estado_nombre',
+                'marca.marca_nombre')
+            ->orderBy('ram.id', 'desc')
+            ->get();
+
+        $discos = DB::table('disco_duro')
+            ->join('disponibilidad','disponibilidad.id','=','disco_duro.disponibilidad_id')
+            ->join('estado','estado.id','=','disco_duro.estado_id')
+            ->join('tamano','tamano.id','=','disco_duro.tamano_id')
+            ->join('marca','marca.id','=','disco_duro.marca_id')
+            ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
+            ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
+            ->whereNotIn('disponibilidad.disponibilidad_nombre', ['Vendido','Reparacion pendiente'])
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->where('disco_duro.disco_duro_destacado', true)
+            ->select('disco_duro.id',
+                'disco_duro.disco_duro_memoria',
+                'disco_duro.disco_duro_precio',
+                'disco_duro.disco_duro_nombre',
+                'disco_duro.disco_duro_foto',
+                'disco_duro.disco_duro_horas_encendido',
+                'disco_duro.disco_duro_esperanza_vida',
+                'disco_duro.disco_duro_crystaldisk',
+                'disco_duro.disco_duro_descuento',
+                'disco_duro.disco_duro_destacado',
+                'tipo_entrada.tipo_entrada_nombre',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'estado.estado_nombre',
+                'tamano.tamano_nombre',
+                'tamano.tamano_descripcion',
+                'marca.marca_nombre',
+                'sistema_archivos.sistema_archivos_nombre')
+            ->orderBy('disco_duro.id', 'desc')
+            ->get();
+
+        $perifericos = DB::table('periferico')
+            ->join('disponibilidad','disponibilidad.id','=','periferico.disponibilidad_id')
+            ->join('estado','estado.id','=','periferico.estado_id')
+            ->join('marca','marca.id','=','periferico.marca_id')
+            ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
+            ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->where('periferico.periferico_destacado', true)
+            ->select('periferico.id',
+                'periferico.periferico_nombre',
+                'periferico.periferico_precio',
+                'periferico.periferico_foto',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'tipo_periferico.nombre_tipo_periferico',
+                'tipo_entrada.tipo_entrada_nombre',
+                'estado.estado_nombre',
+                'marca.marca_nombre')
+            ->orderBy('periferico.id', 'desc')
+            ->get();
+
+        $response = [$rams, $discos, $perifericos, $cables];
+
+        return response()->json($response, 200);
+    }
+
+    public function get_productos_nuevos(Request $request)
+    {
+        $cables = DB::table('cable')
+            ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
+            ->join('estado','estado.id','=','cable.estado_id')
+            ->join('marca','marca.id','=','cable.marca_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('cable.cable_cantidad', '>', 0)
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->orderBy('cable.id', 'desc')
+            ->limit(3)
+            ->get();
+
+        $rams = DB::table('ram')
+            ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
+            ->join('estado','estado.id','=','ram.estado_id')
+            ->join('marca','marca.id','=','ram.marca_id')
+            ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
+            ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
+            ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
+            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->select('ram.id',
+                'ram.ram_nombre',
+                'ram.ram_precio',
+                'ram.ram_foto',
+                'disponibilidad.disponibilidad_nombre',
+                'tipo_ram.tipo_ram_nombre',
+                'tamano_ram.tamano_ram_nombre',
+                'capacidad_ram.capacidad_ram_capacidad',
+                'velocidad_ram.velocidad_ram_velocidad',
+                'estado.estado_nombre',
+                'marca.marca_nombre')
+            ->orderBy('ram.id', 'desc')
+            ->limit(3)
+            ->get();
+
+        $discos = DB::table('disco_duro')
+            ->join('disponibilidad','disponibilidad.id','=','disco_duro.disponibilidad_id')
+            ->join('estado','estado.id','=','disco_duro.estado_id')
+            ->join('tamano','tamano.id','=','disco_duro.tamano_id')
+            ->join('marca','marca.id','=','disco_duro.marca_id')
+            ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
+            ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
+            ->whereNotIn('disponibilidad.disponibilidad_nombre', ['Vendido','Reparacion pendiente'])
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->select('disco_duro.id',
+                'disco_duro.disco_duro_memoria',
+                'disco_duro.disco_duro_precio',
+                'disco_duro.disco_duro_nombre',
+                'disco_duro.disco_duro_foto',
+                'disco_duro.disco_duro_horas_encendido',
+                'disco_duro.disco_duro_esperanza_vida',
+                'disco_duro.disco_duro_crystaldisk',
+                'disco_duro.disco_duro_descuento',
+                'disco_duro.disco_duro_destacado',
+                'tipo_entrada.tipo_entrada_nombre',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'estado.estado_nombre',
+                'tamano.tamano_nombre',
+                'tamano.tamano_descripcion',
+                'marca.marca_nombre',
+                'sistema_archivos.sistema_archivos_nombre')
+            ->orderBy('disco_duro.id', 'desc')
+            ->limit(3)
+            ->get();
+
+        $perifericos = DB::table('periferico')
+            ->join('disponibilidad','disponibilidad.id','=','periferico.disponibilidad_id')
+            ->join('estado','estado.id','=','periferico.estado_id')
+            ->join('marca','marca.id','=','periferico.marca_id')
+            ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
+            ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
+            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            ->where('estado.estado_nombre', '!=', 'Para repuesto')
+            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->select('periferico.id',
+                'periferico.periferico_nombre',
+                'periferico.periferico_precio',
+                'periferico.periferico_foto',
+                'disponibilidad.disponibilidad_nombre',
+                'disponibilidad.disponibilidad_descripcion',
+                'tipo_periferico.nombre_tipo_periferico',
+                'tipo_entrada.tipo_entrada_nombre',
+                'estado.estado_nombre',
+                'marca.marca_nombre')
+            ->orderBy('periferico.id', 'desc')
+            ->limit(3)
+            ->get();
+
+        $response = [$rams, $discos, $perifericos, $cables];
+
+        return response()->json($response, 200);
+    }
+
+    public function check_carrito(Request $productos)
+    {
+        $response = 0;
+        return response()->json($response, 500);
+    }
 }

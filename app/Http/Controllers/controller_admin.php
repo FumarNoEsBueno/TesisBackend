@@ -65,7 +65,9 @@ class controller_admin extends Controller
                 $response = DB::table('disco_duro')->where('id', $request->id)->first();
                 if ($response) {
                     $response->disco_duro_descuento = $request->descuento;
-                    DB::table('disco_duro')->where('id', $request->id)->update(['disco_duro_descuento' => $request->descuento]);
+                    DB::table('disco_duro')
+                        ->where('id', $request->id)
+                        ->update(['disco_duro_destacado' => $request->destacado],['disco_duro_descuento' => $request->descuento]);
                 }
             break;
             case ("ram"):
@@ -108,7 +110,7 @@ class controller_admin extends Controller
 
         $user = $request->user();
 
-        if(!$user->admin_privilegies) return response()->json("Credenciales no validas", 500);
+        if(!$user->trabajador) return response()->json("Credenciales no validas", 500);
 
         $token = $user->createToken('auth-token');
         $token->expires_at = Carbon::now()->addWeeks(1);
@@ -124,7 +126,20 @@ class controller_admin extends Controller
     {
         $user = $request->user();
 
-        if(!$user->admin_privilegies) return response()->json("Usuarion sin permisos", 500);
+        if(!$user->trabajador) return response()->json("Usuarion sin permisos", 500);
+        return response()->json($request->user());
+    }
+
+    public function create_user(Request $request)
+    {
+        $user = DB::table('users')->insert([
+            'name' => $request->name,
+            'number' => $request->number,
+            'email' => $request->email,
+            'trabajador' => true,
+            'password' => bcrypt('password'),
+        ]);
+
         return response()->json($request->user());
     }
 }

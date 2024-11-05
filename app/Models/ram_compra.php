@@ -9,7 +9,7 @@ class ram_compra extends Model
 {
     protected $table='ram_compra';
     protected $fillable = ['ram_id',
-        'descuento_id',
+        'ram_compra_descuento',
         'compra_id'];
     use HasFactory;
 }

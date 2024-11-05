@@ -18,16 +18,15 @@ class controller_periferico extends Controller
             ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
             ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->leftJoin('descuento','descuento.id','=','periferico.descuento_id')
             ->select('periferico.id',
                 'periferico.periferico_nombre',
                 'periferico.periferico_precio',
                 'periferico.periferico_foto',
+                'periferico.periferico_descuento',
                 'disponibilidad.disponibilidad_nombre',
                 'disponibilidad.disponibilidad_descripcion',
                 'tipo_periferico.nombre_tipo_periferico',
                 'tipo_entrada.tipo_entrada_nombre',
-                'descuento.descuento_porcentaje',
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
@@ -60,7 +59,7 @@ class controller_periferico extends Controller
                 'periferico.periferico_nombre',
                 'periferico.periferico_precio',
                 'periferico.periferico_foto',
-                'periferico.descuento_id',
+                'periferico.periferico_descuento',
                 'disponibilidad.disponibilidad_nombre',
                 'disponibilidad.disponibilidad_descripcion',
                 'tipo_periferico.nombre_tipo_periferico',
