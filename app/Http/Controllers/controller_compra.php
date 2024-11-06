@@ -194,10 +194,11 @@ class controller_compra extends Controller
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            #->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
             ->where('cable.cable_cantidad', '>', 0)
-            ->where('estado.estado_nombre', '!=', 'Para repuesto')
-            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            #->where('estado.estado_nombre', '!=', 'Para repuesto')
+            #->where('estado.estado_nombre', '!=', 'Por revisar')
+            ->where('cable.cable_destacado', true)
             ->orderBy('cable.id', 'desc')
             ->limit(3)
             ->get();
@@ -211,9 +212,9 @@ class controller_compra extends Controller
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
             ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
-            ->where('estado.estado_nombre', '!=', 'Para repuesto')
-            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            #->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            #->where('estado.estado_nombre', '!=', 'Para repuesto')
+            #->where('estado.estado_nombre', '!=', 'Por revisar')
             ->where('ram.ram_destacado', true)
             ->select('ram.id',
                 'ram.ram_nombre',
@@ -237,8 +238,8 @@ class controller_compra extends Controller
             ->join('sistema_archivos','sistema_archivos.id','=','disco_duro.sistema_archivos_id')
             ->join('tipo_entrada','tipo_entrada.id','=','disco_duro.tipo_entrada_id')
             ->whereNotIn('disponibilidad.disponibilidad_nombre', ['Vendido','Reparacion pendiente'])
-            ->where('estado.estado_nombre', '!=', 'Para repuesto')
-            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            #->where('estado.estado_nombre', '!=', 'Para repuesto')
+            #->where('estado.estado_nombre', '!=', 'Por revisar')
             ->where('disco_duro.disco_duro_destacado', true)
             ->select('disco_duro.id',
                 'disco_duro.disco_duro_memoria',
@@ -268,9 +269,9 @@ class controller_compra extends Controller
             ->join('tipo_entrada','tipo_entrada.id','=','periferico.tipo_entrada_id')
             ->join('tipo_periferico','tipo_periferico.id','=','periferico.tipo_periferico_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
-            ->where('estado.estado_nombre', '!=', 'Para repuesto')
-            ->where('estado.estado_nombre', '!=', 'Por revisar')
+            #->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
+            #->where('estado.estado_nombre', '!=', 'Para repuesto')
+            #->where('estado.estado_nombre', '!=', 'Por revisar')
             ->where('periferico.periferico_destacado', true)
             ->select('periferico.id',
                 'periferico.periferico_nombre',

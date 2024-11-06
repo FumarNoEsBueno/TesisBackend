@@ -166,7 +166,7 @@ class seeder_periferico extends Seeder
                 'disponibilidad_id' => $periferico[2],
                 'almacen_id' => $periferico[3],
                 'estado_id' => $periferico[4],
-                'marca_id' => $periferico[5],
+                'marca_id' => rand(1,7),
                 'tipo_entrada_id' => $periferico[6],
                 'tipo_periferico_id' => $periferico[7],
             ];

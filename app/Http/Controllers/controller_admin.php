@@ -26,6 +26,7 @@ class controller_admin extends Controller
             ->first();
 
         $response = Compra::where('id', $request->compraId)
+            ->with('usuario')
             ->with('discos')
             ->with('estado_compra')
             ->with('metodo_despacho')
@@ -64,34 +65,37 @@ class controller_admin extends Controller
             case ("disco"):
                 $response = DB::table('disco_duro')->where('id', $request->id)->first();
                 if ($response) {
-                    $response->disco_duro_descuento = $request->descuento;
                     DB::table('disco_duro')
                         ->where('id', $request->id)
-                        ->update(['disco_duro_destacado' => $request->destacado],['disco_duro_descuento' => $request->descuento]);
+                        ->update(['disco_duro_destacado' => $request->destacado,'disco_duro_descuento' => $request->descuento]);
                 }
             break;
             case ("ram"):
                 $response = DB::table('ram')->where('id', $request->id)->first();
                 if ($response) {
-                    $response->descuento_id = $request->descuentoId;
-                    DB::table('ram')->where('id', $request->id)->update(['descuento_id' => $request->descuentoId]);
+                    DB::table('ram')
+                        ->where('id', $request->id)
+                        ->update(['ram_destacado' => $request->destacado,'ram_descuento' => $request->descuento]);
                 }
             break;
             case ("periferico"):
                 $response = DB::table('periferico')->where('id', $request->id)->first();
                 if ($response) {
-                    $response->descuento_id = $request->descuentoId;
-                    DB::table('periferico')->where('id', $request->id)->update(['descuento_id' => $request->descuentoId]);
+                    DB::table('periferico')
+                        ->where('id', $request->id)
+                        ->update(['periferico_destacado' => $request->destacado,'periferico_descuento' => $request->descuento]);
                 }
             break;
             case ("cable"):
                 $response = DB::table('cable')->where('id', $request->id)->first();
                 if ($response) {
-                    $response->descuento_id = $request->descuentoId;
-                    DB::table('cable')->where('id', $request->id)->update(['descuento_id' => $request->descuentoId]);
+                    DB::table('cable')
+                        ->where('id', $request->id)
+                        ->update(['cable_destacado' => $request->destacado,'cable_descuento' => $request->descuento]);
                 }
             break;
         }
+
         return response()->json($response, 200);
     }
 

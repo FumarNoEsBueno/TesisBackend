@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('cable_precio');
             $table->binary('cable_foto');
             $table->integer('cable_descuento')->nullable();
+            $table->boolean('cable_destacado')->default(false);
 
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');

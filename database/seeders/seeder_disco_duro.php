@@ -397,7 +397,7 @@ class seeder_disco_duro extends Seeder
             'disco_duro_horas_encendido' => $disco[3],
             'disco_duro_esperanza_vida' => $disco[4],
             'disco_duro_precio' => rand(1,100)*500 + 10000,
-            'disponibilidad_id' => rand(1,3),
+            'disponibilidad_id' => rand(1,2),
             'almacen_id' => $disco[7],
             'estado_id' => rand(1,4),
             'tamano_id' => rand(1,2),
