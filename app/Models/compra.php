@@ -50,6 +50,8 @@ class compra extends Model
     protected $table='compra';
     protected $fillable = ['compra_codigo',
         'compra_email',
+        'compra_costo',
+        'compra_garantia',
         'estado_compra_id',
         'direccion_id',
         'medoto_pago_id',

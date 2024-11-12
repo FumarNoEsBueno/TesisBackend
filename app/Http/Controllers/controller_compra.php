@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AgradecimientoTrans;
+use App\Mail\GraciasPorComprar;
+use App\Mail\Mailablee;
 use App\Models\cable;
 use App\Models\compra;
 use App\Models\compra_cable;
@@ -13,7 +16,10 @@ use App\Models\ram_compra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use PHPUnit\Event\Code\Throwable;
 use stdClass;
+use Throwable as GlobalThrowable;
 
 class controller_compra extends Controller
 {
@@ -27,6 +33,7 @@ class controller_compra extends Controller
 
     public function comprar(Request $request)
     {
+try{
         $disponibilidad = DB::table('disponibilidad')
             ->where('disponibilidad_nombre','=','Vendido')
             ->first();
@@ -79,6 +86,7 @@ class controller_compra extends Controller
 
         $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'), 0, 6);
         $compra->compra_codigo = $randomCode;
+        $compra->compra_costo = $request->costoTotal;
         $compra->compra_email = $request->user()->email;
         $compra->estado_compra_id = 1;
         $compra->direccion_id = $request->direccionId;
@@ -137,7 +145,23 @@ class controller_compra extends Controller
             }
         }
 
+        $data = [
+            'codigo' => $randomCode,
+            'costo' => $request->costoTotal,
+            'metodo_entrega' => $despacho->metodo_despacho_nombre,
+            'nombre' => $request->user()->name,
+        ];
+
+        if(strcmp($pago->metodo_pago_nombre, 'Transferencia')){
+            Mail::to($request->user()->email)->send(new GraciasPorComprar($data));
+        }else{
+            Mail::to($request->user()->email)->send(new AgradecimientoTrans($data));
+        }
+
         return response()->json($compra, 200);
+}catch(Throwable $e){
+        return response()->json($e, 500);
+}
     }
 
     public function get_all_compras(Request $request){
@@ -398,5 +422,16 @@ class controller_compra extends Controller
     {
         $response = 0;
         return response()->json($response, 500);
+    }
+
+    public function enviarCorreo()
+    {
+        $data = [
+            'nombre' => 'Juan Pérez',
+        ];
+
+        Mail::to('marcelo.murillo.99@hotmail.com')->send(new Mailablee($data));
+
+        return response()->json("Wena los k", 200);
     }
 }

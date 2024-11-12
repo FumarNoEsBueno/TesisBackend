@@ -36,7 +36,9 @@ class controller_recepcion extends Controller
 
     public function get_all_recepcion_paginated(Request $request)
     {
-        $recepcion = solicitud_recepcion::with('recepcion_estado')
+        $recepcion = solicitud_recepcion
+            ::with('recepcion_estado')
+            ->with('user')
             ->latest()
             ->paginate(5);
 

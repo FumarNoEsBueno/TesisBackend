@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EstadoCompraActualizado;
+use App\Mail\Mailablee;
 use App\Models\cable;
 use App\Models\compra;
 use App\Models\compra_cable;
@@ -13,11 +15,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class controller_admin extends Controller
 {
     public function update_estado_compra(Request $request)
     {
+    try{
         $estado = model_estado_compra::where('id','=',$request->estadoId)
             ->first();
 
@@ -33,6 +38,11 @@ class controller_admin extends Controller
             ->with('metodo_pago');
 
         $response->update(['estado_compra_id' => $request->estadoId]);
+
+        if($estado->estado_compra_nombre == 'Entregado' ||
+            $estado->estado_compra_nombre == 'Retirado'){
+            $response->update(['compra_garantia' => Carbon::now()->addMonth()]);
+        }
 
         if($estado->estado_compra_slug = 'cancelado'){
 
@@ -56,7 +66,19 @@ class controller_admin extends Controller
             $cable->update(['cable_cantidad' => DB::raw("`compra_cable_cantidad` + `cable_cantidad`")]);
         }
 
+        $data = [
+            'nombre' => $response->first()->usuario->name,
+            'codigo' => $response->first()->compra_codigo,
+            'estado' => $estado->estado_compra_nombre,
+        ];
+
+        Mail::to($response->first()->usuario->email)->send(new EstadoCompraActualizado($data));
+
         return response()->json($response->first(), 200);
+
+    }catch(Throwable $e){
+        return response()->json($e, 500);
+    }
     }
 
     public function set_producto(Request $request)
@@ -146,4 +168,17 @@ class controller_admin extends Controller
 
         return response()->json($request->user());
     }
+
+
+    public function enviarCorreo()
+    {
+        $data = [
+            'nombre' => 'Juan Pérez',
+        ];
+
+        Mail::to('marcelo.murillo1701@alumnos.ubiobio.cl')->send(new Mailablee($data));
+
+        return response()->json("Wena los k", 200);
+    }
+
 }

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class solicitud_recepcion extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function recepcion_estado()
     {
         return $this->belongsTo(recepcion_estado::class);

@@ -14,6 +14,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('compra_codigo');
             $table->string('compra_email');
+            $table->integer('compra_costo');
+            $table->date('compra_garantia')->nullable();
 
             $table->unsignedBigInteger('estado_compra_id')->nullable();
             $table->unsignedBigInteger('direccion_id')->nullable();

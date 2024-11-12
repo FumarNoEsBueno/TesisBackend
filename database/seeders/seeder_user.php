@@ -13,7 +13,7 @@ class seeder_user extends Seeder
         DB::table('users')->insert([
             'name' => 'User',
             'number' => '+56 9 5555 5555',
-            'email' => 'user@gmail.com',
+            'email' => 'marcelo.murillo1701@alumnos.ubiobio.cl',
             'password' => bcrypt('password'),
         ]);
         DB::table('users')->insert([
@@ -25,7 +25,7 @@ class seeder_user extends Seeder
         DB::table('users')->insert([
             'name' => 'admin1',
             'number' => '+56 9 5555 5557',
-            'email' => 'admin1@gmail.com',
+            'email' => 'marcelo.murillo.99@hotmail.com',
             'admin_privilegies' => true,
             'trabajador' => true,
             'password' => bcrypt('password'),
