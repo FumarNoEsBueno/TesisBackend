@@ -49,7 +49,8 @@ class disco_duro extends Model
     }
 
     protected $table='disco_duro';
-    protected $fillable = ['disco_duro_memoria',
+    protected $fillable = [
+        'disco_duro_memoria',
         'disco_duro_nombre',
         'disco_duro_foto',
         'disco_duro_crystaldisk',
@@ -64,6 +65,7 @@ class disco_duro extends Model
         'tamano_id',
         'marca_id',
         'sistema_archivos_id',
-        'tipo_entrada_id'];
+        'tipo_entrada_id'
+    ];
     use HasFactory;
 }

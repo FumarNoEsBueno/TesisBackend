@@ -2,12 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class controller_ram extends Controller
 {
     private $intervalo_precio = 10000;
+
+    public function get_ram_by_id(Request $request)
+    {
+        return ram::where('id','=',$request->id)->first();
+    }
+
+    public function get_every_ram(Request $request)
+    {
+        return ram::all()->select('id', 'ram_nombre');
+    }
+
+    public function delete_ram(Request $request)
+    {
+        $ram = ram::where('id', $request->id)
+            ->first()
+            ->delete();
+        return $ram;
+    }
+
+    public function modify_ram(Request $request)
+    {
+        $ram = ram::where('id', $request->id)
+            ->first()
+            ->update([
+            'ram_descripcion' => $request->ram_descripcion,
+            'ram_nombre' => $request->ram_nombre,
+            'ram_foto' => "ram_1.jpg",
+            'ram_precio' => $request->ram_precio,
+            'ram_descuento' => $request->ram_descuento,
+            'ram_destacado' => $request->ram_destacado,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_ram_id' => $request->tipo_ram_id,
+            'capacidad_ram_id' => $request->capacidad_ram_id,
+            'tamano_ram_id' => $request->tamano_ram_id,
+            'velocidad_ram_id' => $request->velocidad_ram_id,
+        ]);
+        return $ram;
+    }
+
+    public function post_ram(Request $request)
+    {
+
+        $ram = ram::create([
+            'ram_descripcion' => $request->ram_descripcion,
+            'ram_nombre' => $request->ram_nombre,
+            'ram_foto' => "ram_1.jpg",
+            'ram_precio' => $request->ram_precio,
+            'ram_descuento' => $request->ram_descuento,
+            'ram_destacado' => $request->ram_destacado,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_ram_id' => $request->tipo_ram_id,
+            'capacidad_ram_id' => $request->capacidad_ram_id,
+            'tamano_ram_id' => $request->tamano_ram_id,
+            'velocidad_ram_id' => $request->velocidad_ram_id,
+        ]);
+        return $ram;
+    }
 
     public function get_all_ram(Request $request)
     {

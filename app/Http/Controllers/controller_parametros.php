@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\almacen;
 use App\Models\capacidad_ram;
 use App\Models\disponibilidad;
 use App\Models\estado;
@@ -20,6 +21,11 @@ use Illuminate\Http\Request;
 
 class controller_parametros extends Controller
 {
+    public function almacen()
+    {
+        return almacen::all();
+    }
+
     public function tipo_entrada()
     {
         return tipo_entrada::all();

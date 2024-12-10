@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\disco_duro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,6 +12,73 @@ class controller_disco_duro extends Controller
     private $intervalo_capacidad = 6;
     private $intervalo_esperanza = 5000;
     private $intervalo_horas = 5000;
+
+    public function get_disco_duro_by_id(Request $request)
+    {
+        return disco_duro::where('id','=',$request->id)->first();
+    }
+
+    public function get_every_disco_duro(Request $request)
+    {
+        return disco_duro::all()->select('id', 'disco_duro_nombre');
+    }
+
+    public function delete_disco_duro(Request $request)
+    {
+        $disco = disco_duro::where('id', $request->id)
+            ->first()
+            ->delete();
+        return $disco;
+    }
+
+    public function modify_disco_duro(Request $request)
+    {
+        $disco = disco_duro::where('id', $request->id)
+            ->first()
+            ->update([
+            'disco_duro_memoria' => $request->memoria,
+            'disco_duro_nombre' => $request->nombre,
+            'disco_duro_foto' => "1.jpg",
+            'disco_duro_crystaldisk' => "1.jpg",
+            'disco_duro_horas_encendido' => $request->horas_encendido,
+            'disco_duro_esperanza_vida' => $request->esperanza_vida,
+            'disco_duro_precio' => $request->precio,
+            'disponibilidad_id' => $request->disponibilidad,
+            'disco_duro_descuento' => $request->descuento,
+            'disco_duro_destacado' => $request->destacado,
+            'almacen_id' => $request->almacen,
+            'estado_id' => $request->estado,
+            'tamano_id' => $request->tamano,
+            'marca_id' => $request->marca,
+            'sistema_archivos_id' => $request->sistema_archivos,
+            'tipo_entrada_id' => $request->tipo_entrada
+        ]);
+        return $disco;
+    }
+
+    public function post_disco_duro(Request $request)
+    {
+
+        $disco = disco_duro::create([
+            'disco_duro_memoria' => $request->memoria,
+            'disco_duro_nombre' => $request->nombre,
+            'disco_duro_foto' => "1.jpg",
+            'disco_duro_crystaldisk' => "1.jpg",
+            'disco_duro_horas_encendido' => $request->horas_encendido,
+            'disco_duro_esperanza_vida' => $request->esperanza_vida,
+            'disco_duro_precio' => $request->precio,
+            'disponibilidad_id' => $request->disponibilidad,
+            'disco_duro_descuento' => $request->descuento,
+            'disco_duro_destacado' => $request->destacado,
+            'almacen_id' => $request->almacen,
+            'estado_id' => $request->estado,
+            'tamano_id' => $request->tamano,
+            'marca_id' => $request->marca,
+            'sistema_archivos_id' => $request->sistema_archivos,
+            'tipo_entrada_id' => $request->tipo_entrada
+        ]);
+        return $disco;
+    }
 
     public function get_all_discos_duros(Request $request)
     {

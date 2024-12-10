@@ -2,12 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\periferico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class controller_periferico extends Controller
 {
     private $intervalo_precio = 10000;
+
+    public function get_periferico_by_id(Request $request)
+    {
+        return periferico::where('id','=',$request->id)->first();
+    }
+
+    public function get_every_periferico(Request $request)
+    {
+        return periferico::all()->select('id', 'periferico_nombre');
+    }
+
+    public function delete_periferico(Request $request)
+    {
+        $periferico = periferico::where('id', $request->id)
+            ->first()
+            ->delete();
+        return $periferico;
+    }
+
+    public function modify_periferico(Request $request)
+    {
+        $periferico = periferico::where('id', $request->id)
+            ->first()
+            ->update([
+            'periferico_nombre' => $request->periferico_nombre,
+            'periferico_foto' => "periferico1.jgp",
+            'periferico_descripcion' =>$request->periferico_descripcion,
+            'periferico_precio' => $request->periferico_precio,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'periferico_descuento' => $request->periferico_descuento,
+            'periferico_destacado' => $request->periferico_destacado,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_entrada_id' => $request->tipo_entrada_id,
+            'tipo_periferico_id' => $request->tipo_periferico_id,
+        ]);
+        return $periferico;
+    }
+
+    public function post_periferico(Request $request)
+    {
+
+        $periferico = periferico::create([
+            'periferico_nombre' => $request->periferico_nombre,
+            'periferico_foto' => "periferico1.jgp",
+            'periferico_descripcion' =>$request->periferico_descripcion,
+            'periferico_precio' => $request->periferico_precio,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'periferico_descuento' => $request->periferico_descuento,
+            'periferico_destacado' => $request->periferico_destacado,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_entrada_id' => $request->tipo_entrada_id,
+            'tipo_periferico_id' => $request->tipo_periferico_id,
+        ]);
+        return $periferico;
+    }
 
     public function get_all_perifericos(Request $request)
     {

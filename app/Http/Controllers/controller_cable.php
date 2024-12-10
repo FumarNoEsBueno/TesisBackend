@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,6 +10,63 @@ class controller_cable extends Controller
 {
     private $intervalo_precio = 10000;
 
+    public function get_cable_by_id(Request $request)
+    {
+        return cable::where('id','=',$request->id)->first();
+    }
+
+    public function get_every_cable(Request $request)
+    {
+        return cable::all()->select('id', 'cable_nombre');
+    }
+
+    public function delete_cable(Request $request)
+    {
+        $cable = cable::where('id', $request->id)
+            ->first()
+            ->delete();
+        return $cable;
+    }
+
+    public function modify_cable(Request $request)
+    {
+        $cable = cable::where('id', $request->id)
+            ->first()
+            ->update([
+            'cable_nombre' => $request->cable_nombre,
+            'cable_cantidad' => $request->cable_cantidad,
+            'cable_precio' =>$request->cable_precio,
+            'cable_foto' => "cable_1.jpg",
+            'cable_descuento' => $request->cable_descuento,
+            'cable_destacado' => $request->cable_destacado,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_entrada_id' => $request->tipo_entrada_id,
+            'tipo_periferico_id' => $request->tipo_periferico_id,
+        ]);
+        return $cable;
+    }
+    public function post_cable(Request $request)
+    {
+
+        $cable = cable::create([
+            'cable_nombre' => $request->cable_nombre,
+            'cable_cantidad' => $request->cable_cantidad,
+            'cable_precio' =>$request->cable_precio,
+            'cable_foto' => "cable_1.jpg",
+            'cable_descuento' => $request->cable_descuento,
+            'cable_destacado' => $request->cable_destacado,
+            'disponibilidad_id' => $request->disponibilidad_id,
+            'almacen_id' => $request->almacen_id,
+            'estado_id' => $request->estado_id,
+            'marca_id' => $request->marca_id,
+            'tipo_entrada_id' => $request->tipo_entrada_id,
+            'tipo_periferico_id' => $request->tipo_periferico_id,
+        ]);
+        return $cable;
+    }
     public function get_all_cable(Request $request)
     {
         $cables = DB::table('cable')
