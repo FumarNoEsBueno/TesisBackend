@@ -22,7 +22,6 @@ class controller_admin extends Controller
 {
     public function update_estado_compra(Request $request)
     {
-    try{
         $estado = model_estado_compra::where('id','=',$request->estadoId)
             ->first();
 
@@ -76,9 +75,6 @@ class controller_admin extends Controller
 
         return response()->json($response->first(), 200);
 
-    }catch(Throwable $e){
-        return response()->json($e, 500);
-    }
     }
 
     public function set_producto(Request $request)

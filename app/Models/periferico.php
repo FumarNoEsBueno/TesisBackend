@@ -18,6 +18,7 @@ class periferico extends Model
         'periferico_foto',
         'periferico_descripcion',
         'periferico_precio',
+        'solicitud_recepcion_id',
         'disponibilidad_id',
         'periferico_descuento',
         'periferico_destacado',

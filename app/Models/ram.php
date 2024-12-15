@@ -20,6 +20,7 @@ class ram extends Model
         'ram_precio',
         'ram_descuento',
         'ram_destacado',
+        'solicitud_recepcion_id',
         'disponibilidad_id',
         'almacen_id',
         'estado_id',

@@ -41,6 +41,7 @@ class controller_periferico extends Controller
             'periferico_descuento' => $request->periferico_descuento,
             'periferico_destacado' => $request->periferico_destacado,
             'almacen_id' => $request->almacen_id,
+            'solicitud_recepcion_id' => $request->solicitud_recepcion_id,
             'estado_id' => $request->estado_id,
             'marca_id' => $request->marca_id,
             'tipo_entrada_id' => $request->tipo_entrada_id,

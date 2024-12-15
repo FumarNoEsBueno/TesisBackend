@@ -18,12 +18,14 @@ return new class extends Migration
             $table->integer('cable_descuento')->nullable();
             $table->boolean('cable_destacado')->default(false);
 
+            $table->unsignedBigInteger('solicitud_recepcion_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('tipo_entrada_id');
 
+            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepción');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

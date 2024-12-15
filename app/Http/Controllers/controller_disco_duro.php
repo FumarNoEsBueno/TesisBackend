@@ -47,6 +47,7 @@ class controller_disco_duro extends Controller
             'disco_duro_descuento' => $request->descuento,
             'disco_duro_destacado' => $request->destacado,
             'almacen_id' => $request->almacen,
+            'solicitud_recepcion_id' => $request->solicitud_recepcion_id,
             'estado_id' => $request->estado,
             'tamano_id' => $request->tamano,
             'marca_id' => $request->marca,

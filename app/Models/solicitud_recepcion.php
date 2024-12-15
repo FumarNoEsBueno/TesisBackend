@@ -7,10 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class solicitud_recepcion extends Model
 {
+    public function disco()
+    {
+        return $this->hasMany(disco_duro::class,'solicitud_recepcion_id', 'id');
+    }
+    public function ram()
+    {
+        return $this->hasMany(ram::class);
+    }
+    public function periferico()
+    {
+        return $this->hasMany(periferico::class);
+    }
+    public function cable()
+    {
+        return $this->hasMany(cable::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function recepcion_estado()
     {
         return $this->belongsTo(recepcion_estado::class);

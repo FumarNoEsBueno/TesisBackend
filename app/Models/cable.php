@@ -20,6 +20,7 @@ class cable extends Model
         'cable_foto',
         'cable_descuento',
         'cable_destacado',
+        'solicitud_recepcion_id',
         'disponibilidad_id',
         'almacen_id',
         'estado_id',

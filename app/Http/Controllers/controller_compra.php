@@ -165,7 +165,8 @@ try{
     }
 
     public function get_all_compras(Request $request){
-        $compras = Compra::with('discos')
+        $compras = Compra::
+            with('discos')
             ->with('usuario')
             ->with('perifericos')
             ->with('rams')
@@ -173,6 +174,9 @@ try{
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
+            ->where('compra_codigo','LIKE','%'.$request->codigo.'%')
+            ->where('compra_email','LIKE','%'.$request->correo.'%')
+            ->where('estado_compra_id','=',$request->estado)
             ->latest()
             ->paginate(5);
 

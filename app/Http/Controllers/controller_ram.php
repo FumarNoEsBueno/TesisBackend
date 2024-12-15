@@ -45,6 +45,7 @@ class controller_ram extends Controller
             'marca_id' => $request->marca_id,
             'tipo_ram_id' => $request->tipo_ram_id,
             'capacidad_ram_id' => $request->capacidad_ram_id,
+            'solicitud_recepcion_id' => $request->solicitud_recepcion_id,
             'tamano_ram_id' => $request->tamano_ram_id,
             'velocidad_ram_id' => $request->velocidad_ram_id,
         ]);

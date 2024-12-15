@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('ram_precio');
             $table->integer('ram_descuento')->nullable();
             $table->boolean('ram_destacado')->default(false);
+            $table->unsignedBigInteger('solicitud_recepcion_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_ram_id');
             $table->unsignedBigInteger('velocidad_ram_id');
 
+            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepción');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

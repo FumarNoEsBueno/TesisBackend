@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class controller_recepcion extends Controller
 {
+    public function get_lotes_recepcionados(Request $request)
+    {
+        $recepcion_estado = recepcion_estado::where('recepcion_estado_nombre','=','Recepcionado')
+            ->first();
+
+        $recepcion = solicitud_recepcion
+            ::where('recepcion_estado_id', '=', $recepcion_estado->id)
+            ->latest()
+            ->get();
+
+        return $recepcion;
+    }
+
     public function confirmar_recepcion(Request $request)
     {
         $recepcion_estado = recepcion_estado::where('recepcion_estado_nombre','=','Recepcionado')
@@ -36,10 +49,16 @@ class controller_recepcion extends Controller
 
     public function get_all_recepcion_paginated(Request $request)
     {
-        $recepcion = solicitud_recepcion
-            ::with('recepcion_estado')
+        $recepcion = solicitud_recepcion::
+            with('disco')
+            ->with('ram')
+            ->with('periferico')
+            ->with('cable')
             ->with('user')
-            ->latest()
+            ->with('recepcion_estado')
+            ->where('solicitud_recepcion_codigo','LIKE','%'.$request->codigo.'%')
+            //->where('users.email','LIKE','%'.$request->correo.'%')
+            ->where('recepcion_estado_id','=',$request->estado)
             ->paginate(5);
 
         return $recepcion;

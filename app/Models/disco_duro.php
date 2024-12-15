@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class disco_duro extends Model
 {
 
+    public function recepcion()
+    {
+        return $this->belongsTo(solicitud_recepcion::class,'solicitud_recepcion_id', 'id');
+    }
     public function compras()
     {
         return $this->belongsToMany(Compra::class, 'disco_duro_compra');
@@ -57,6 +61,7 @@ class disco_duro extends Model
         'disco_duro_horas_encendido',
         'disco_duro_esperanza_vida',
         'disco_duro_precio',
+        'solicitud_recepcion_id',
         'disponibilidad_id',
         'disco_duro_descuento',
         'disco_duro_destacado',
