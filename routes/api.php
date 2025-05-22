@@ -11,6 +11,12 @@ use App\Http\Controllers\controller_periferico;
 use App\Http\Controllers\controller_profile;
 use App\Http\Controllers\controller_ram;
 use App\Http\Controllers\controller_recepcion;
+use App\Http\Controllers\controller_transporte;
+use App\Http\Controllers\controller_almacen;
+use App\Http\Controllers\controller_residuo;
+use App\Http\Controllers\controller_cargador;
+
+
 
 //Admin routes
 Route::post('/admin_login',[controller_admin::class, 'admin_login']);
@@ -63,6 +69,7 @@ Route::middleware('auth:api')->post('/create_direccion',[controller_profile::cla
 Route::middleware('auth:api')->post('/delete_direccion',[controller_profile::class, 'delete_direccion']);
 Route::middleware('auth:api')->post('/create_recepcion',[controller_recepcion::class, 'create_recepcion']);
 Route::middleware('auth:api')->post('/update_password',[controller_profile::class, 'update_password']);
+
 Route::post('/login',[controller_profile::class, 'login']);
 Route::post('/register',[controller_profile::class, 'register']);
 Route::get('/discosDuros',[controller_disco_duro::class, 'discosDurosPaginated']);
@@ -77,9 +84,10 @@ Route::get('/get_productos_nuevos',[controller_compra::class, 'get_productos_nue
 Route::get('/get_productos_destacados',[controller_compra::class, 'get_productos_destacados']);
 
 Route::get('/parametros/estado',[controller_parametros::class, 'estado']);
-Route::get('/parametros/almacen',[controller_parametros::class, 'almacen']);
 Route::get('/parametros/estado_compra',[controller_parametros::class, 'estado_compra']);
+Route::get('/parametros/estado_venta',[controller_parametros::class, 'estado_venta']);
 Route::get('/parametros/estado_recepcion',[controller_parametros::class, 'estado_recepcion']);
+Route::get('/parametros/almacen',[controller_parametros::class, 'almacen']);
 Route::get('/parametros/marca',[controller_parametros::class, 'marca']);
 Route::get('/parametros/disponibilidad',[controller_parametros::class, 'disponibilidad']);
 Route::get('/parametros/sistema-archivos',[controller_parametros::class, 'sistemaArchivos']);
@@ -96,6 +104,7 @@ Route::get('/get_ciudades_por_provincia',[controller_profile::class, 'get_ciudad
 Route::get('/get_provincias_por_region',[controller_profile::class, 'get_provincias_por_region']);
 Route::get('/get_regiones',[controller_profile::class, 'get_regiones']);
 
+
 Route::get('/images/{nombreImagen}', function ($nombreImagen) {
     return response()->file(public_path('images/' . $nombreImagen));
 });
@@ -103,3 +112,18 @@ Route::get('/images/{nombreImagen}', function ($nombreImagen) {
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+//Rutas de la tesis del Diego
+
+//Solicitar transporte
+Route::middleware('auth:api')->post('/solicitar_transporte',[controller_transporte::class, 'solicitarTransporte']);
+Route::get('/get_all_transportes',[controller_transporte::class, 'getAllTransportes']);
+
+// Route::get('/get_all_almacenes',[controller_almacen::class, 'getAllAlmacenes']);
+
+//Registrar residuo
+Route::middleware('auth:api')->post('/registrar_residuo', [controller_residuo::class, 'store']);
+
+
+

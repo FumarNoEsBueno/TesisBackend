@@ -45,16 +45,16 @@ class controller_profile extends Controller
         $direccion = direccion::create([
             'direccion_nombre' => $request->calle_nombre,
             'ciudad_id' => $request->id,
-            'users_id' => $request->user()->id,
+            'user_id' => $request->user()->id,
         ]);
 
         return $direccion;
     }
 
-    public function get_direcciones_by_user(Request $request)
+    public function get_direcciones_by_users(Request $request)
     {
         $direcciones = DB::table('direccion')
-            ->where('users_id','=',$request->user()->id)
+            ->where('user_id','=',$request->user()->id)
             ->join('ciudad','ciudad.id','=','direccion.ciudad_id')
             ->join('provincia','provincia.id','=','ciudad.provincia_id')
             ->join('region','region.id','=','provincia.region_id')
@@ -90,7 +90,7 @@ class controller_profile extends Controller
         return response()->json("Cuenta registrada correctamente", 200);
     }
 
-    public function login(Request $request)
+     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required'],
@@ -113,14 +113,14 @@ class controller_profile extends Controller
 
     public function update_password(Request $request)
     {
-        $user = DB::table('users')
+        $users = DB::table('users')
             ->where('id','=', $request->user()->id);
         return bcrypt($request->actual);
 
-        if(bcrypt($request->actual) != $user->first()->password){
+        if(bcrypt($request->actual) != $users->first()->password){
             return response()->json("Contraseña mal proporcionada", 500);
         }
-        $user->update(['password' => bcrypt($request->contreasena_nueva)]);
+        $users->update(['password' => bcrypt($request->contreasena_nueva)]);
 
         return response()->json("Contraseña cambiada correctamente", 200);
     }

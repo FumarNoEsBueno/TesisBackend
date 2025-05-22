@@ -10,7 +10,7 @@ class seeder_estado extends Seeder
 {
     public function run(): void
     {
-        $estados = [
+        $estados = [//almacena los estados de los productos
             ['Nuevo','nuevo'],
             ['Usado','usado'],
             ['Para repuesto','repuesto'],

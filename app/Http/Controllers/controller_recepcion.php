@@ -54,10 +54,9 @@ class controller_recepcion extends Controller
             ->with('ram')
             ->with('periferico')
             ->with('cable')
-            ->with('user')
+            ->with('users')
             ->with('recepcion_estado')
-            ->where('solicitud_recepcion_codigo','LIKE','%'.$request->codigo.'%')
-            //->where('users.email','LIKE','%'.$request->correo.'%')
+            ->where('solicitud_recepcion_codigo','LIKE','%'.$request->codigo.'%')        
             ->where('recepcion_estado_id','=',$request->estado)
             ->paginate(5);
 
@@ -66,7 +65,7 @@ class controller_recepcion extends Controller
 
     public function get_recepcion_paginated_by_user_id(Request $request)
     {
-        $recepcion = solicitud_recepcion::where('user_id', $request->user()->id)
+        $recepcion = solicitud_recepcion::where('users_id', $request->user()->id)
             ->with('recepcion_estado')
             ->latest()
             ->paginate(5);
@@ -79,7 +78,7 @@ class controller_recepcion extends Controller
         $recepcion = new solicitud_recepcion();
         $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'), 0, 6);
 
-        $recepcion->user_id = $request->user()->id;
+        $recepcion->users_id = $request->user()->id;
         $recepcion->solicitud_recepcion_volumen_aproximado = $request->volumen;
         $recepcion->recepcion_estado_id = 1;
         $recepcion->solicitud_recepcion_peso_aproximado = $request->peso;

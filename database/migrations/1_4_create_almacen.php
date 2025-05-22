@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('almacen_nombre');
             $table->unsignedBigInteger('direccion_id');
+            
             $table->foreign('direccion_id')->references('id')->on('direccion');
         });
     }

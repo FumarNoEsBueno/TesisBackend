@@ -9,33 +9,182 @@ use Illuminate\Support\Facades\DB;
 class seeder_user extends Seeder
 {
     public function run(): void
-    {
-        DB::table('users')->insert([
-            'name' => 'User',
-            'number' => '+56 9 5555 5555',
-            'email' => 'marcelo.murillo1701@alumnos.ubiobio.cl',
+    {      
+         /*
+        DB::table('users')->insert
+        ([
+            'name' => 'Ejemplo',
+            'number' => '+56 9 1234 5678',
+            'email' => 'ejemplo@gmail.com',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => false,
+            'publico' => true,
+            'reparador' => false,
+            'tecnico' => false,
+            'trabajador' => true,
+            'transportador' => false,
+            'upgradeador' => false,
             'password' => bcrypt('password'),
         ]);
-        DB::table('users')->insert([
-            'name' => 'user2',
-            'number' => '+56 9 5555 5556',
-            'email' => 'user2@gmail.com',
-            'password' => bcrypt('password'),
-        ]);
-        DB::table('users')->insert([
-            'name' => 'admin1',
+         */
+        DB::table('users')->insert
+        ([
+            'name' => 'Marcelo Murillo',
             'number' => '+56 9 5555 5557',
             'email' => 'marcelo.murillo.99@hotmail.com',
-            'admin_privilegies' => true,
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'publico' => true,
+            'reparador' => true,
+            'tecnico' => true,
             'trabajador' => true,
+            'transportador' => false,
+            'upgradeador' => true,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('users')->insert
+        ([
+            'name' => 'Diego Paredes',
+            'number' => '+56 9 6233 4354',
+            'email' => 'diego@gmail.com',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'publico' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => true,
+            'upgradeador' => true,
+            'password' => bcrypt('_1@Dio'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Javier Kc',
+            'number' => '+56 9 1234 5678',
+            'email' => 'kc@gmail.com',
+            'destructor' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => true,
             'password' => bcrypt('password'),
         ]);
         DB::table('users')->insert([
-            'name' => 'admin2',
-            'number' => '+56 9 5555 5557',
-            'email' => 'admin2@gmail.com',
-            'admin_privilegies' => false,
+            'name' => 'Benjamin Puentes',
+            'number' => '+56 9 7752 6335',
+            'email' => 'naufrago@gmail.com',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'reparador' => true,
+            'tecnico' => true,
             'trabajador' => true,
+            'transportador' => false,
+            'upgradeador' => true,
+            'password' => bcrypt('benj@007'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Jean Germain',
+            'number' => '+56 9 1234 5679',
+            'email' => 'VA.orialco@gmail.com',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => false,
+            'password' => bcrypt('todoanime1'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Frikardo Valenzuela',
+            'number' => '+56 9 1234 5670',
+            'email' => 'frikardo@gmail.com',
+            'informatico' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'upgradeador' => true,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Bryan Muñoz',
+            'number' => '+56 9 1234 5671',
+            'email' => 'pan@gmail.com',
+            'admin_privileges' => true,
+            'trabajador' => true,
+            'upgradeador' => true,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Alejandra Segura',
+            'number' => '+56 9 5678 1234',
+            'email' => 'asegura@ubiobio.cl',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => true,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Constanza Peters',
+            'number' => '+56 9 5678 1234',
+            'email' => 'conytha@gmail.cl',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => true,
+            'password' => bcrypt('password'),
+        ]);
+        /*
+        Usuarios solo del rango
+        */
+        DB::table('users')->insert
+        ([
+            'name' => 'transportador',
+            'number' => '+56 9 1234 5678',
+            'email' => 'transportador@gmail.com',
+            'admin_privileges' => false,
+            'clasificador' => false,
+            'destructor' => false,
+            'informatico' => false,
+            'publico' => false,
+            'reparador' => false,
+            'tecnico' => false,
+            'trabajador' => true,//trabajador
+            'transportador' => true,//conductor
+            'upgradeador' => false,
+            'password' => bcrypt('password'),
+        ]);
+
+        DB::table('users')->insert
+        ([
+            'name' => 'upgradeador',
+            'number' => '+56 9 1234 5678',
+            'email' => 'upgradeador@gmail.com',
+            'admin_privileges' => false,
+            'clasificador' => false,
+            'destructor' => false,
+            'informatico' => false,
+            'publico' => false,
+            'reparador' => false,
+            'tecnico' => false,
+            'trabajador' => true,//trabajador
+            'transportador' => false,
+            'upgradeador' => true,//upgradeador
             'password' => bcrypt('password'),
         ]);
     }

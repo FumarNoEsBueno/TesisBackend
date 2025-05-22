@@ -11,6 +11,42 @@ class ram extends Model
     {
         return $this->belongsToMany(Compra::class, 'ram_compra');
     }
+    public function almacen()
+    {
+        return $this->belongsTo(Almacen::class, 'almacen_id');
+    }
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+    public function tipoRam()
+    {
+        return $this->belongsTo(TipoRam::class, 'tipo_ram_id');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'estado_id');
+    }
+    public function disponibilidad()
+    {
+        return $this->belongsTo(Disponibilidad::class, 'disponibilidad_id');
+    }
+    public function capacidadRam()
+    {
+        return $this->belongsTo(CapacidadRam::class, 'capacidad_ram_id');
+    }
+    public function tamanoRam()
+    {
+        return $this->belongsTo(TamanoRam::class, 'tamano_ram_id');
+    }
+    public function velocidadRam()
+    {
+        return $this->belongsTo(VelocidadRam::class, 'velocidad_ram_id');
+    }
+    public function solicitudRecepcion()
+    {
+        return $this->belongsTo(SolicitudRecepcion::class, 'solicitud_recepcion_id');
+    }
 
     protected $table='ram';
     protected $fillable = [

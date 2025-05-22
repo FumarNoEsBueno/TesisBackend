@@ -25,12 +25,16 @@ class solicitud_recepcion extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function recepcion_estado()
     {
-        return $this->belongsTo(recepcion_estado::class);
+        return $this->belongsTo(recepcion_estado::class, 'recepcion_estado_id');
+    }
+    public function metodo_recepcion()
+    {
+        return $this->belongsTo(metodo_recepcion::class, 'metodo_recepcion_id');
     }
 
     protected $table='solicitud_recepción';

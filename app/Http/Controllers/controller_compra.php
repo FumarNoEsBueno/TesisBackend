@@ -183,7 +183,7 @@ try{
         return $compras;
     }
 
-    public function get_compras_by_user_id(Request $request){
+    public function get_compras_by_users_id(Request $request){
         $compras = Compra::where('users_id', $request->user()->id)
             ->with('usuario')
             ->with('discos')

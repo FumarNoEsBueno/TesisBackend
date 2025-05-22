@@ -66,16 +66,11 @@ class controller_parametros extends Controller
         return marca::all();
     }
 
-    public function estado_compra()
-    {
-        return model_estado_compra::all();
-    }
-
     public function disponibilidad()
     {
         return disponibilidad::all();
     }
-
+    
     public function sistemaArchivos()
     {
         return sistema_archivos::all();
@@ -84,14 +79,25 @@ class controller_parametros extends Controller
     {
         return tamano::all();
     }
+    
+    public function estado_compra()
+    {
+        return Estado::with('compra')->get();
+    }
+
+    public function estado_venta()
+    {
+        return Estado::with('venta')->get();
+    }
 
     public function estado_recepcion()
     {
-        return recepcion_estado::all();
+        return recepcion_estado::all(); 
     }
 
-    public function estado()
+    public function estado_producto(Request $request)
     {
-        return estado::all();
+        $producto = $request->input('producto');
+        return Estado::with($producto)->get();
     }
 }

@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ram_compra extends Model
 {
+    public function compra()
+    {
+        return $this->belongsToMany(Compra::class, 'compra_id');
+    }
+    public function ram()
+    {
+        return $this->belongsTo(Ram::class, 'ram_id');
+    }
+
     protected $table='ram_compra';
     protected $fillable = ['ram_id',
         'ram_compra_descuento',

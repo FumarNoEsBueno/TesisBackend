@@ -7,9 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class direccion extends Model
 {
+    public function ciudad()
+    {
+        return $this->belongsTo(ciudad::class, 'ciudad_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
     protected $table='direccion';
     protected $fillable = ['direccion_nombre',
         'ciudad_id',
-        'users_id'];
+        'user_id'];
     use HasFactory;
 }

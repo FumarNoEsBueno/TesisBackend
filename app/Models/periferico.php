@@ -11,6 +11,30 @@ class periferico extends Model
     {
         return $this->belongsToMany(Compra::class, 'periferico_compra');
     }
+    public function almacen()
+    {
+        return $this->belongsTo(Almacen::class, 'almacen_id');
+    }
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+    public function tipoEntrada()
+    {
+        return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_id');
+    }
+    public function tipoPeriferico()
+    {
+        return $this->belongsTo(TipoPeriferico::class, 'tipo_periferico_id');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'estado_id');
+    }
+    public function disponibilidad()
+    {
+        return $this->belongsTo(Disponibilidad::class, 'disponibilidad_id');
+    }
 
     protected $table='periferico';
     protected $fillable = [

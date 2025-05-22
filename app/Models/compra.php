@@ -10,7 +10,7 @@ class compra extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function cables()
@@ -48,7 +48,7 @@ class compra extends Model
     }
 
     protected $table='compra';
-    protected $fillable = ['compra_codigo',
+    protected $fillable = [
         'compra_email',
         'compra_costo',
         'compra_garantia',

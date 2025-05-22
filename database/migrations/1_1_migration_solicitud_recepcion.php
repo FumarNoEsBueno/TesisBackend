@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('solicitud_recepcion_descripcion')->nullable();
             $table->unsignedBigInteger('metodo_despacho_id');
             $table->unsignedBigInteger('recepcion_estado_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('users_id');
 
             $table->foreign('metodo_despacho_id')->references('id')->on('metodo_despacho');
             $table->foreign('recepcion_estado_id')->references('id')->on('recepcion_estado');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

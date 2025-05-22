@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class provincia extends Model
 {
+    public function region()
+    {
+        return $this->belongsTo(Region::class, 'region_id');
+    }
+    
     protected $table='provincia';
     protected $fillable = ['provincia_nombre','region_id'];
     use HasFactory;

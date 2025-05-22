@@ -37,5 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_ram::class);
         $this->call(seeder_metodo_pago::class);
         $this->call(seeder_metodo_despacho::class);
+        //Diego was here
+        $this->call(seeder_transporte::class);
     }
 }

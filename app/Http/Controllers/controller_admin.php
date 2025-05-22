@@ -11,6 +11,7 @@ use App\Models\disco_duro;
 use App\Models\model_estado_compra;
 use App\Models\periferico;
 use App\Models\ram;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -130,11 +131,11 @@ class controller_admin extends Controller
         ]);
         if(!Auth::attempt($credentials)) return response()->json("Credenciales no validas", 500);
 
-        $user = $request->user();
+        $s = $request->user();
 
-        if(!$user->trabajador) return response()->json("Credenciales no validas", 500);
+        if(!$users->trabajador) return response()->json("Credenciales no validas", 500);
 
-        $token = $user->createToken('auth-token');
+        $token = $users->createToken('auth-token');
         $token->expires_at = Carbon::now()->addWeeks(1);
 
         $tokenResult = $token->accessToken;
@@ -146,15 +147,15 @@ class controller_admin extends Controller
 
     public function check_admin_login(Request $request)
     {
-        $user = $request->user();
+        $users = $request->user();
 
-        if(!$user->trabajador) return response()->json("Usuarion sin permisos", 500);
+        if(!$users->trabajador) return response()->json("Usuarion sin permisos", 500);
         return response()->json($request->user());
     }
 
-    public function create_user(Request $request)
+    public function create_users(Request $request)
     {
-        $user = DB::table('users')->insert([
+        $users = DB::table('users')->insert([
             'name' => $request->name,
             'number' => $request->number,
             'email' => $request->email,

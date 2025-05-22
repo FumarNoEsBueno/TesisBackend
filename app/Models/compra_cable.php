@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class compra_cable extends Model
 {
+    public function cable()
+    {
+        return $this->belongsTo(cable::class, 'cable_id');
+    }
+    public function compra()
+    {
+        return $this->belongsTo(compra::class, 'compra_id');
+    }
+
     protected $table='compra_cable';
     protected $fillable = [
         'compra_cable_cantidad',
