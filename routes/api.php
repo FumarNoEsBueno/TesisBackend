@@ -124,6 +124,16 @@ Route::get('/get_all_transportes',[controller_transporte::class, 'getAllTranspor
 
 //Registrar residuo
 Route::middleware('auth:api')->post('/registrar_residuo', [controller_residuo::class, 'store']);
+Route::middleware('auth:api')->post('/get_residuo_by_id', [controller_residuo::class, 'getResiduoById']);
+Route::middleware('auth:api')->post('/get_all_residuos', [controller_residuo::class, 'getAllResiduos']);
+Route::middleware('auth:api')->post('/update_residuo', [controller_residuo::class, 'updateResiduo']);
+Route::middleware('auth:api')->post('/delete_residuo', [controller_residuo::class, 'deleteResiduo']);
 
+//Registrar cargador
+Route::middleware('auth:api')->post('/registrar_cargador', [controller_cargador::class, 'store']);
+Route::middleware('auth:api')->post('/get_cargador_by_id', [controller_cargador::class, 'getCargadorById']);
+Route::middleware('auth:api')->post('/get_all_cargadores', [controller_cargador::class, 'getAllCargadores']);
+Route::middleware('auth:api')->post('/update_cargador', [controller_cargador::class, 'updateCargador']);
+Route::middleware('auth:api')->post('/delete_cargador', [controller_cargador::class, 'deleteCargador']);
 
 
