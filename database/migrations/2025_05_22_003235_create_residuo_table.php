@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('residuo', function (Blueprint $table) {
+        Schema::create('residuo', function (Blueprint $table) 
+        {
             $table->id();
-            $table->date('fecha');
-            $table->string('hora');
             $table->string('nombre');
+            $table->date('fecha');//fecha de ingreso
+            $table->string('hora');
             $table->text('descripcion');
             $table->float('peso');
             
-            // almacén
+            // almacenado en
             $table->foreignId('almacen_id')
                 ->constrained('almacen')                // asume tabla 'almacens' o ajusta con ->constrained('almacen')
                 ->cascadeOnDelete();
 
-            // usuario
+            // ingresado por
             $table->foreignId('users_id')
                 ->constrained('users')       // tabla real 'users'
                 ->cascadeOnDelete();

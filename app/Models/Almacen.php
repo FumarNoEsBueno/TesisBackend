@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class almacen extends Model
 {
+    protected $table='almacen';
+    protected $fillable = ['almacen_nombre','direccion_id'];
+    use HasFactory;   
+
+
     public function residuo()
     {
         return $this->hasMany(residuo::class, 'almacen_id');
@@ -26,14 +31,9 @@ class almacen extends Model
     public function disco_duro()
     {
         return $this->hasMany(disco_duro::class, 'almacen_id');
-    }
-    
+    }    
     public function direccion()
     {
         return $this->belongsTo(direccion::class, 'direccion_id');
     }
-
-    protected $table='almacen';
-    protected $fillable = ['almacen_nombre','direccion_id'];
-    use HasFactory;
 }

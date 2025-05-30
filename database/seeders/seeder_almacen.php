@@ -3,25 +3,26 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
-use App\Models\almacen;
+use App\Models\Almacen;
+use Illuminate\Support\Facades\DB;
 
 class seeder_almacen extends Seeder
 {
     public function run(): void
     {
         $almacenes = [
-            ['Casa del Jean', 1],
-            ['Casa del Diego', 2]
+            ['Almacen Nonguen', 1],
+            ['Almacen Hualpen', 2],
+            ['Casa del Naufrago', 3]
         ];
 
-        $almacenes = array_map(function ($almacen) {
-            return [
-                'almacen_nombre' => $almacen[0],
-                'direccion_id' => $almacen[1]
-            ];
-        }, $almacenes);
+        $datos = array_map(fn($a) => [
+            'almacen_nombre' => $a[0],
+            'direccion_id'   => $a[1]
+        ], $almacenes);
 
-        almacen::insert($almacenes);
+        Almacen::insert($datos);
     }
 }

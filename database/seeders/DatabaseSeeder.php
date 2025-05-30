@@ -39,5 +39,10 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_metodo_despacho::class);
         //Diego was here
         $this->call(seeder_transporte::class);
+        $this->call(seeder_tarea::class);
+        $this->call(seeder_residuo::class);
+        
+
     }
 }
+
