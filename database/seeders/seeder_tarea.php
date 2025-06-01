@@ -6,41 +6,40 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\tarea; 
+
 class seeder_tarea extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
         DB::table('tareas')->insert([
             [
-                'nombre'         => 'Clasificar envases de vidrio',
-                'descripcion'    => 'Separar botellas verdes, marrones y transparentes en cajas etiquetadas',
+                'nombre'         => 'Clasificar teclados en buenos y malos',
+                'descripcion'    => 'Separar teclados funcionales de los que no funcionan',
                 'tipo_trabajo'   => 'clasificador',
+                'nivel_urgencia' => 'bajo',
+                'created_at'     => now(),
+                'updated_at'     => now(),
+            ],
+            [
+                'nombre'         => 'Ordenar',
+                'descripcion'    => 'Identificar objetos y áreas disponibles para almacenar nuevos productos',
+                'tipo_trabajo'   => 'clasificador',
+                'nivel_urgencia' => 'alto',
+                'created_at'     => now(),
+                'updated_at'     => now(),
+            ],
+            [
+                'nombre'         => 'Revisión de permisos de usuarios',
+                'descripcion'    => 'Crear y actualizar roles de acceso en el sistema',
+                'tipo_trabajo'   => 'informatico',
                 'nivel_urgencia' => 'medio',
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ],
             [
-                'nombre'         => 'Trituración de documentos',
-                'descripcion'    => 'Destruir papel confidencial en la trituradora industrial',
-                'tipo_trabajo'   => 'destructor',
-                'nivel_urgencia' => 'alto',
-                'created_at'     => now(),
-                'updated_at'     => now(),
-            ],
-            [
-                'nombre'         => 'Revisión de permisos de usuario',
-                'descripcion'    => 'Verificar y actualizar roles de acceso en el sistema',
-                'tipo_trabajo'   => 'administrador',
-                'nivel_urgencia' => 'alto',
-                'created_at'     => now(),
-                'updated_at'     => now(),
-            ],
-            [
-                'nombre'         => 'Etiquetado de cajas',
-                'descripcion'    => 'Añadir etiquetas con código de producto y fecha de ingreso',
+                'nombre'         => 'Etiquetado de pantallas',
+                'descripcion'    => 'Añadir etiquetas con identificado de producto y estado',
                 'tipo_trabajo'   => 'clasificador',
                 'nivel_urgencia' => 'bajo',
                 'created_at'     => now(),
@@ -48,7 +47,7 @@ class seeder_tarea extends Seeder
             ],
             [
                 'nombre'         => 'Eliminación de residuos electrónicos',
-                'descripcion'    => 'Desmontar y triturar tarjetas de circuito imprimo',
+                'descripcion'    => 'Desmontar y triturar chatarra para clasificar metales',
                 'tipo_trabajo'   => 'destructor',
                 'nivel_urgencia' => 'medio',
                 'created_at'     => now(),
@@ -65,23 +64,31 @@ class seeder_tarea extends Seeder
             [
                 'nombre'         => 'Separar metales ferrosos',
                 'descripcion'    => 'Usar imán para distinguir chatarra ferrosa en la pila',
-                'tipo_trabajo'   => 'clasificador',
+                'tipo_trabajo'   => 'destructor',
                 'nivel_urgencia' => 'medio',
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ],
             [
-                'nombre'         => 'Descontaminación de bidones químicos',
-                'descripcion'    => 'Limpiar y neutralizar residuos antes de verterlos',
+                'nombre'         => 'Depurar aluminio',
+                'descripcion'    => 'Usar imán para distinguir chatarra ferrosa en la pila de aluminio',
+                'tipo_trabajo'   => 'destructor',
+                'nivel_urgencia' => 'medio',
+                'created_at'     => now(),
+                'updated_at'     => now(),
+            ],
+            [
+                'nombre'         => 'Disolución quimica, obtencion de metales',
+                'descripcion'    => 'Limpiar y neutralizar residuos antes de verterlos. Obtener metales puros',
                 'tipo_trabajo'   => 'destructor',
                 'nivel_urgencia' => 'alto',
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ],
             [
-                'nombre'         => 'Configurar nuevos usuarios',
-                'descripcion'    => 'Crear cuentas, asignar roles y enviar credenciales',
-                'tipo_trabajo'   => 'administrador',
+                'nombre'         => 'Reparar y testear impresoras',
+                'descripcion'    => 'Las impresoras que no funcionan deben ser reparadas y probadas',
+                'tipo_trabajo'   => 'reparador',
                 'nivel_urgencia' => 'bajo',
                 'created_at'     => now(),
                 'updated_at'     => now(),

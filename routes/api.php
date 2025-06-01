@@ -3,8 +3,10 @@
 use App\Http\Controllers\controller_admin;
 use App\Http\Controllers\controller_cable;
 use App\Http\Controllers\controller_compra;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\controller_disco_duro;
 use App\Http\Controllers\controller_parametros;
 use App\Http\Controllers\controller_periferico;
@@ -15,6 +17,8 @@ use App\Http\Controllers\controller_transporte;
 use App\Http\Controllers\controller_almacen;
 use App\Http\Controllers\controller_residuo;
 use App\Http\Controllers\controller_cargador;
+use App\Http\Controllers\controller_tarea;
+
 
 
 
@@ -136,4 +140,5 @@ Route::middleware('auth:api')->post('/get_all_cargadores', [controller_cargador:
 Route::middleware('auth:api')->post('/update_cargador', [controller_cargador::class, 'update_cargador']);
 Route::middleware('auth:api')->post('/delete_cargador', [controller_cargador::class, 'delete_cargador']);
 
+Route::get('/tareas/urgentes', [controller_tarea::class, 'urgentes']);
 
