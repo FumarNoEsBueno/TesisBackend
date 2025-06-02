@@ -10,25 +10,6 @@ class seeder_user extends Seeder
 {
     public function run(): void
     {      
-         /*
-        DB::table('users')->insert
-        ([
-            'name' => 'Ejemplo',
-            'number' => '+56 9 1234 5678',
-            'email' => 'ejemplo@gmail.com',
-            'admin_privileges' => true,
-            'clasificador' => true,
-            'destructor' => true,
-            'informatico' => false,
-            'publico' => true,
-            'reparador' => false,
-            'tecnico' => false,
-            'trabajador' => true,
-            'transportador' => false,
-            'upgradeador' => false,
-            'password' => bcrypt('password'),
-        ]);
-         */
         DB::table('users')->insert
         ([
             'name' => 'Marcelo Murillo',
@@ -50,7 +31,7 @@ class seeder_user extends Seeder
         ([
             'name' => 'Diego Paredes',
             'number' => '+56 9 6233 4354',
-            'email' => 'diego@gmail.com',
+            'email' => 'diparcu@gmail.com',
             'admin_privileges' => true,
             'clasificador' => true,
             'destructor' => true,
@@ -77,7 +58,7 @@ class seeder_user extends Seeder
         DB::table('users')->insert([
             'name' => 'Benjamin Puentes',
             'number' => '+56 9 7752 6335',
-            'email' => 'naufrago@gmail.com',
+            'email' => 'bpuentesgonzalez@gmail.com',
             'admin_privileges' => true,
             'clasificador' => true,
             'destructor' => true,
@@ -133,7 +114,7 @@ class seeder_user extends Seeder
             'tecnico' => true,
             'trabajador' => true,
             'transportador' => true,
-            'password' => bcrypt('password'),
+            'password' => bcrypt('contraseñasegura'),
         ]);
         DB::table('users')->insert([
             'name' => 'Constanza Peters',
@@ -185,6 +166,24 @@ class seeder_user extends Seeder
             'trabajador' => true,//trabajador
             'transportador' => false,
             'upgradeador' => true,//upgradeador
+            'password' => bcrypt('password'),
+        ]);
+
+        DB::table('users')->insert
+        ([
+            'name' => 'clasificador',
+            'number' => '+56 9 1234 5678',
+            'email' => 'clasificador@biobioreciclajes.cl',
+            'admin_privileges' => false,
+            'clasificador' => true,//clasificador
+            'destructor' => false,
+            'informatico' => false,
+            'publico' => false,
+            'reparador' => false,
+            'tecnico' => false,
+            'trabajador' => true,//trabajador
+            'transportador' => false,
+            'upgradeador' => false,
             'password' => bcrypt('password'),
         ]);
     }
