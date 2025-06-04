@@ -3,18 +3,18 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-class cargo extends Model
+class rol extends Model
 {
-    protected $table = 'cargo';
+    protected $table = 'rol';
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_cargo')->withPivot('user_cargo_estado');
+        return $this->belongsToMany(User::class, 'user_rol')->withPivot('user_rol_estado');
     }
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'cargo_nombre',
+        'nombre',
     ];
     use HasFactory;
 }

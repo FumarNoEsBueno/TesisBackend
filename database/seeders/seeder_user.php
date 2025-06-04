@@ -95,12 +95,12 @@ class seeder_user extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'Bryan Muñoz',
-            'number' => '+56 9 1234 5671',
-            'email' => 'pan@gmail.com',
+            'number' => '+56 9 6187 6876',
+            'email' => 'bmunoz.rol@gmail.com',
             'admin_privileges' => true,
             'trabajador' => true,
             'upgradeador' => true,
-            'password' => bcrypt('password'),
+            'password' => bcrypt('mamahuevo10'),
         ]);
         DB::table('users')->insert([
             'name' => 'Alejandra Segura',

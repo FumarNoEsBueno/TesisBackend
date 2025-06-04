@@ -22,12 +22,12 @@ return new class extends Migration
             
             // almacenado en
             $table->foreignId('almacen_id')
-                ->constrained('almacen')                // asume tabla 'almacens' o ajusta con ->constrained('almacen')
+                ->constrained('almacen')
                 ->cascadeOnDelete();
 
             // ingresado por
             $table->foreignId('users_id')
-                ->constrained('users')       // tabla real 'users'
+                ->constrained('users')       // tabla real 'users', no 'user'
                 ->cascadeOnDelete();
 
             $table->timestamps();

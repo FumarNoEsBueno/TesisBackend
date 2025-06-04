@@ -1,11 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\cargo;
+use App\Models\rol;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-class seeder_cargo extends Seeder
+class seeder_rol extends Seeder
 {
     public function run(): void
     {
@@ -19,6 +19,6 @@ class seeder_cargo extends Seeder
             'Upgradeador'
         ];
 
-         DB::table('cargo')->insert($datos);
+         DB::table('rol')->insert($datos);
     }
 }

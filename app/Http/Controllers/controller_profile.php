@@ -124,4 +124,9 @@ class controller_profile extends Controller
 
         return response()->json("Contraseña cambiada correctamente", 200);
     }
+
+    public function get_all_roles(Request $request)
+    {
+        return DB::table('rol')->get();
+    }
 }

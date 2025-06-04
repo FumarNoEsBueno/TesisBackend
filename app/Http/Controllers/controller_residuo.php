@@ -4,36 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\residuo;
-use App\Models\almacen;
+use App\Models\Almacen;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class controller_residuo extends Controller 
 {
-    public function almacen()
-    {
-        return $this->belongsTo(almacen::class, 'almacen_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(Users::class, 'user_id');
-    }
-    
+    /**
+     * Crear un nuevo residuo
+     */
     public function store(Request $request)
     {
-        $validated = $request->validate
-        ([
-            'fecha'      => 'required|date',
-            'hora'       => 'required|string',
-            'nombre'     => 'required|string',
-            'descripcion'=> 'required|string',
-            'peso'       => 'required|numeric',
-            'almacen_id' => 'required|exists:almacen,id',
-            'user_id'    => 'required|exists:users,id',
+        $validated = Validator::make($request->all(), [
+            'fecha'       => 'required|date',
+            'hora'        => 'required|string',
+            'nombre'      => 'required|string',
+            'descripcion' => 'required|string',
+            'peso'        => 'required|numeric',
+            'almacen_id'  => 'required|exists:almacen,id',
+            'users_id'    => 'required|exists:users,id',
         ]);
 
-        $residuo = Residuo::create($validated);
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => 'Datos inválidos',
+                'errors'  => $validated->errors()
+            ], 422);
+        }
+
+        $residuo = residuo::create($validated->validated());
 
         return response()->json([
             'message' => 'Residuo registrado correctamente',
@@ -41,6 +40,9 @@ class controller_residuo extends Controller
         ], 201);
     }
 
+    /**
+     * Listar todos los residuos (con sus almacenes y usuarios)
+     */
     public function get_all_residuos()
     {
         $residuos = residuo::with(['almacen', 'user'])->get();
@@ -51,11 +53,14 @@ class controller_residuo extends Controller
         ], 200);
     }
 
+    /**
+     * Obtener un solo residuo por ID
+     */
     public function get_residuo_by_id($id)
     {
-        $residuo = residuo::with(['almacen', 'user'])->find($id);
+        $res = residuo::with(['almacen', 'user'])->find($id);
 
-        if (!$residuo) {
+        if (!$res) {
             return response()->json([
                 'message' => 'Residuo no encontrado'
             ], 404);
@@ -63,54 +68,63 @@ class controller_residuo extends Controller
 
         return response()->json([
             'message' => 'Residuo encontrado',
-            'data'    => $residuo
+            'data'    => $res
         ], 200);
     }
 
+    /**
+     * Actualizar un residuo existente
+     */
     public function update_residuo(Request $request, $id)
     {
-        $residuo = residuo::find($id);
-
-        if (!$residuo) {
+        $res = residuo::find($id);
+        if (!$res) {
             return response()->json([
                 'message' => 'Residuo no encontrado'
             ], 404);
         }
 
-        $validated = $request->validate
-        ([
-            'fecha'      => 'required|date',
-            'hora'       => 'required|string',
-            'nombre'     => 'required|string',
-            'descripcion'=> 'required|string',
-            'peso'       => 'required|numeric',
-            'almacen_id' => 'required|exists:almacen,id',
-            'user_id'    => 'required|exists:users,id',
+        $validated = Validator::make($request->all(), [
+            'fecha'       => 'required|date',
+            'hora'        => 'required|string',
+            'nombre'      => 'required|string',
+            'descripcion' => 'required|string',
+            'peso'        => 'required|numeric',
+            'almacen_id'  => 'required|exists:almacen,id',
+            'users_id'    => 'required|exists:users,id',
         ]);
 
-        $residuo->update($validated);
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => 'Datos inválidos',
+                'errors'  => $validated->errors()
+            ], 422);
+        }
+
+        $res->update($validated->validated());
 
         return response()->json([
             'message' => 'Residuo actualizado correctamente',
-            'data'    => $residuo
+            'data'    => $res
         ], 200);
     }
 
+    /**
+     * Eliminar un residuo
+     */
     public function delete_residuo($id)
     {
-        $residuo = residuo::find($id);
-
-        if (!$residuo) {
+        $res = residuo::find($id);
+        if (!$res) {
             return response()->json([
                 'message' => 'Residuo no encontrado'
             ], 404);
         }
 
-        $residuo->delete();
+        $res->delete();
 
         return response()->json([
             'message' => 'Residuo eliminado correctamente'
         ], 200);
     }
-
 }
