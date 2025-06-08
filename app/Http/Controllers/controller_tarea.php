@@ -19,4 +19,17 @@ class controller_tarea extends Controller
 
         return response()->json($tareasUrgentes);
     }
+
+    public function listar_sin_precio()
+    {
+    }
+
+    public function tasar_producto(Request $request, $id)
+    {
+        $tarea = tarea::findOrFail($id);
+        $tarea->precio = $request->input('precio');
+        $tarea->save();
+
+        return response()->json(['message' => 'Precio actualizado correctamente']);
+    }
 }

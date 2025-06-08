@@ -8,6 +8,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:4200',
+        'http://192.168.1.85:4200',//para trabajar en local a traves del firewall
         'https://api.biobioreciclajes.cl',
         'https://tesisdiego.biobioreciclajes.cl',
         'https://biobioreciclajes.cl',

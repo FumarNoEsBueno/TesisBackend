@@ -185,6 +185,22 @@ class seeder_user extends Seeder
             'transportador' => false,
             'upgradeador' => false,
             'password' => bcrypt('password'),
+        ]);DB::table('users')->insert
+        ([
+            'name' => 'Constanza Peters',
+            'number' => '+56 9 5678 1234',            
+            'email' => 'conypeters@gmail.com',
+            'admin_privileges' => true,
+            'clasificador' => true,
+            'destructor' => true,
+            'informatico' => true,
+            'publico' => true,
+            'reparador' => true,
+            'tecnico' => true,
+            'trabajador' => true,
+            'transportador' => true,
+            'upgradeador' => true,
+            'password' => bcrypt('costie16'),
         ]);
     }
 }

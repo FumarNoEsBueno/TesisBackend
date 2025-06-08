@@ -125,26 +125,21 @@ Route::get('/user', function (Request $request) {
 //-----------------------------------------
 
 //-----------------------------------------
-//Solicitar transporte
+//Transporte
+Route::put('/transportes/{id}', [controller_transporte::class, 'update']);
 Route::middleware('auth:api')->post('/solicitar_transporte',[controller_transporte::class, 'solicitarTransporte']);
 Route::get('/get_all_transportes',[controller_transporte::class, 'getAllTransportes']);
-
-// Route::get('/get_all_almacenes',[controller_almacen::class, 'getAllAlmacenes']);
 
 //-----------------------------------------
 //Registrar residuo
 
 // Lista de residuos
 Route::get('/residuos', [controller_residuo::class, 'get_all_residuos']);
-// Obtener un residuo por ID
 Route::get('/residuos/{id}', [controller_residuo::class, 'get_residuo_by_id']);
-// Crear un nuevo residuo
 Route::post('/residuos', [controller_residuo::class, 'store']);
-// Actualizar residuo existente
 Route::put('/residuos/{id}', [controller_residuo::class, 'update_residuo']);
-// Eliminar residuo
 Route::delete('/residuos/{id}', [controller_residuo::class, 'delete_residuo']);
-//Registrar cargador
+// Registrar producto cargador
 Route::middleware('auth:api')->post('/registrar_cargador', [controller_cargador::class, 'store']);
 Route::get('/get_cargador_by_id', [controller_cargador::class, 'get_cargador_by_id']);
 Route::middleware('auth:api')->get('/get_all_cargadores', [controller_cargador::class, 'get_all_cargadores']);
@@ -153,3 +148,5 @@ Route::middleware('auth:api')->post('/delete_cargador', [controller_cargador::cl
 
 Route::get('/tareas/urgentes', [controller_tarea::class, 'urgentes']);
 
+Route::middleware('auth:api')->post('/tareas/tasar', [controller_tarea::class, 'tasar_producto']);
+Route::get('tareas/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
