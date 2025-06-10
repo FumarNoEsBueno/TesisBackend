@@ -279,6 +279,18 @@ class seeder_transporte extends Seeder
             'transporte_hora' => '17:40',
             'transporte_descripcion' => 'Llevar archivo físico',
         ]);
+        DB::table('transporte')->insert([
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'Casa Segura', 'transporte_hacia' => 'UBB', 'transporte_cuando' => '03-06-2025', 'transporte_hora' => '08:00', 'transporte_descripcion' => 'Traslado a clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'UBB', 'transporte_hacia' => 'Casa Segura', 'transporte_cuando' => '03-06-2025', 'transporte_hora' => '18:00', 'transporte_descripcion' => 'Retorno desde clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'Casa Segura', 'transporte_hacia' => 'UBB', 'transporte_cuando' => '06-06-2025', 'transporte_hora' => '08:00', 'transporte_descripcion' => 'Traslado a clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'UBB', 'transporte_hacia' => 'Casa Segura', 'transporte_cuando' => '06-06-2025', 'transporte_hora' => '18:00', 'transporte_descripcion' => 'Retorno desde clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'Casa Segura', 'transporte_hacia' => 'UBB', 'transporte_cuando' => '10-06-2025', 'transporte_hora' => '08:00', 'transporte_descripcion' => 'Traslado a clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'UBB', 'transporte_hacia' => 'Casa Segura', 'transporte_cuando' => '10-06-2025', 'transporte_hora' => '18:00', 'transporte_descripcion' => 'Retorno desde clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'Casa Segura', 'transporte_hacia' => 'UBB', 'transporte_cuando' => '13-06-2025', 'transporte_hora' => '08:00', 'transporte_descripcion' => 'Traslado a clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'UBB', 'transporte_hacia' => 'Casa Segura', 'transporte_cuando' => '13-06-2025', 'transporte_hora' => '18:00', 'transporte_descripcion' => 'Retorno desde clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'Casa Segura', 'transporte_hacia' => 'UBB', 'transporte_cuando' => '17-06-2025', 'transporte_hora' => '08:00', 'transporte_descripcion' => 'Traslado a clases'],
+            ['transporte_solicitante' => 'Alejandra Segura', 'transporte_desde' => 'UBB', 'transporte_hacia' => 'Casa Segura', 'transporte_cuando' => '17-06-2025', 'transporte_hora' => '18:00', 'transporte_descripcion' => 'Retorno desde clases'],
+        ]);
 
     }
 }
