@@ -146,7 +146,7 @@ Route::middleware('auth:api')->get('/get_all_cargadores', [controller_cargador::
 Route::middleware('auth:api')->post('/update_cargador', [controller_cargador::class, 'update_cargador']);
 Route::middleware('auth:api')->post('/delete_cargador', [controller_cargador::class, 'delete_cargador']);
 
-Route::get('/tareas/urgentes', [controller_tarea::class, 'urgentes']);
+Route::get('/tarea/urgente', [controller_tarea::class, 'urgente']);
 
-Route::middleware('auth:api')->post('/tareas/tasar', [controller_tarea::class, 'tasar_producto']);
-Route::get('tareas/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
+Route::middleware('auth:api')->post('/tarea/tasar', [controller_tarea::class, 'tasar_producto']);
+Route::get('tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);

@@ -11,9 +11,9 @@ class tarea extends Model
 
     /**
      * Nombre de la tabla en la base de datos.
-     * Asegúrate de que tu tabla siga llamándose 'tareas'.
+     * Asegúrate de que tu tabla siga llamándose 'tarea'.
      */
-    protected $table = 'tareas';
+    protected $table = 'tarea';
 
     /**
      * Campos asignables masivamente.

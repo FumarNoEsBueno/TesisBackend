@@ -12,7 +12,7 @@ class seeder_tarea extends Seeder
 {
     public function run()
     {
-        DB::table('tareas')->insert([
+        DB::table('tarea')->insert([
             [
                 'nombre'         => 'Clasificar teclados en buenos y malos',
                 'descripcion'    => 'Separar teclados funcionales de los que no funcionan',

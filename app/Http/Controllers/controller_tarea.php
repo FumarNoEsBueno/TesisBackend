@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 class controller_tarea extends Controller
 {
     /**
-     * Devuelve todas las tareas cuyo nivel_urgencia = 'alto'
+     * Devuelve todas las tarea cuyo nivel_urgencia = 'alto'
      */
-    public function urgentes()
+    public function urgente()
     {
-        $tareasUrgentes = tarea::where('nivel_urgencia', 'alto')
+        $tareaUrgente = tarea::where('nivel_urgencia', 'alto')
                               ->orderBy('created_at', 'desc')
                               ->get();
 
-        return response()->json($tareasUrgentes);
+        return response()->json($tareaUrgente);
     }
 
     public function listar_sin_precio()
