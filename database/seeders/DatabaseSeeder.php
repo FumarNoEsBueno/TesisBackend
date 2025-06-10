@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_transporte::class);
         $this->call(seeder_tarea::class);
         $this->call(seeder_residuo::class);
+        $this->call(seeder_reparacion::class);
         
 
     }

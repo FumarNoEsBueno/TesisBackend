@@ -18,8 +18,7 @@ use App\Http\Controllers\controller_almacen;
 use App\Http\Controllers\controller_residuo;
 use App\Http\Controllers\controller_cargador;
 use App\Http\Controllers\controller_tarea;
-
-
+use App\Http\Controllers\ReparacionController;
 
 
 //Admin routes
@@ -150,3 +149,5 @@ Route::get('/tarea/urgente', [controller_tarea::class, 'urgente']);
 
 Route::middleware('auth:api')->post('/tarea/tasar', [controller_tarea::class, 'tasar_producto']);
 Route::get('tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
+Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
+Route::get('/reparacion', [ReparacionController::class, 'index']);
