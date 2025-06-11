@@ -151,12 +151,20 @@ Route::get('/tarea/urgente', [controller_tarea::class, 'urgente']);
 
 Route::middleware('auth:api')->post('/tarea/tasar', [controller_tarea::class, 'tasar_producto']);
 Route::get('tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
-Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
-Route::get('/reparacion', [ReparacionController::class, 'index']);
 
 
 Route::apiResource('herramienta', HerramientaController::class);
-Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);
 
+//Producto
 Route::get('/producto', [ProductoController::class, 'index']);
 Route::apiResource('producto', ProductoController::class);
+
+//Reparacion
+Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
+Route::get('/reparacion', [ReparacionController::class, 'index']);
+
+Route::post('/reparacion', [ReparacionController::class, 'store']);
+
+Route::put('/reparacion/{id}', [ReparacionController::class, 'update']);
+
+Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);
