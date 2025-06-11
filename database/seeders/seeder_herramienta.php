@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\herramienta;
+use Carbon\Carbon;
 
 class seeder_herramienta extends Seeder
 {
@@ -87,6 +88,17 @@ class seeder_herramienta extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nombre' => 'Piedra afiladora',
+                'descripcion' => 'Para afilar cuchillas',
+                'estado_id' => 1,
+                'peso' => 1.2,
+                'fecha' => Carbon::now()->toDateString(),
+                'hora' => Carbon::now()->toTimeString(),
+                'users_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }

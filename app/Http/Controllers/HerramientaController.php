@@ -7,11 +7,11 @@ use App\Models\herramienta;
 
 class HerramientaController extends Controller
 {
-    public function index()
-    {
-        $herramienta = herramienta::with('estado')->get();
-        return response()->json($herramienta);
+    public function index() {
+        $herramientas = Herramienta::select('id','nombre')->get();
+        return response()->json(['data'=>$herramientas]);
     }
+
 
     public function store(Request $request)
     {
