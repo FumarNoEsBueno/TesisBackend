@@ -22,6 +22,7 @@ use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\HerramientaController;
 
 
+
 //Admin routes
 Route::post('/admin_login',[controller_admin::class, 'admin_login']);
 Route::get('/correo',[controller_admin::class, 'enviarCorreo']);
@@ -155,3 +156,4 @@ Route::get('/reparacion', [ReparacionController::class, 'index']);
 
 
 Route::apiResource('herramienta', HerramientaController::class);
+Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);

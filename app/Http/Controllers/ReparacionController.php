@@ -140,7 +140,15 @@ class ReparacionController extends Controller
 
     public function destroy($id)
     {
-        Reparacion::destroy($id);
-        return response()->json(['message' => 'Reparación eliminada']);
+        $reparacion = \App\Models\Reparacion::find($id);
+
+        if (!$reparacion) {
+            return response()->json(['error' => 'Reparación no encontrada'], 404);
+        }
+
+        $reparacion->delete();
+
+        return response()->json(['mensaje' => 'Reparación eliminada correctamente']);
     }
+
 }
