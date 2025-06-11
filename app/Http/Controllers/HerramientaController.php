@@ -9,8 +9,8 @@ class HerramientaController extends Controller
 {
     public function index()
     {
-        $herramientas = herramienta::with('estado')->get();
-        return response()->json($herramientas);
+        $herramienta = herramienta::with('estado')->get();
+        return response()->json($herramienta);
     }
 
     public function store(Request $request)

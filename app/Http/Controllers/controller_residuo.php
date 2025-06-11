@@ -41,15 +41,15 @@ class controller_residuo extends Controller
     }
 
     /**
-     * Listar todos los residuos (con sus almacenes y usuarios)
+     * Listar todos los residuo (con sus almacenes y usuarios)
      */
-    public function get_all_residuos()
+    public function get_all_residuo()
     {
-        $residuos = residuo::with(['almacen', 'user'])->get();
+        $residuo = residuo::with(['almacen', 'user'])->get();
 
         return response()->json([
-            'message' => 'Lista de residuos obtenida correctamente',
-            'data'    => $residuos
+            'message' => 'Lista de residuo obtenida correctamente',
+            'data'    => $residuo
         ], 200);
     }
 

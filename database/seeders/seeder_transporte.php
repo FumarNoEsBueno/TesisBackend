@@ -119,7 +119,7 @@ class seeder_transporte extends Seeder
             'transporte_hora'          => '17:10',
             'transporte_descripcion'   => 'Entrega urgente de piezas',
         ]);
-                DB::table('transporte')->insert([
+        DB::table('transporte')->insert([
             'transporte_solicitante' => 'Jean Germain',
             'transporte_desde' => 'Almacen Hualpen',
             'transporte_hacia' => 'Almacen Nonguen',

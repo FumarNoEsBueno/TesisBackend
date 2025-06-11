@@ -11,7 +11,13 @@ class herramienta extends Model
     protected $table = 'herramienta';
 
     protected $fillable = [
-        'nombre', 'descripcion', 'estado_id', 'peso', 'fecha', 'hora', 'users_id'
+        'nombre', 
+        'descripcion', 
+        'estado_id', 
+        'peso', 
+        'fecha', 
+        'hora', 
+        'users_id'
     ];
 
     public function estado()

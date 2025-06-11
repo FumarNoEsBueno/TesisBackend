@@ -20,8 +20,7 @@ use App\Http\Controllers\controller_cargador;
 use App\Http\Controllers\controller_tarea;
 use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\HerramientaController;
-
-
+use App\Http\Controllers\ProductoController;
 
 
 //Admin routes
@@ -135,12 +134,12 @@ Route::get('/get_all_transportes',[controller_transporte::class, 'getAllTranspor
 //-----------------------------------------
 //Registrar residuo
 
-// Lista de residuos
-Route::get('/residuos', [controller_residuo::class, 'get_all_residuos']);
-Route::get('/residuos/{id}', [controller_residuo::class, 'get_residuo_by_id']);
-Route::post('/residuos', [controller_residuo::class, 'store']);
-Route::put('/residuos/{id}', [controller_residuo::class, 'update_residuo']);
-Route::delete('/residuos/{id}', [controller_residuo::class, 'delete_residuo']);
+// Lista de residuo
+Route::get('/residuo', [controller_residuo::class, 'get_all_residuo']);
+Route::get('/residuo/{id}', [controller_residuo::class, 'get_residuo_by_id']);
+Route::post('/residuo', [controller_residuo::class, 'store']);
+Route::put('/residuo/{id}', [controller_residuo::class, 'update_residuo']);
+Route::delete('/residuo/{id}', [controller_residuo::class, 'delete_residuo']);
 // Registrar producto cargador
 Route::middleware('auth:api')->post('/registrar_cargador', [controller_cargador::class, 'store']);
 Route::get('/get_cargador_by_id', [controller_cargador::class, 'get_cargador_by_id']);
@@ -158,3 +157,6 @@ Route::get('/reparacion', [ReparacionController::class, 'index']);
 
 Route::apiResource('herramienta', HerramientaController::class);
 Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);
+
+Route::get('/producto', [ProductoController::class, 'index']);
+Route::apiResource('producto', ProductoController::class);

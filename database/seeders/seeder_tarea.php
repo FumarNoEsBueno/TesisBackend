@@ -46,7 +46,7 @@ class seeder_tarea extends Seeder
                 'updated_at'     => now(),
             ],
             [
-                'nombre'         => 'Eliminación de residuos electrónicos',
+                'nombre'         => 'Eliminación de residuo electrónico',
                 'descripcion'    => 'Desmontar y triturar chatarra para clasificar metales',
                 'tipo_trabajo'   => 'destructor',
                 'nivel_urgencia' => 'medio',
@@ -79,7 +79,7 @@ class seeder_tarea extends Seeder
             ],
             [
                 'nombre'         => 'Disolución quimica, obtencion de metales',
-                'descripcion'    => 'Limpiar y neutralizar residuos antes de verterlos. Obtener metales puros',
+                'descripcion'    => 'Limpiar y neutralizar residuo antes de verterlos. Obtener metales puros',
                 'tipo_trabajo'   => 'destructor',
                 'nivel_urgencia' => 'alto',
                 'created_at'     => now(),
