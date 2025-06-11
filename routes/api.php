@@ -162,9 +162,6 @@ Route::apiResource('producto', ProductoController::class);
 //Reparacion
 Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
 Route::get('/reparacion', [ReparacionController::class, 'index']);
-
 Route::post('/reparacion', [ReparacionController::class, 'store']);
-
 Route::put('/reparacion/{id}', [ReparacionController::class, 'update']);
-
 Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);
