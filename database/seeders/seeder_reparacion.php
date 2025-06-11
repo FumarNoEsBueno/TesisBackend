@@ -13,8 +13,8 @@ class seeder_reparacion extends Seeder
         DB::table('reparacion')->insert([
             [
                 'id_usuario' => 1,
-                'tipo_reparado' => 'residuo',
-                'id_reparado' => 10,
+                'tipo_objeto' => 'residuo',
+                'id_objeto' => 10,
                 'detalle_reparacion' => 'Reparación de filtración',
                 'observaciones' => 'Se usó sellador especial',
                 'fecha_reparacion' => Carbon::now()->subDays(2),
@@ -23,8 +23,8 @@ class seeder_reparacion extends Seeder
             ],
             [
                 'id_usuario' => 2,
-                'tipo_reparado' => 'producto',
-                'id_reparado' => 5,
+                'tipo_objeto' => 'producto',
+                'id_objeto' => 5,
                 'detalle_reparacion' => 'Reemplazo de pieza dañada',
                 'observaciones' => 'Pieza original no disponible, se usó alternativa',
                 'fecha_reparacion' => Carbon::now()->subDays(5),
@@ -33,8 +33,8 @@ class seeder_reparacion extends Seeder
             ],
             [
                 'id_usuario' => 3,
-                'tipo_reparado' => 'herramienta',
-                'id_reparado' => 3,
+                'tipo_objeto' => 'herramienta',
+                'id_objeto' => 3,
                 'detalle_reparacion' => 'Afilado de cuchilla',
                 'observaciones' => 'Se afiló con piedra especial',
                 'fecha_reparacion' => Carbon::now()->subDays(10),
@@ -43,8 +43,8 @@ class seeder_reparacion extends Seeder
             ],
             [
                 'id_usuario' => 1,
-                'tipo_reparado' => 'residuo',
-                'id_reparado' => 7,
+                'tipo_objeto' => 'residuo',
+                'id_objeto' => 7,
                 'detalle_reparacion' => 'Limpieza profunda',
                 'observaciones' => 'Se usaron productos biodegradables',
                 'fecha_reparacion' => Carbon::now()->subDays(1),
@@ -53,8 +53,8 @@ class seeder_reparacion extends Seeder
             ],
             [
                 'id_usuario' => 2,
-                'tipo_reparado' => 'herramienta',
-                'id_reparado' => 8,
+                'tipo_objeto' => 'herramienta',
+                'id_objeto' => 8,
                 'detalle_reparacion' => 'Cambio de mango',
                 'observaciones' => 'Mango de madera reemplazado',
                 'fecha_reparacion' => Carbon::now(),

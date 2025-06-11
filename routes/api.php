@@ -19,6 +19,7 @@ use App\Http\Controllers\controller_residuo;
 use App\Http\Controllers\controller_cargador;
 use App\Http\Controllers\controller_tarea;
 use App\Http\Controllers\ReparacionController;
+use App\Http\Controllers\HerramientaController;
 
 
 //Admin routes
@@ -151,3 +152,6 @@ Route::middleware('auth:api')->post('/tarea/tasar', [controller_tarea::class, 't
 Route::get('tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
 Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
 Route::get('/reparacion', [ReparacionController::class, 'index']);
+
+
+Route::apiResource('herramienta', HerramientaController::class);

@@ -15,13 +15,12 @@ return new class extends Migration
         {
             $table->id();
             $table->unsignedBigInteger('id_usuario');
-            $table->enum('tipo_reparado', ['residuo', 'producto', 'herramienta']);
-            $table->unsignedBigInteger('id_reparado');
+            $table->enum('tipo_objeto', ['residuo', 'producto', 'herramienta']);
+            $table->unsignedBigInteger('id_objeto');
             $table->string('detalle_reparacion');
             $table->text('observaciones')->nullable();
             $table->date('fecha_reparacion');
             $table->timestamps();
-
 
             $table->foreign('id_usuario')->references('id')->on('users');
         });
