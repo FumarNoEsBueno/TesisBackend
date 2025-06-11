@@ -23,6 +23,7 @@ use App\Http\Controllers\HerramientaController;
 
 
 
+
 //Admin routes
 Route::post('/admin_login',[controller_admin::class, 'admin_login']);
 Route::get('/correo',[controller_admin::class, 'enviarCorreo']);
