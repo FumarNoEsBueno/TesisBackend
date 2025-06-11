@@ -44,47 +44,64 @@ class ReparacionController extends Controller
                         break;
 
                     case 'producto':
-                        // Lógica para producto: se basa en $fila->tipo y $r->id_objeto
-                        $fila = DB::table('producto')->where('id', $r->id_objeto)->first();
-                        if (!$fila) {
-                            $nombre = 'Producto no encontrado';
+                        // Buscar registro en tabla producto según id_objeto de la reparación
+                        $prod = DB::table('producto')->where('id', $r->id_objeto)->first();
+                        if (!$prod) {
+                            // No existe el producto referenciado
+                            $nombre = "Producto con ID {$r->id_objeto} no encontrado";
                         } else {
-                            // Suponemos que hay columna 'tipo' en producto con valores como 'disco duro', 'ram', 'periferico', etc.
-                            $subtipo = $fila->tipo; // p.ej. 'disco duro' o 'ram'
-                            // Normalizar para nombre de tabla: convertir espacios a guión bajo, minúsculas
-                            $tablaSubtipo = Str::snake($subtipo); // e.g. "disco_duro", "ram", "periferico"
+                            // 1) Intentar subtipo según columna tipo
+                            $subtipo = $prod->tipo; // ej. 'disco duro', 'ram', 'periferico', etc.
+                            // Normalizar nombre de tabla: snake case, sin caracteres especiales
+                            $tablaSubtipo = Str::snake($subtipo); // 'disco_duro', 'ram', 'periferico', etc.
                             if (Schema::hasTable($tablaSubtipo)) {
-                                // Obtener el registro en la tabla de subtipo:
-                                $filaSub = DB::table($tablaSubtipo)->where('id', $fila->id_objeto)->first();
+                                // Buscar registro en tabla de subtipo usando id_objeto de producto
+                                // Suponemos que en la tabla de subtipo la PK es 'id', y el valor a buscar es $prod->id_objeto
+                                $filaSub = DB::table($tablaSubtipo)->where('id', $prod->id_objeto)->first();
                                 if (!$filaSub) {
-                                    $nombre = ucfirst($subtipo) . ' no encontrado';
+                                    $nombre = ucfirst($subtipo) . " con ID {$prod->id_objeto} no encontrado";
                                 } else {
-                                    // Intentar columnas de nombre en la tabla de subtipo:
-                                    // 1) Si existe columna 'nombre' en esa tabla:
-                                    if (Schema::hasColumn($tablaSubtipo, 'nombre') && isset($filaSub->nombre)) {
-                                        $nombre = $filaSub->nombre ?: "Revisar columna nombre en {$tablaSubtipo}";
+                                    // Intentar extraer columna de nombre:
+                                    if (Schema::hasColumn($tablaSubtipo, 'nombre') && isset($filaSub->nombre) && $filaSub->nombre !== null && $filaSub->nombre !== '') {
+                                        $nombre = $filaSub->nombre;
                                     } else {
-                                        // 2) Buscar columnas que terminen en '_nombre'
+                                        // Buscar columna que termine en '_nombre'
                                         $cols = Schema::getColumnListing($tablaSubtipo);
                                         $colsNombre = array_filter($cols, fn($c) => Str::endsWith($c, '_nombre'));
                                         if (count($colsNombre) === 1) {
                                             $col = array_values($colsNombre)[0];
                                             $valor = $filaSub->$col;
-                                            $nombre = $valor !== null && $valor !== '' 
-                                                ? $valor 
-                                                : "Revisar columna {$col} en {$tablaSubtipo}";
+                                            if ($valor !== null && $valor !== '') {
+                                                $nombre = $valor;
+                                            } else {
+                                                $nombre = "Revisar columna {$col} en {$tablaSubtipo}";
+                                            }
                                         } else {
-                                            // No hay columna única de nombre, o hay varias
-                                            $nombre = "Revisar columna nombre en producto (subtabla {$tablaSubtipo})";
+                                            // Hay 0 o >1 columnas *_nombre; no sabemos cuál usar
+                                            $nombre = "Revisar columna nombre en {$tablaSubtipo}";
                                         }
                                     }
                                 }
                             } else {
-                                $nombre = "Tabla {$tablaSubtipo} no existe para producto";
+                                // No existe tabla de subtipo. Usar fallback con datos de la tabla producto
+                                if (isset($prod->descripcion) && trim($prod->descripcion) !== '') {
+                                    // Por ejemplo, tomar la descripción o concatenar tipo+descripcion
+                                    // Puedes formatear nombre como prefieras; ejemplo:
+                                    $desc = trim($prod->descripcion);
+                                    // Para no repetir demasiado, quizá recortar a 30 chars:
+                                    $snippet = mb_strlen($desc) > 30 ? mb_substr($desc, 0, 30) . '...' : $desc;
+                                    $nombre = ucfirst($prod->tipo) . ": " . $snippet;
+                                } else {
+                                    // Si no hay descripción, fallback a tipo o aviso
+                                    if (isset($prod->tipo) && trim($prod->tipo) !== '') {
+                                        $nombre = ucfirst($prod->tipo);
+                                    } else {
+                                        $nombre = 'Revisar columna descripción en producto';
+                                    }
+                                }
                             }
                         }
                         break;
-
                     default:
                         $nombre = 'Tipo no válido';
                 }
