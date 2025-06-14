@@ -156,10 +156,10 @@ Route::middleware('auth:api')->post('/tarea/tasar', [controller_tarea::class, 't
 Route::get('tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
 
 
-Route::apiResource('herramienta', HerramientaController::class);
+
 
 //Producto
-Route::get('/producto', [ProductoController::class, 'index']);
+
 Route::apiResource('producto', ProductoController::class);
 
 //Reparacion
@@ -170,4 +170,10 @@ Route::middleware('auth:api')->put('/reparacion/{id}', [ReparacionController::cl
 Route::middleware('auth:api')->delete('/reparacion/{id}', [ReparacionController::class, 'destroy']);
 Route::middleware('auth:api')->get('/reparacion', [ReparacionController::class, 'index']);
 
+                Route::apiResource('herramienta', HerramientaController::class);
+Route::middleware('auth:api')->get('/herramienta', [HerramientaController::class,'index']);
+
+Route::middleware('auth:api')->get('/residuo', [controller_residuo::class,'get_all_residuo']);
+Route::middleware('auth:api')->get('/producto', [ProductoController::class,'index']); // o como definas
+                        Route::get('/producto', [ProductoController::class, 'index']);
 
