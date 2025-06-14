@@ -13,10 +13,10 @@ class ReparacionController extends Controller
     public function index()
     {
         $reparaciones = DB::table('reparacion')
-            ->leftJoin('users', 'reparacion.id_usuario', '=', 'users.id')
+            ->leftJoin('users', 'reparacion.user_id', '=', 'users.id')
             ->select(
                 'reparacion.id',
-                'reparacion.id_usuario',
+                'reparacion.user_id',
                 'users.name as reparado_por',
                 'reparacion.tipo_objeto',
                 'reparacion.id_objeto',
@@ -126,7 +126,6 @@ class ReparacionController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_usuario' => 'required|integer|exists:users,id',
             'tipo_objeto' => 'required|string|in:residuo,producto,herramienta',
             'id_objeto' => 'required|integer',
             'detalle_reparacion' => 'required|string',
@@ -134,17 +133,21 @@ class ReparacionController extends Controller
             'fecha_reparacion' => 'required|date',
         ]);
 
+        // Aquí auth()->id() NO debe ser null si la ruta está protegida y se envía token válido
+        $data['user_id'] = $request->user()->id;
+
         $reparacion = Reparacion::create($data);
         return response()->json(['message' => 'Reparación creada', 'data' => $reparacion], 201);
     }
+
 
     public function update(Request $request, $id)
     {
         $reparacion = Reparacion::findOrFail($id);
         $data = $request->validate([
             // En update, validar los campos que pueden cambiar. 
-            // Si no cambias id_usuario, podrías omitirlo o incluirlo según tu lógica:
-            'id_usuario' => 'sometimes|integer|exists:users,id',
+            // Si no cambias user_id, podrías omitirlo o incluirlo según tu lógica:
+            'user_id' => 'sometimes|integer|exists:users,id',
             'tipo_objeto' => 'sometimes|string|in:residuo,producto,herramienta',
             'id_objeto' => 'sometimes|integer',
             'detalle_reparacion' => 'sometimes|string',

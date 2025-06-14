@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reparacion', function (Blueprint $table) 
         {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('user_id');
             $table->enum('tipo_objeto', ['residuo', 'producto', 'herramienta']);
             $table->unsignedBigInteger('id_objeto');
             $table->string('detalle_reparacion');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('fecha_reparacion');
             $table->timestamps();
 
-            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

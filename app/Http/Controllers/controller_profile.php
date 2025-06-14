@@ -90,7 +90,7 @@ class controller_profile extends Controller
         return response()->json("Cuenta registrada correctamente", 200);
     }
 
-     public function login(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required'],

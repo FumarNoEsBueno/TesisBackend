@@ -12,7 +12,7 @@ class Reparacion extends Model
     protected $table = 'reparacion';
 
     protected $fillable = [
-        'id_usuario',
+        'user_id',
         'tipo_objeto',
         'id_objeto',
         'detalle_reparacion',
@@ -21,7 +21,7 @@ class Reparacion extends Model
     ];
 
     public function usuario() {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function producto() {

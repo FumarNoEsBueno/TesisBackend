@@ -26,9 +26,12 @@ use App\Http\Controllers\ProductoController;
 //Admin routes
 Route::post('/admin_login',[controller_admin::class, 'admin_login']);
 Route::get('/correo',[controller_admin::class, 'enviarCorreo']);
+
 Route::middleware('auth:api')->post('/check_admin_login',[controller_admin::class, 'check_admin_login']);
 Route::middleware('auth:api')->post('/get_all_compras',[controller_compra::class, 'get_all_compras']);
 Route::middleware('auth:api')->post('/get_all_recepciones',[controller_recepcion::class, 'get_all_recepcion_paginated']);
+
+
 Route::get('/get_lotes_recepcionados',[controller_recepcion::class, 'get_lotes_recepcionados']);
 Route::get('/get_all_ram',[controller_ram::class, 'get_all_ram']);
 Route::get('/get_every_ram',[controller_ram::class, 'get_every_ram']);
@@ -160,8 +163,11 @@ Route::get('/producto', [ProductoController::class, 'index']);
 Route::apiResource('producto', ProductoController::class);
 
 //Reparacion
+Route::middleware('auth:api')->post('/reparacion', [ReparacionController::class, 'store']);
 Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
-Route::get('/reparacion', [ReparacionController::class, 'index']);
-Route::post('/reparacion', [ReparacionController::class, 'store']);
-Route::put('/reparacion/{id}', [ReparacionController::class, 'update']);
-Route::delete('reparacion/{id}', [ReparacionController::class, 'destroy']);
+Route::middleware('auth:api')->post('/reparacion', [ReparacionController::class, 'store']);
+Route::middleware('auth:api')->put('/reparacion/{id}', [ReparacionController::class, 'update']);
+Route::middleware('auth:api')->delete('/reparacion/{id}', [ReparacionController::class, 'destroy']);
+Route::middleware('auth:api')->get('/reparacion', [ReparacionController::class, 'index']);
+
+

@@ -12,7 +12,7 @@ class seeder_reparacion extends Seeder
     {
         DB::table('reparacion')->insert([
             [
-                'id_usuario' => 1,
+                'user_id' => 1,
                 'tipo_objeto' => 'residuo',
                 'id_objeto' => 10,
                 'detalle_reparacion' => 'Reparación de filtración',
@@ -22,7 +22,7 @@ class seeder_reparacion extends Seeder
                 'updated_at' => Carbon::now()->subDays(2),
             ],
             [
-                'id_usuario' => 2,
+                'user_id' => 2,
                 'tipo_objeto' => 'producto',
                 'id_objeto' => 5,
                 'detalle_reparacion' => 'Reemplazo de pieza dañada',
@@ -32,7 +32,7 @@ class seeder_reparacion extends Seeder
                 'updated_at' => Carbon::now()->subDays(5),
             ],
             [
-                'id_usuario' => 3,
+                'user_id' => 3,
                 'tipo_objeto' => 'herramienta',
                 'id_objeto' => 3,
                 'detalle_reparacion' => 'Afilado de cuchilla',
@@ -42,7 +42,7 @@ class seeder_reparacion extends Seeder
                 'updated_at' => Carbon::now()->subDays(10),
             ],
             [
-                'id_usuario' => 1,
+                'user_id' => 1,
                 'tipo_objeto' => 'residuo',
                 'id_objeto' => 7,
                 'detalle_reparacion' => 'Limpieza profunda',
@@ -52,7 +52,7 @@ class seeder_reparacion extends Seeder
                 'updated_at' => Carbon::now()->subDays(1),
             ],
             [
-                'id_usuario' => 2,
+                'user_id' => 2,
                 'tipo_objeto' => 'herramienta',
                 'id_objeto' => 8,
                 'detalle_reparacion' => 'Cambio de mango',
