@@ -23,6 +23,7 @@ use App\Http\Controllers\HerramientaController;
 use App\Http\Controllers\ProductoController;
 
 
+
 // -----------------------------------------
 // RUTAS DE AUTENTICACIÓN / PERFIL
 // -----------------------------------------

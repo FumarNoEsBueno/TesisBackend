@@ -10,8 +10,8 @@ class seeder_residuo extends Seeder
     public function run(): void
     {
         $datos = [
-            // Almacen Nonguen 1, Almacen Hualpen 2, Casa del Naufrago 3
-            // Almacen Nonguen (almacen_id = 1)
+            // almacen Nonguen 1, almacen Hualpen 2, Casa del Naufrago 3
+            // almacen Nonguen (almacen_id = 1)
             [
                 'nombre'       => 'Computadores viejos',
                 'fecha'        => '2025-05-31',
@@ -56,7 +56,7 @@ class seeder_residuo extends Seeder
                 'created_at'   => now(),
                 'updated_at'   => now(),
             ],
-            // Almacen Hualpen (almacen_id = 2)
+            // almacen Hualpen (almacen_id = 2)
             [
                 'nombre'       => 'item_de_ejemplo',
                 'fecha'        => '2025-05-30',

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Almacen;
+use App\Models\almacen;
 use App\Models\User;
 
 class residuo extends Model 
@@ -22,10 +22,10 @@ class residuo extends Model
         'users_id'
     ];
 
-    // Relación con Almacen
+    // Relación con almacen
     public function almacen()
     {
-        return $this->belongsTo(Almacen::class, 'almacen_id');
+        return $this->belongsTo(almacen::class, 'almacen_id');
     }
 
     // Relación con User

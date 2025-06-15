@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class controller_almacen extends Controller
 {
-    public function getAllalmacen(Request $request)
+    public function get_all_almacen(Request $request)
     {
-        \Log::info("getAllalmacen ejecutado"); // Log para debug
+        \Log::info("get_all_almacen ejecutado"); // Log para debug
 
         // Obtener todos los registros de almacen
         $almacen = almacen::all();

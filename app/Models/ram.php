@@ -13,7 +13,7 @@ class ram extends Model
     }
     public function almacen()
     {
-        return $this->belongsTo(Almacen::class, 'almacen_id');
+        return $this->belongsTo(almacen::class, 'almacen_id');
     }
     public function marca()
     {

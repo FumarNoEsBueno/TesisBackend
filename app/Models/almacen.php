@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\residuo;
+use App\Models\ram;
+use App\Models\periferico;
+use App\Models\cable;
+use App\Models\disco_duro;
+use App\Models\direccion;
+
+
 class almacen extends Model
 {
     protected $table='almacen';
