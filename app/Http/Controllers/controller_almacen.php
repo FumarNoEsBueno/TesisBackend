@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class controller_almacen extends Controller
 {
-    public function getAllAlmacenes(Request $request)
+    public function getAllalmacen(Request $request)
     {
-        \Log::info("getAllAlmacenes ejecutado"); // Log para debug
+        \Log::info("getAllalmacen ejecutado"); // Log para debug
 
-        // Obtener todos los registros de almacenes
-        $almacenes = almacen::all();
+        // Obtener todos los registros de almacen
+        $almacen = almacen::all();
 
         // Respuesta exitosa
         return response()->json([
-            'message' => 'Lista de almacenes',
-            'data' => $almacenes
+            'message' => 'Lista de almacen',
+            'data' => $almacen
         ], 200);
     }
     

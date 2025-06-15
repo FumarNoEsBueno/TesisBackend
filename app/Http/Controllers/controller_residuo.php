@@ -41,7 +41,7 @@ class controller_residuo extends Controller
     }
 
     /**
-     * Listar todos los residuo (con sus almacenes y usuarios)
+     * Listar todos los residuo (con sus almacen y usuarios)
      */
     public function get_all_residuo()
     {

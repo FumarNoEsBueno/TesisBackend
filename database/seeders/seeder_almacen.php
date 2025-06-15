@@ -12,7 +12,7 @@ class seeder_almacen extends Seeder
 {
     public function run(): void
     {
-        $almacenes = [
+        $almacen = [
             ['Almacen Nonguen', 1],
             ['Almacen Hualpen', 2],
             ['Casa del Naufrago', 3]
@@ -21,7 +21,7 @@ class seeder_almacen extends Seeder
         $datos = array_map(fn($a) => [
             'almacen_nombre' => $a[0],
             'direccion_id'   => $a[1]
-        ], $almacenes);
+        ], $almacen);
 
         Almacen::insert($datos);
     }
