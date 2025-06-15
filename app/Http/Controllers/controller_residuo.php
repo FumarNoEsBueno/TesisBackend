@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\residuo;
-use App\Models\Almacen;
+use App\Models\almacen;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 

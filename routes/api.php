@@ -21,6 +21,7 @@ use App\Http\Controllers\controller_tarea;
 use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\HerramientaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UpgradeoController;
 
 
 
@@ -288,6 +289,18 @@ Route::get('/get_all_reparacion', [ReparacionController::class, 'index']);
 
 Route::get('/images/{nombreImagen}', function ($nombreImagen) {
     return response()->file(public_path('images/' . $nombreImagen));
+});
+
+// -----------------------------------------
+// RUTAS UPGRADEO (UpgradeoController)
+// -----------------------------------------
+
+Route::middleware('auth:api')->group(function() {
+    // upgradeo
+    Route::get('/upgradeo', [UpgradeoController::class, 'index']);
+    Route::post('/upgradeo', [UpgradeoController::class, 'store']);
+    Route::put('/upgradeo/{id}', [UpgradeoController::class, 'update']);
+    Route::delete('/upgradeo/{id}', [UpgradeoController::class, 'destroy']);
 });
 
 // -----------------------------------------

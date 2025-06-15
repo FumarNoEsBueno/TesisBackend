@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_reparacion::class);
         $this->call(seeder_producto::class);
         $this->call(seeder_herramienta::class);
-        
+        $this->call(seeder_upgradeo::class);
 
     }
 }
