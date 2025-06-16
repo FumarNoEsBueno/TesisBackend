@@ -214,11 +214,13 @@ Route::middleware('auth:api')->group(function() {
 // RUTAS TAREA (controller_tarea)
 // -----------------------------------------
 
+Route::get('/tarea', [controller_tarea::class, 'index']);
 Route::get('/tarea/urgente', [controller_tarea::class, 'urgente']);
 Route::get('/tarea/sin_precio', [controller_tarea::class, 'listar_sin_precio']);
 Route::middleware('auth:api')->group(function() {
     Route::post('/tarea/tasar', [controller_tarea::class, 'tasar_producto']);
 });
+
 
 // -----------------------------------------
 // RUTAS PARÁMETROS (controller_parametros)
