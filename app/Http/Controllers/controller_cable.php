@@ -10,6 +10,18 @@ class controller_cable extends Controller
 {
     private $intervalo_precio = 10000;
 
+
+    public function index()
+{
+    return Cable::with([
+        'disponibilidad:id,disponibilidad_nombre',
+        'almacen:id,almacen_nombre',
+        'estado:id,estado_nombre',
+        'marca:id,marca_nombre',
+        'tipoEntrada:id,tipo_entrada_nombre',
+    ])->get();
+}
+
     public function get_cable_by_id(Request $request)
     {
         return cable::where('id','=',$request->id)->first();

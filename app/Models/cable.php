@@ -36,31 +36,35 @@ class cable extends Model
         return $this->belongsToMany(Compra::class, 'compra_cable')->withPivot('compra_cable_cantidad');
     }
 
-    public function almacen()
-    {
-        return $this->belongsTo(almacen::class, 'almacen_id');
-    }
     public function solicitudRecepcion()
     {
         return $this->belongsTo(solicitud_recepcion::class, 'solicitud_recepcion_id');
-    }
+    }    
+
     public function disponibilidad()
     {
-        return $this->belongsTo(disponibilidad::class, 'disponibilidad_id');
-    }
-    public function estado()
-    {
-        return $this->belongsTo(estado::class, 'estado_id');
-    }
-    public function marca()
-    {
-        return $this->belongsTo(marca::class, 'marca_id');
-    }
-    public function tipoEntrada()
-    {
-        return $this->belongsTo(tipo_entrada::class, 'tipo_entrada_id');
+        return $this->belongsTo(Disponibilidad::class, 'disponibilidad_id');
     }
 
-    
+    public function almacen()
+    {
+        return $this->belongsTo(Almacen::class, 'almacen_id');
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'estado_id');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+
+    public function tipoEntrada()
+    {
+        return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_id');
+    }
+
     
 }
