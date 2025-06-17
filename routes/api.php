@@ -10,7 +10,7 @@ use App\Http\Controllers\controller_compra;
 use App\Http\Controllers\controller_recepcion;
 use App\Http\Controllers\controller_ram;
 use App\Http\Controllers\controller_periferico;
-use App\Http\Controllers\controller_cable;
+use App\Http\Controllers\CableController;
 use App\Http\Controllers\controller_disco_duro;
 use App\Http\Controllers\controller_parametros;
 use App\Http\Controllers\controller_almacen;
@@ -130,19 +130,19 @@ Route::middleware('auth:api')->group(function() {
 });
 
 // -----------------------------------------
-// RUTAS CABLE (controller_cable)
+// RUTAS CABLE (CableController)
 // -----------------------------------------
-Route::get('/cable', [controller_cable::class, 'get_all_cable']);
-Route::get('/get_all_cable', [controller_cable::class, 'get_all_cable']);
-Route::get('/get_every_cable', [controller_cable::class, 'get_every_cable']);
-Route::get('/get_cable_by_id', [controller_cable::class, 'get_cable_by_id']);
-Route::get('/cables', [controller_cable::class, 'getCablesPaginated']);
-Route::get('/get_cable_recomendado', [controller_cable::class, 'get_cable_recomendado']);
+Route::get('/cable', [CableController::class, 'get_all_cable']);
+Route::get('/get_all_cable', [CableController::class, 'get_all_cable']);
+Route::get('/get_every_cable', [CableController::class, 'get_every_cable']);
+Route::get('/get_cable_by_id', [CableController::class, 'get_cable_by_id']);
+Route::get('/cables', [CableController::class, 'getCablesPaginated']);
+Route::get('/get_cable_recomendado', [CableController::class, 'get_cable_recomendado']);
 
 Route::middleware('auth:api')->group(function() {
-    Route::post('/post_cable', [controller_cable::class, 'post_cable']);
-    Route::post('/modify_cable', [controller_cable::class, 'modify_cable']);
-    Route::post('/delete_cable', [controller_cable::class, 'delete_cable']);
+    Route::post('/post_cable', [CableController::class, 'post_cable']);
+    Route::post('/modify_cable', [CableController::class, 'modify_cable']);
+    Route::post('/delete_cable', [CableController::class, 'delete_cable']);
 });
 
 // -----------------------------------------

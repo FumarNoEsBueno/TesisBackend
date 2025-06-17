@@ -6,21 +6,37 @@ use App\Models\cable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class controller_cable extends Controller
+class CableController extends Controller
 {
     private $intervalo_precio = 10000;
 
 
     public function index()
-{
-    return Cable::with([
-        'disponibilidad:id,disponibilidad_nombre',
-        'almacen:id,almacen_nombre',
-        'estado:id,estado_nombre',
-        'marca:id,marca_nombre',
-        'tipoEntrada:id,tipo_entrada_nombre',
-    ])->get();
-}
+    {
+        $cables = Cable::select(
+                'cable.id',
+                'cable.cable_nombre',
+                'cable.test',
+                'cable.largo',
+                'cable.descripcion',
+                // nombres desde las tablas foráneas:
+                'disponibilidad.disponibilidad_nombre',
+                'almacen.almacen_nombre',
+                'estado.estado_nombre',
+                'marca.marca_nombre',
+                'tipo_entrada.tipo_entrada_nombre'
+            )
+            // joins con nombres de tabla **singular** (tal como existen en tu BD)
+            ->leftJoin('disponibilidad', 'cable.disponibilidad_id', '=', 'disponibilidad.id')
+            ->leftJoin('almacen',       'cable.almacen_id',        '=', 'almacen.id')
+            ->leftJoin('estado',        'cable.estado_id',         '=', 'estado.id')
+            ->leftJoin('marca',         'cable.marca_id',          '=', 'marca.id')
+            ->leftJoin('tipo_entrada',  'cable.tipo_entrada_id',   '=', 'tipo_entrada.id')
+            ->get();
+
+        return response()->json(['data' => $cables]);
+    }
+
 
     public function get_cable_by_id(Request $request)
     {
@@ -83,11 +99,11 @@ class controller_cable extends Controller
     public function get_all_cable(Request $request)
     {
         $query = DB::table('cable')
-            ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
-            ->join('estado','estado.id','=','cable.estado_id')
-            ->join('marca','marca.id','=','cable.marca_id')
-            ->join('tipo_entrada','tipo_entrada.id','=','cable.tipo_entrada_id')
-            // Cambiar la columna a la que realmente existe:
+            ->join('disponibilidad', 'disponibilidad.id', '=', 'cable.disponibilidad_id')
+            ->join('estado',        'estado.id',         '=', 'cable.estado_id')
+            ->join('marca',         'marca.id',          '=', 'cable.marca_id')
+            ->join('tipo_entrada',  'tipo_entrada.id',   '=', 'cable.tipo_entrada_id')
+            ->join('almacen',       'almacen.id',        '=', 'cable.almacen_id')          // <-- nuevo join
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
             ->select(
                 'cable.id',
@@ -95,13 +111,17 @@ class controller_cable extends Controller
                 'cable.test',
                 'cable.largo',
                 'cable.descripcion',
+                'cable.comentario',
                 'cable.cable_foto',
-                'estado.estado_nombre',
-                'tipo_entrada.tipo_entrada_nombre',
-                'marca.marca_nombre'
-            );
 
-        // Aquí puedes añadir más filtros si vienen en $request
+                'disponibilidad.disponibilidad_nombre as disponibilidad_nombre',   // <-- nueva columna
+                'almacen.almacen_nombre         as almacen_nombre',                // <-- nueva columna
+
+                'estado.estado_nombre as estado_nombre',
+                'tipo_entrada.tipo_entrada_nombre as tipo_entrada_nombre',
+                'marca.marca_nombre           as marca_nombre'
+            );
+        
 
         // Paginamos 12 por página
         $cables = $query->paginate(12);
