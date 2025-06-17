@@ -10,6 +10,7 @@ class seeder_producto extends Seeder
 {
     public function run(): void
     {
+        
         DB::table('producto')->insert([
             [
                 'tipo' => 'cargador',
@@ -129,6 +130,46 @@ class seeder_producto extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        // Generar 15 cables con fecha y hora actuales
+        $nowDate = Carbon::now()->toDateString();
+        $nowTime = Carbon::now()->toTimeString();
+
+        $base = [
+            [
+                'tipo' => 'cargador',
+                'id_objeto' => 1,
+                'almacen_id' => 1,
+                'users_id' => 1,
+                'estado_id' => 1,
+                'fecha' => Carbon::now()->subDays(10)->toDateString(),
+                'hora' => '10:00',
+                'descripcion' => 'Cargador universal 60W',
+                'peso' => 0.3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // ... otras entradas existentes ...
+        ];
+
+        $cables = array_map(function ($id) use ($nowDate, $nowTime) {
+            return [
+                'tipo' => 'cable',
+                'id_objeto' => $id,
+                'almacen_id' => 1,
+                'users_id' => 1,
+                'estado_id' => 1,
+                'fecha' => $nowDate,
+                'hora' => $nowTime,
+                'descripcion' => 'Referencia a Cable ID ' . $id,
+                'peso' => 0.1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }, range(1, 15));
+
+        DB::table('producto')->insert(array_merge($base, $cables));
+
 
     }
 }

@@ -7,6 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class cable extends Model
 {
+    use HasFactory;
+    protected $table = 'cable';
+
+    protected $fillable = [
+        'cable_nombre',
+        'marca_id',
+        'disponibilidad_id',
+        'comentario',
+        'estado_id',
+        'test',
+        'largo',
+        'almacen_id',
+        'descripcion',
+        'cable_precio_unitario',
+        'cable_precio_final',
+        'cable_foto',
+        'cable_descuento',
+        'cable_destacado',
+        'solicitud_recepcion_id',
+        'tipo_entrada_id',      // un único ID en tu migración
+        'tipo_entrada_1_id',    // si realmente necesitas dos tipos
+        'tipo_entrada_2_id'
+    ];
+
     public function compras()
     {
         return $this->belongsToMany(Compra::class, 'compra_cable')->withPivot('compra_cable_cantidad');
@@ -37,20 +61,6 @@ class cable extends Model
         return $this->belongsTo(tipo_entrada::class, 'tipo_entrada_id');
     }
 
-    protected $table='cable';
-    protected $fillable = [
-        'cable_nombre',
-        'cable_cantidad',
-        'cable_precio',
-        'cable_foto',
-        'cable_descuento',
-        'cable_destacado',
-        'solicitud_recepcion_id',
-        'disponibilidad_id',
-        'almacen_id',
-        'estado_id',
-        'marca_id',
-        'tipo_entrada_id',
-        ];
-    use HasFactory;
+    
+    
 }

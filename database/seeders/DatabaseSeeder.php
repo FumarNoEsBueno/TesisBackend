@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_estado::class);
         $this->call(seeder_disponibilidad::class);
         $this->call(seeder_periferico::class);
-        $this->call(seeder_disco_duro::class);
-        $this->call(seeder_cable::class);
+        $this->call(SeederCable::class);
+        $this->call(seeder_disco_duro::class);        
         $this->call(seeder_ram::class);
         $this->call(seeder_metodo_pago::class);
         $this->call(seeder_metodo_despacho::class);
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call(seeder_producto::class);
         $this->call(seeder_herramienta::class);
         $this->call(seeder_upgradeo::class);
-
+        
     }
 }
 

@@ -132,7 +132,7 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 // RUTAS CABLE (controller_cable)
 // -----------------------------------------
-
+Route::get('/cable', [controller_cable::class, 'get_all_cable']);
 Route::get('/get_all_cable', [controller_cable::class, 'get_all_cable']);
 Route::get('/get_every_cable', [controller_cable::class, 'get_every_cable']);
 Route::get('/get_cable_by_id', [controller_cable::class, 'get_cable_by_id']);

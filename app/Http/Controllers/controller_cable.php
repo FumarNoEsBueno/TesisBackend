@@ -70,37 +70,31 @@ class controller_cable extends Controller
     }
     public function get_all_cable(Request $request)
     {
-        $cables = DB::table('cable')
+        $query = DB::table('cable')
             ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
             ->join('tipo_entrada','tipo_entrada.id','=','cable.tipo_entrada_id')
+            // Cambiar la columna a la que realmente existe:
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
-            ->select('cable.id',
+            ->select(
+                'cable.id',
                 'cable.cable_nombre',
-                'cable.cable_cantidad',
-                'cable.cable_precio',
+                'cable.test',
+                'cable.largo',
+                'cable.descripcion',
                 'cable.cable_foto',
-                'cable.cable_descuento',
-                'cable.cable_destacado',
                 'estado.estado_nombre',
                 'tipo_entrada.tipo_entrada_nombre',
-                'marca.marca_nombre',
-                );
+                'marca.marca_nombre'
+            );
 
-        if($request->estado != null) $cables = $cables->whereIn('estado.id',$request->estado);
-        if($request->marca != null) $cables = $cables->whereIn('marca.id',$request->marca);
-        if($request->tipoEntrada != null) $cables = $cables->whereIn('tipo_entrada.id',$request->tipoEntrada);
-        if($request->precio != null){
-            foreach ($request->precio as $precio) {
-                $cables = $cables->where('cable_precio','>', ($precio - 1) * $this->intervalo_precio);
-                $cables = $cables->where('cable_precio','<', $precio * $this->intervalo_precio);
-            }
-        }
+        // Aquí puedes añadir más filtros si vienen en $request
 
+        // Paginamos 12 por página
+        $cables = $query->paginate(12);
 
-        $cables = $cables->paginate(12);
-        return $cables;
+        return response()->json($cables);
     }
 
     public function getCablesPaginated(Request $request)
