@@ -18,17 +18,17 @@ class Estado extends Model
 
     public function discos()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->hasMany(DiscoDuro::class);
     }
 
     public function rams()
     {
-        return $this->hasMany(ram::class);
+        return $this->hasMany(Ram::class);
     }
 
     public function perifericos()
     {
-        return $this->hasMany(periferico::class);
+        return $this->hasMany(Periferico::class);
     }
 
     public function cables()

@@ -12,17 +12,17 @@ class controller_ram extends Controller
 
     public function get_ram_by_id(Request $request)
     {
-        return ram::where('id','=',$request->id)->first();
+        return Ram::where('id','=',$request->id)->first();
     }
 
     public function get_every_ram(Request $request)
     {
-        return ram::all()->select('id', 'ram_nombre');
+        return Ram::all()->select('id', 'ram_nombre');
     }
 
     public function delete_ram(Request $request)
     {
-        $ram = ram::where('id', $request->id)
+        $ram = Ram::where('id', $request->id)
             ->first()
             ->delete();
         return $ram;
@@ -30,7 +30,7 @@ class controller_ram extends Controller
 
     public function modify_ram(Request $request)
     {
-        $ram = ram::where('id', $request->id)
+        $ram = Ram::where('id', $request->id)
             ->first()
             ->update([
             'ram_descripcion' => $request->ram_descripcion,
@@ -55,7 +55,7 @@ class controller_ram extends Controller
     public function post_ram(Request $request)
     {
 
-        $ram = ram::create([
+        $ram = Ram::create([
             'ram_descripcion' => $request->ram_descripcion,
             'ram_nombre' => $request->ram_nombre,
             'ram_foto' => "ram_1.jpg",

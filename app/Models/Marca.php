@@ -9,7 +9,7 @@ class Marca extends Model
 {
     public function discos()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->hasMany(DiscoDuro::class);
     }
 
     protected $table='marca';

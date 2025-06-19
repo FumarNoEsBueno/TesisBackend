@@ -15,7 +15,7 @@ class DiscoDuroCompra extends Model
 
     public function disco()
     {
-        return $this->belongsTo(disco_duro::class);
+        return $this->belongsTo(DiscoDuro::class);
     }
 
     protected $table='disco_duro_compra';

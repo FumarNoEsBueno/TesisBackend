@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\disco_duro;
+use App\Models\DiscoDuro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,17 +15,17 @@ class controller_disco_duro extends Controller
 
     public function get_disco_duro_by_id(Request $request)
     {
-        return disco_duro::where('id','=',$request->id)->first();
+        return DiscoDuro::where('id','=',$request->id)->first();
     }
 
     public function get_every_disco_duro(Request $request)
     {
-        return disco_duro::all()->select('id', 'disco_duro_nombre');
+        return DiscoDuro::all()->select('id', 'disco_duro_nombre');
     }
 
     public function delete_disco_duro(Request $request)
     {
-        $disco = disco_duro::where('id', $request->id)
+        $disco = DiscoDuro::where('id', $request->id)
             ->first()
             ->delete();
         return $disco;
@@ -33,7 +33,7 @@ class controller_disco_duro extends Controller
 
     public function modify_disco_duro(Request $request)
     {
-        $disco = disco_duro::where('id', $request->id)
+        $disco = DiscoDuro::where('id', $request->id)
             ->first()
             ->update([
             'disco_duro_memoria' => $request->memoria,
@@ -60,7 +60,7 @@ class controller_disco_duro extends Controller
     public function post_disco_duro(Request $request)
     {
 
-        $disco = disco_duro::create([
+        $disco = DiscoDuro::create([
             'disco_duro_memoria' => $request->memoria,
             'disco_duro_nombre' => $request->nombre,
             'disco_duro_foto' => "1.jpg",

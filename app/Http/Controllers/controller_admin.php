@@ -23,7 +23,7 @@ class controller_admin extends Controller
 {
     public function update_estado_compra(Request $request)
     {
-        $estado = estado_compra::where('id','=',$request->estadoId)
+        $estado = EstadoCompra::where('id','=',$request->estadoId)
             ->first();
 
         $disponibilidad = DB::table('disponibilidad')
@@ -46,15 +46,15 @@ class controller_admin extends Controller
 
         if($estado->estado_compra_slug = 'cancelado'){
 
-            disco_duro::whereHas('compras', function($query) use ($request) {
+            DiscoDuro::whereHas('compras', function($query) use ($request) {
                 $query->where('compra.id', $request->compraId);
             })->update(['disponibilidad_id' => $disponibilidad->id]);
 
-            periferico::whereHas('compras', function($query) use ($request) {
+            Periferico::whereHas('compras', function($query) use ($request) {
                 $query->where('compra.id', $request->compraId);
             })->update(['disponibilidad_id' => $disponibilidad->id]);
 
-            ram::whereHas('compras', function($query) use ($request) {
+            Ram::whereHas('compras', function($query) use ($request) {
                 $query->where('compra.id', $request->compraId);
             })->update(['disponibilidad_id' => $disponibilidad->id]);
 

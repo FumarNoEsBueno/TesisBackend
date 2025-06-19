@@ -118,15 +118,15 @@ Route::middleware('auth:api')->group(function() {
 // RUTAS PERIFÉRICO (controller_periferico)
 // -----------------------------------------
 
-Route::get('/get_all_periferico', [controller_periferico::class, 'get_all_periferico']);
-Route::get('/get_every_periferico', [controller_periferico::class, 'get_every_periferico']);
-Route::get('/get_periferico_by_id', [controller_periferico::class, 'get_periferico_by_id']);
-Route::get('/perifericos', [controller_periferico::class, 'perifericosPaginated']);
+Route::get('/get_all_periferico', [controller_Periferico::class, 'get_all_periferico']);
+Route::get('/get_every_periferico', [controller_Periferico::class, 'get_every_periferico']);
+Route::get('/get_periferico_by_id', [controller_Periferico::class, 'get_periferico_by_id']);
+Route::get('/perifericos', [controller_Periferico::class, 'perifericosPaginated']);
 
 Route::middleware('auth:api')->group(function() {
-    Route::post('/post_periferico', [controller_periferico::class, 'post_periferico']);
-    Route::post('/modify_periferico', [controller_periferico::class, 'modify_periferico']);
-    Route::post('/delete_periferico', [controller_periferico::class, 'delete_periferico']);
+    Route::post('/post_periferico', [controller_Periferico::class, 'post_periferico']);
+    Route::post('/modify_periferico', [controller_Periferico::class, 'modify_periferico']);
+    Route::post('/delete_periferico', [controller_Periferico::class, 'delete_periferico']);
 });
 
 // -----------------------------------------

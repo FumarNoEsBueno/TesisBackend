@@ -20,11 +20,11 @@ class Almacen extends Model
     }
     public function ram()
     {
-        return $this->hasMany(ram::class, 'almacen_id');
+        return $this->hasMany(Ram::class, 'almacen_id');
     }
     public function periferico()
     {
-        return $this->hasMany(periferico::class, 'almacen_id');
+        return $this->hasMany(Periferico::class, 'almacen_id');
     }
     public function cable()
     {
@@ -32,7 +32,7 @@ class Almacen extends Model
     }
     public function disco_duro()
     {
-        return $this->hasMany(disco_duro::class, 'almacen_id');
+        return $this->hasMany(DiscoDuro::class, 'almacen_id');
     }    
     public function direccion()
     {

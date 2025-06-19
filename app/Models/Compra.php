@@ -20,31 +20,31 @@ class Compra extends Model
 
     public function rams()
     {
-        return $this->belongsToMany(ram::class, 'ram_compra', 'compra_id', 'ram_id');
+        return $this->belongsToMany(Ram::class, 'ram_compra', 'compra_id', 'ram_id');
     }
 
     public function perifericos()
     {
-        return $this->belongsToMany(periferico::class, 'periferico_compra', 'compra_id', 'periferico_id');
+        return $this->belongsToMany(Periferico::class, 'periferico_compra', 'compra_id', 'periferico_id');
     }
 
     public function discos()
     {
-        return $this->belongsToMany(disco_duro::class, 'disco_duro_compra', 'compra_id', 'disco_duro_id');
+        return $this->belongsToMany(DiscoDuro::class, 'disco_duro_compra', 'compra_id', 'disco_duro_id');
     }
 
     public function metodo_pago()
     {
-        return $this->belongsTo(metodo_pago::class);
+        return $this->belongsTo(MetodoPago::class);
     }
 
     public function MetodoDespacho()
     {
-        return $this->belongsTo(metodo_despacho::class);
+        return $this->belongsTo(MetodoDespacho::class);
     }
     public function EstadoCompra()
     {
-        return $this->belongsTo(estado_compra::class);
+        return $this->belongsTo(EstadoCompra::class);
     }
 
     protected $table='compra';

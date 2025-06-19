@@ -12,17 +12,17 @@ class controller_periferico extends Controller
 
     public function get_periferico_by_id(Request $request)
     {
-        return periferico::where('id','=',$request->id)->first();
+        return Periferico::where('id','=',$request->id)->first();
     }
 
     public function get_every_periferico(Request $request)
     {
-        return periferico::all()->select('id', 'periferico_nombre');
+        return Periferico::all()->select('id', 'periferico_nombre');
     }
 
     public function delete_periferico(Request $request)
     {
-        $periferico = periferico::where('id', $request->id)
+        $periferico = Periferico::where('id', $request->id)
             ->first()
             ->delete();
         return $periferico;
@@ -30,7 +30,7 @@ class controller_periferico extends Controller
 
     public function modify_periferico(Request $request)
     {
-        $periferico = periferico::where('id', $request->id)
+        $periferico = Periferico::where('id', $request->id)
             ->first()
             ->update([
             'periferico_nombre' => $request->periferico_nombre,
@@ -53,7 +53,7 @@ class controller_periferico extends Controller
     public function post_periferico(Request $request)
     {
 
-        $periferico = periferico::create([
+        $periferico = Periferico::create([
             'periferico_nombre' => $request->periferico_nombre,
             'periferico_foto' => "periferico1.jgp",
             'periferico_descripcion' =>$request->periferico_descripcion,
