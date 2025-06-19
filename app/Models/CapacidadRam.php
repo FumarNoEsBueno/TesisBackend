@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CapacidadRam extends Model
 {
-    protected $table='capacidad_ram';
+    protected $table='CapacidadRam';
     protected $fillable = [
-        'capacidad_ram_capacidad'];
+        'CapacidadRam_capacidad'];
     use HasFactory;
 }

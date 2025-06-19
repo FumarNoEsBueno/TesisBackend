@@ -25,7 +25,7 @@ class Residuo extends Model
     // Relación con almacen
     public function almacen()
     {
-        return $this->belongsTo(almacen::class, 'almacen_id');
+        return $this->belongsTo(Almacen::class, 'almacen_id');
     }
 
     // Relación con User

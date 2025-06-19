@@ -33,7 +33,7 @@ class Estado extends Model
 
     public function cables()
     {
-        return $this->hasMany(cable::class);
+        return $this->hasMany(Cable::class);
     }
 
     public function compras()

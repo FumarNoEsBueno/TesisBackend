@@ -21,7 +21,7 @@ class SolicitudRecepcion extends Model
     }
     public function cable()
     {
-        return $this->hasMany(cable::class);
+        return $this->hasMany(Cable::class);
     }
     public function user()
     {

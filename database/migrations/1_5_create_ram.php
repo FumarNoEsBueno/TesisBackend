@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('tipo_ram_id');
-            $table->unsignedBigInteger('capacidad_ram_id');
+            $table->unsignedBigInteger('CapacidadRam_id');
             $table->unsignedBigInteger('tamano_ram_id');
             $table->unsignedBigInteger('velocidad_ram_id');
 
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->foreign('estado_id')->references('id')->on('estado');
             $table->foreign('marca_id')->references('id')->on('marca');
             $table->foreign('tipo_ram_id')->references('id')->on('tipo_ram');
-            $table->foreign('capacidad_ram_id')->references('id')->on('capacidad_ram');
+            $table->foreign('CapacidadRam_id')->references('id')->on('CapacidadRam');
             $table->foreign('tamano_ram_id')->references('id')->on('tamano_ram');
             $table->foreign('velocidad_ram_id')->references('id')->on('velocidad_ram');
         });

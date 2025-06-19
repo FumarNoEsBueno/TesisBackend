@@ -13,7 +13,7 @@ class Ram extends Model
     }
     public function almacen()
     {
-        return $this->belongsTo(almacen::class, 'almacen_id');
+        return $this->belongsTo(Almacen::class, 'almacen_id');
     }
     public function marca()
     {
@@ -27,13 +27,13 @@ class Ram extends Model
     {
         return $this->belongsTo(Estado::class, 'estado_id');
     }
-    public function disponibilidad()
+    public function Disponibilidad()
     {
         return $this->belongsTo(Disponibilidad::class, 'disponibilidad_id');
     }
     public function capacidadRam()
     {
-        return $this->belongsTo(CapacidadRam::class, 'capacidad_ram_id');
+        return $this->belongsTo(CapacidadRam::class, 'CapacidadRam_id');
     }
     public function tamanoRam()
     {
@@ -62,7 +62,7 @@ class Ram extends Model
         'estado_id',
         'marca_id',
         'tipo_ram_id',
-        'capacidad_ram_id',
+        'CapacidadRam_id',
         'tamano_ram_id',
         'velocidad_ram_id'];
     use HasFactory;

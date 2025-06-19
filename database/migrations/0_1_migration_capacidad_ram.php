@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('capacidad_ram', function (Blueprint $table) {
+        Schema::create('CapacidadRam', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('capacidad_ram_capacidad');
+            $table->string('CapacidadRam_capacidad');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('capacidad_ram');
+        Schema::dropIfExists('CapacidadRam');
     }
 };

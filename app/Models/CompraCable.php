@@ -9,7 +9,7 @@ class CompraCable extends Model
 {
     public function cable()
     {
-        return $this->belongsTo(cable::class, 'cable_id');
+        return $this->belongsTo(Cable::class, 'cable_id');
     }
     public function compra()
     {

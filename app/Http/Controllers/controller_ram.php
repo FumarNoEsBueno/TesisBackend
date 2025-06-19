@@ -44,7 +44,7 @@ class controller_ram extends Controller
             'estado_id' => $request->estado_id,
             'marca_id' => $request->marca_id,
             'tipo_ram_id' => $request->tipo_ram_id,
-            'capacidad_ram_id' => $request->capacidad_ram_id,
+            'CapacidadRam_id' => $request->CapacidadRam_id,
             'solicitud_recepcion_id' => $request->solicitud_recepcion_id,
             'tamano_ram_id' => $request->tamano_ram_id,
             'velocidad_ram_id' => $request->velocidad_ram_id,
@@ -67,7 +67,7 @@ class controller_ram extends Controller
             'estado_id' => $request->estado_id,
             'marca_id' => $request->marca_id,
             'tipo_ram_id' => $request->tipo_ram_id,
-            'capacidad_ram_id' => $request->capacidad_ram_id,
+            'CapacidadRam_id' => $request->CapacidadRam_id,
             'tamano_ram_id' => $request->tamano_ram_id,
             'velocidad_ram_id' => $request->velocidad_ram_id,
         ]);
@@ -83,7 +83,7 @@ class controller_ram extends Controller
             ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
             ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
-            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->join('CapacidadRam','CapacidadRam.id','=','ram.CapacidadRam_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
             ->select('ram.id',
                 'ram.ram_nombre',
@@ -94,14 +94,14 @@ class controller_ram extends Controller
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
-                'capacidad_ram.capacidad_ram_capacidad',
+                'CapacidadRam.CapacidadRam_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
         if($request->estado != null) $rams = $rams->whereIn('estado.id',$request->estado);
         if($request->marca != null) $rams = $rams->whereIn('marca.id',$request->marca);
-        if($request->capacidad != null) $rams = $rams->whereIn('capacidad_ram.id',$request->capacidad);
+        if($request->capacidad != null) $rams = $rams->whereIn('CapacidadRam.id',$request->capacidad);
         if($request->tipo != null) $rams = $rams->whereIn('tipo_ram.id',$request->tipo);
         if($request->tamano != null) $rams = $rams->whereIn('tamano_ram.id',$request->tamano);
         if($request->velocidad != null) $rams = $rams->whereIn('velocidad_ram.id',$request->velocidad);
@@ -124,7 +124,7 @@ class controller_ram extends Controller
             ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
             ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
-            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->join('CapacidadRam','CapacidadRam.id','=','ram.CapacidadRam_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
             ->select('ram.id',
@@ -136,14 +136,14 @@ class controller_ram extends Controller
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
-                'capacidad_ram.capacidad_ram_capacidad',
+                'CapacidadRam.CapacidadRam_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
         if($request->estado != null) $rams = $rams->whereIn('estado.id',$request->estado);
         if($request->marca != null) $rams = $rams->whereIn('marca.id',$request->marca);
-        if($request->capacidad != null) $rams = $rams->whereIn('capacidad_ram.id',$request->capacidad);
+        if($request->capacidad != null) $rams = $rams->whereIn('CapacidadRam.id',$request->capacidad);
         if($request->tipo != null) $rams = $rams->whereIn('tipo_ram.id',$request->tipo);
         if($request->tamano != null) $rams = $rams->whereIn('tamano_ram.id',$request->tamano);
         if($request->velocidad != null) $rams = $rams->whereIn('velocidad_ram.id',$request->velocidad);

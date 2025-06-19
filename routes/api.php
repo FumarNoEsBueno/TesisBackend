@@ -132,17 +132,17 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 // RUTAS CABLE (controller_cable)
 // -----------------------------------------
-Route::get('/cable', [controller_cable::class, 'get_all_cable']);
-Route::get('/get_all_cable', [controller_cable::class, 'get_all_cable']);
-Route::get('/get_every_cable', [controller_cable::class, 'get_every_cable']);
-Route::get('/get_cable_by_id', [controller_cable::class, 'get_cable_by_id']);
-Route::get('/cables', [controller_cable::class, 'getCablesPaginated']);
-Route::get('/get_cable_recomendado', [controller_cable::class, 'get_cable_recomendado']);
+Route::get('/cable', [controller_Cable::class, 'get_all_cable']);
+Route::get('/get_all_cable', [controller_Cable::class, 'get_all_cable']);
+Route::get('/get_every_cable', [controller_Cable::class, 'get_every_cable']);
+Route::get('/get_cable_by_id', [controller_Cable::class, 'get_cable_by_id']);
+Route::get('/cables', [controller_Cable::class, 'getCablesPaginated']);
+Route::get('/get_cable_recomendado', [controller_Cable::class, 'get_cable_recomendado']);
 
 Route::middleware('auth:api')->group(function() {
-    Route::post('/post_cable', [controller_cable::class, 'post_cable']);
-    Route::post('/modify_cable', [controller_cable::class, 'modify_cable']);
-    Route::post('/delete_cable', [controller_cable::class, 'delete_cable']);
+    Route::post('/post_cable', [controller_Cable::class, 'post_cable']);
+    Route::post('/modify_cable', [controller_Cable::class, 'modify_cable']);
+    Route::post('/delete_cable', [controller_Cable::class, 'delete_cable']);
 });
 
 // -----------------------------------------
@@ -165,8 +165,8 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 
 Route::middleware('auth:api')->group(function() {
-    Route::get('/get_all_almacen', [controller_almacen::class, 'index'] ?? ''); 
-    Route::get('/almacen', [controller_almacen::class, 'get_all_almacen']);
+    Route::get('/get_all_almacen', [controller_Almacen::class, 'index'] ?? ''); 
+    Route::get('/almacen', [controller_Almacen::class, 'get_all_almacen']);
     
     // Ajustar si tu controlador y método difieren
 });
@@ -242,7 +242,7 @@ Route::prefix('parametros')->group(function() {
     Route::get('/tipo_periferico', [controller_parametros::class, 'tipo_periferico']);
     Route::get('/tipo_entrada', [controller_parametros::class, 'tipo_entrada']);
     Route::get('/despacho', [controller_parametros::class, 'despacho']);
-    Route::get('/capacidad_ram', [controller_parametros::class, 'capacidad_ram']);
+    Route::get('/CapacidadRam', [controller_parametros::class, 'CapacidadRam']);
 });
 
 // -----------------------------------------

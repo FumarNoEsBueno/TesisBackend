@@ -15,7 +15,7 @@ class Compra extends Model
 
     public function cables()
     {
-        return $this->belongsToMany(cable::class, 'compra_cable', 'compra_id', 'cable_id')->withPivot('compra_cable_cantidad');
+        return $this->belongsToMany(Cable::class, 'compra_cable', 'compra_id', 'cable_id')->withPivot('compra_cable_cantidad');
     }
 
     public function rams()
@@ -35,16 +35,16 @@ class Compra extends Model
 
     public function metodo_pago()
     {
-        return $this->belongsTo(model_metodo_pago::class);
+        return $this->belongsTo(metodo_pago::class);
     }
 
-    public function metodo_despacho()
+    public function MetodoDespacho()
     {
-        return $this->belongsTo(model_metodo_despacho::class);
+        return $this->belongsTo(metodo_despacho::class);
     }
-    public function estado_compra()
+    public function EstadoCompra()
     {
-        return $this->belongsTo(model_estado_compra::class);
+        return $this->belongsTo(estado_compra::class);
     }
 
     protected $table='compra';

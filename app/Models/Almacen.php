@@ -5,12 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Almacen;
-use App\Models\Almacen;
-use App\Models\Almacen;
-use App\Models\Almacen;
-use App\Models\Almacen;
-use App\Models\Almacen;
 
 
 class Almacen extends Model
@@ -34,7 +28,7 @@ class Almacen extends Model
     }
     public function cable()
     {
-        return $this->hasMany(cable::class, 'almacen_id');
+        return $this->hasMany(Cable::class, 'almacen_id');
     }
     public function disco_duro()
     {

@@ -13,7 +13,7 @@ class Periferico extends Model
     }
     public function almacen()
     {
-        return $this->belongsTo(almacen::class, 'almacen_id');
+        return $this->belongsTo(Almacen::class, 'almacen_id');
     }
     public function marca()
     {
@@ -31,7 +31,7 @@ class Periferico extends Model
     {
         return $this->belongsTo(Estado::class, 'estado_id');
     }
-    public function disponibilidad()
+    public function Disponibilidad()
     {
         return $this->belongsTo(Disponibilidad::class, 'disponibilidad_id');
     }

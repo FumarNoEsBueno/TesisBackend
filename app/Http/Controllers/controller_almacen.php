@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\almacen;
+use App\Models\Almacen;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +14,7 @@ class controller_almacen extends Controller
         \Log::info("get_all_almacen ejecutado"); // Log para debug
 
         // Obtener todos los registros de almacen
-        $almacen = almacen::all();
+        $almacen = Almacen::all();
 
         // Respuesta exitosa
         return response()->json([

@@ -17,9 +17,9 @@ class DiscoDuro extends Model
         return $this->belongsToMany(Compra::class, 'disco_duro_compra');
     }
 
-    public function disponibilidad()
+    public function Disponibilidad()
     {
-        return $this->belongsTo(disponibilidad::class);
+        return $this->belongsTo(Disponibilidad::class);
     }
 
     public function estado()
@@ -27,9 +27,9 @@ class DiscoDuro extends Model
         return $this->belongsTo(estado::class);
     }
 
-    public function tamano()
+    public function Tamano()
     {
-        return $this->belongsTo(tamano::class);
+        return $this->belongsTo(Tamano::class);
     }
 
     public function marca()
@@ -39,17 +39,17 @@ class DiscoDuro extends Model
 
     public function archivos()
     {
-        return $this->belongsTo(sistema_archivos::class);
+        return $this->belongsTo(SistemaArchivos::class);
     }
 
     public function entrada()
     {
-        return $this->belongsTo(tipo_entrada::class);
+        return $this->belongsTo(TipoEntrada::class);
     }
 
     public function descuento()
     {
-        return $this->belongsTo(model_descuento::class);
+        return $this->belongsTo(descuento::class);
     }
 
     protected $table='disco_duro';
