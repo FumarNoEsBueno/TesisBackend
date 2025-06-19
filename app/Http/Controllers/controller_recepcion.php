@@ -10,7 +10,7 @@ class controller_recepcion extends Controller
 {
     public function get_lotes_recepcionados(Request $request)
     {
-        $recepcion_estado = recepcion_estado::where('recepcion_estado_nombre','=','Recepcionado')
+        $recepcion_estado = RecepcionEstado::where('recepcion_estado_nombre','=','Recepcionado')
             ->first();
 
         $recepcion = solicitud_recepcion
@@ -23,7 +23,7 @@ class controller_recepcion extends Controller
 
     public function confirmar_recepcion(Request $request)
     {
-        $recepcion_estado = recepcion_estado::where('recepcion_estado_nombre','=','Recepcionado')
+        $recepcion_estado = RecepcionEstado::where('recepcion_estado_nombre','=','Recepcionado')
             ->first();
 
         $recepcion = solicitud_recepcion::
@@ -36,7 +36,7 @@ class controller_recepcion extends Controller
 
     public function cancelar_recepcion(Request $request)
     {
-        $recepcion_estado = recepcion_estado::where('recepcion_estado_nombre','=','Recepcion cancelada')
+        $recepcion_estado = RecepcionEstado::where('recepcion_estado_nombre','=','Recepcion cancelada')
             ->first();
 
         $recepcion = solicitud_recepcion::

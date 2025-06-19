@@ -30,11 +30,11 @@ class SolicitudRecepcion extends Model
 
     public function recepcion_estado()
     {
-        return $this->belongsTo(recepcion_estado::class, 'recepcion_estado_id');
+        return $this->belongsTo(RecepcionEstado::class, 'recepcion_estado_id');
     }
     public function metodo_recepcion()
     {
-        return $this->belongsTo(metodo_recepcion::class, 'metodo_recepcion_id');
+        return $this->belongsTo(MetodoRecepcion::class, 'metodo_recepcion_id');
     }
 
     protected $table='solicitud_recepcion';
