@@ -16,7 +16,7 @@ class Almacen extends Model
 
     public function residuo()
     {
-        return $this->hasMany(residuo::class, 'almacen_id');
+        return $this->hasMany(Residuo::class, 'almacen_id');
     }
     public function ram()
     {

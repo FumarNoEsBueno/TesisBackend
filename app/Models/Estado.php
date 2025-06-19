@@ -38,12 +38,12 @@ class Estado extends Model
 
     public function compras()
     {
-        return $this->hasMany(compra::class);
+        return $this->hasMany(Compra::class);
     }
 
     public function ventas()
     {
-        return $this->hasMany(venta::class);
+        return $this->hasMany(Venta::class);
     }
 
 }

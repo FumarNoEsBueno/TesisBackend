@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\residuo;
-use App\Models\almacen;
+use App\Models\Residuo;
+use App\Models\Almacen;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,7 +32,7 @@ class controller_residuo extends Controller
             ], 422);
         }
 
-        $residuo = residuo::create($validated->validated());
+        $residuo = Residuo::create($validated->validated());
 
         return response()->json([
             'message' => 'Residuo registrado correctamente',
@@ -45,7 +45,7 @@ class controller_residuo extends Controller
      */
     public function get_all_residuo()
     {
-        $residuo = residuo::with(['almacen', 'user'])->get();
+        $residuo = Residuo::with(['almacen', 'user'])->get();
 
         return response()->json([
             'message' => 'Lista de residuo obtenida correctamente',
@@ -58,7 +58,7 @@ class controller_residuo extends Controller
      */
     public function get_residuo_by_id($id)
     {
-        $res = residuo::with(['almacen', 'user'])->find($id);
+        $res = Residuo::with(['almacen', 'user'])->find($id);
 
         if (!$res) {
             return response()->json([
@@ -77,7 +77,7 @@ class controller_residuo extends Controller
      */
     public function update_residuo(Request $request, $id)
     {
-        $res = residuo::find($id);
+        $res = Residuo::find($id);
         if (!$res) {
             return response()->json([
                 'message' => 'Residuo no encontrado'
@@ -114,7 +114,7 @@ class controller_residuo extends Controller
      */
     public function delete_residuo($id)
     {
-        $res = residuo::find($id);
+        $res = Residuo::find($id);
         if (!$res) {
             return response()->json([
                 'message' => 'Residuo no encontrado'
