@@ -27,7 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tamano_ram_id');
             $table->unsignedBigInteger('velocidad_ram_id');
 
-            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepción');
+            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepcion');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

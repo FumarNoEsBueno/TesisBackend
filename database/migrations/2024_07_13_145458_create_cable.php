@@ -11,26 +11,39 @@ return new class extends Migration
         Schema::create('cable', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('cable_nombre');
-            $table->integer('cable_cantidad');
-            $table->integer('cable_precio');
-            $table->binary('cable_foto');
-            $table->integer('cable_descuento')->nullable();
+
+            $table->string('cable_nombre');            
+            $table->decimal('cable_precio_unitario', 10, 2);
+            $table->decimal('cable_precio_final', 10, 2);
+            $table->string('cable_foto')->nullable();
+            $table->boolean('cable_descuento')->default(false);
             $table->boolean('cable_destacado')->default(false);
 
+            $table->text('comentario')->nullable();
+            $table->text('descripcion')->nullable();
+
+            $table->decimal('largo', 8, 2)->nullable();
+            $table->decimal('test', 8, 2)->nullable();
+
+            // Foraneas
             $table->unsignedBigInteger('solicitud_recepcion_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('tipo_entrada_id');
+            $table->unsignedBigInteger('tipo_entrada_1_id')->nullable();
+            $table->unsignedBigInteger('tipo_entrada_2_id')->nullable();
 
-            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepción');
+            // Relaciones
+            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepcion');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');
             $table->foreign('marca_id')->references('id')->on('marca');
             $table->foreign('tipo_entrada_id')->references('id')->on('tipo_entrada');
+            $table->foreign('tipo_entrada_1_id')->references('id')->on('tipo_entrada');
+            $table->foreign('tipo_entrada_2_id')->references('id')->on('tipo_entrada');
         });
     }
 
