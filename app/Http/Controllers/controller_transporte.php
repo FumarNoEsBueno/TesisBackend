@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\model_transporte; // Asegúrate de importar el modelo
+use App\Models\transporte; // Asegúrate de importar el modelo
 
 class controller_transporte extends Controller
 {
@@ -26,7 +26,7 @@ class controller_transporte extends Controller
         ]);
 
         // Guardar en base de datos
-        $transporte = model_transporte::create($validated);
+        $transporte = transporte::create($validated);
 
         // Respuesta exitosa
         return response()->json([
@@ -42,7 +42,7 @@ class controller_transporte extends Controller
         \Log::info("getAllTransportes ejecutado"); // Log para debug
 
         // Obtener todos los registros de transporte
-        $transportes = model_transporte::all();
+        $transportes = transporte::all();
 
         // Respuesta exitosa
         return response()->json([
@@ -63,7 +63,7 @@ class controller_transporte extends Controller
             'transporte_descripcion'=> 'nullable|string',
         ]);
 
-        $transporte = model_transporte::findOrFail($id);
+        $transporte = transporte::findOrFail($id);
         $transporte->update($validated);
 
         return response()->json([

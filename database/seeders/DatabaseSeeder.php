@@ -11,41 +11,39 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        $this->call(seeder_user::class);
-        $this->call(seeder_capacidad_ram::class);
-        $this->call(seeder_descuento::class);
-        $this->call(seeder_recepcion_estado::class);
-        $this->call(seeder_estado_compra::class);
-        $this->call(seeder_region::class);
-        $this->call(seeder_provincia::class);
-        $this->call(seeder_ciudad::class);
-        $this->call(seeder_direccion::class);
-        $this->call(seeder_almacen::class);
-        $this->call(seeder_tamano_disco_duro::class);
-        $this->call(seeder_tamano_ram::class);
-        $this->call(seeder_tipo_entrada::class);
-        $this->call(seeder_tipo_periferico::class);
-        $this->call(seeder_tipo_ram::class);
-        $this->call(seeder_velocidad_ram::class);
-        $this->call(seeder_sistema_archivos::class);
-        $this->call(seeder_marca::class);
-        $this->call(seeder_estado::class);
-        $this->call(seeder_disponibilidad::class);
-        $this->call(seeder_periferico::class);
-        $this->call(SeederCable::class);
-        $this->call(seeder_disco_duro::class);        
-        $this->call(seeder_ram::class);
-        $this->call(seeder_metodo_pago::class);
-        $this->call(seeder_metodo_despacho::class);
-        //Diego was here
-        $this->call(seeder_transporte::class);
-        $this->call(seeder_tarea::class);
-        $this->call(seeder_residuo::class);
-        $this->call(seeder_reparacion::class);
-        $this->call(seeder_producto::class);
-        $this->call(seeder_herramienta::class);
-        $this->call(seeder_upgradeo::class);
-        
+        $this->call(UserSeeder::class);
+        $this->call(CapacidadRamSeeder::class);
+        $this->call(DescuentoSeeder::class);
+        $this->call(RecepcionEstadoSeeder::class);
+        $this->call(EstadoCompraSeeder::class);
+        $this->call(RegionSeeder::class);
+        $this->call(ProvinciaSeeder::class);
+        $this->call(CiudadSeeder::class);
+        $this->call(DireccionSeeder::class);
+        $this->call(AlmacenSeeder::class);
+        $this->call(TamanoDiscoDuroSeeder::class);
+        $this->call(TamanoRamSeeder::class);
+        $this->call(TipoEntradaSeeder::class);
+        $this->call(TipoPerifericoSeeder::class);
+        $this->call(TipoRamSeeder::class);
+        $this->call(VelocidadRamSeeder::class);
+        $this->call(SistemaArchivosSeeder::class);
+        $this->call(MarcaSeeder::class);
+        $this->call(EstadoSeeder::class);
+        $this->call(DisponibilidadSeeder::class);
+        $this->call(PerifericoSeeder::class);
+        $this->call(CableSeeder::class);
+        $this->call(DiscoDuroSeeder::class);
+        $this->call(RamSeeder::class);
+        $this->call(MetodoPagoSeeder::class);
+        $this->call(MetodoDespachoSeeder::class);
+        $this->call(TransporteSeeder::class);
+        $this->call(TareaSeeder::class);
+        $this->call(ResiduoSeeder::class);
+        $this->call(ReparacionSeeder::class);
+        $this->call(ProductoSeeder::class);
+        $this->call(HerramientaSeeder::class);
+        $this->call(UpgradeoSeeder::class);
     }
 }
 

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('solicitud_recepción', function (Blueprint $table) {
+        Schema::create('solicitud_recepcion', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('solicitud_recepcion_volumen_aproximado');
@@ -29,6 +29,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('solicitud_recepción');
+        Schema::dropIfExists('solicitud_recepcion');
     }
 };

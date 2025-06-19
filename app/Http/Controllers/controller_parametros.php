@@ -2,100 +2,100 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\almacen;
-use App\Models\capacidad_ram;
-use App\Models\disponibilidad;
-use App\Models\estado;
-use App\Models\marca;
-use App\Models\model_estado_compra;
-use App\Models\model_metodo_despacho;
-use App\Models\recepcion_estado;
-use App\Models\sistema_archivos;
-use App\Models\tamano;
-use App\Models\tamano_ram;
-use App\Models\tipo_entrada;
-use App\Models\tipo_periferico;
-use App\Models\tipo_ram;
-use App\Models\velocidad_ram;
+use App\Models\Almacen;
+use App\Models\CapacidadRam;
+use App\Models\Disponibilidad;
+use App\Models\Estado;
+use App\Models\Marca;
+use App\Models\EstadoCompra;
+use App\Models\MetodoDespacho;
+use App\Models\RecepcionEstado;
+use App\Models\SistemaArchivos;
+use App\Models\Tamano;
+use App\Models\TamanoRam;
+use App\Models\TipoEntrada;
+use App\Models\TipoPeriferico;
+use App\Models\TipoRam;
+use App\Models\VelocidadRam;
 use Illuminate\Http\Request;
 
 class controller_parametros extends Controller
 {
-    public function almacen()
+    public function Almacen()
     {
-        return almacen::all();
+        return Almacen::all();
     }
 
-    public function tipo_entrada()
+    public function TipoEntrada()
     {
-        return tipo_entrada::all();
+        return TipoEntrada::all();
     }
 
-    public function capacidad_ram()
+    public function CapacidadRam()
     {
-        return capacidad_ram::all();
+        return CapacidadRam::all();
     }
 
-    public function despacho()
+    public function MetodoDespacho()
     {
-        return model_metodo_despacho::all();
+        return MetodoDespacho::all();
     }
 
-    public function tipo_periferico()
+    public function TipoPeriferico()
     {
-        return tipo_periferico::all();
+        return TipoPeriferico::all();
     }
 
-    public function tipo_ram()
+    public function TipoRam()
     {
-        return tipo_ram::all();
+        return TipoRam::all();
     }
 
-    public function velocidad_ram()
+    public function VelocidadRam()
     {
-        return velocidad_ram::all();
+        return VelocidadRam::all();
     }
 
-    public function tamano_Ram()
+    public function TamanoRam()
     {
-        return tamano_ram::all();
+        return TamanoRam::all();
     }
 
-    public function marca()
+    public function Marca()
     {
-        return marca::all();
+        return Marca::all();
     }
 
-    public function disponibilidad()
+    public function Disponibilidad()
     {
-        return disponibilidad::all();
+        return Disponibilidad::all();
     }
     
-    public function sistemaArchivos()
+    public function SistemaArchivos()
     {
-        return sistema_archivos::all();
+        return SistemaArchivos::all();
     }
-    public function tamano()
+    public function Tamano()
     {
-        return tamano::all();
+        return Tamano::all();
     }
     
-    public function estado_compra()
+    public function EstadoCompra()
     {
         return Estado::with('compra')->get();
     }
 
-    public function estado_venta()
+    public function EstadoVenta()
     {
         return Estado::with('venta')->get();
     }
 
-    public function estado_recepcion()
+    public function EstadoRecepcion()
     {
-        return recepcion_estado::all(); 
+        return RecepcionEstado::all(); 
     }
 
-    public function estado_producto(Request $request)
+    public function EstadoProducto(Request $request)
     {
         $producto = $request->input('producto');
         return Estado::with($producto)->get();

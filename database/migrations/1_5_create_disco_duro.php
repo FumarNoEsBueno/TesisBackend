@@ -30,7 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sistema_archivos_id');
             $table->unsignedBigInteger('tipo_entrada_id');
 
-            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepción');
+            $table->foreign('solicitud_recepcion_id')->references('id')->on('solicitud_recepcion');
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');

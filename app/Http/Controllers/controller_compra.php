@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\AgradecimientoTrans;
 use App\Mail\GraciasPorComprar;
 use App\Mail\Mailablee;
-use App\Models\cable;
-use App\Models\compra;
-use App\Models\compra_cable;
-use App\Models\disco_duro;
-use App\Models\disco_duro_compra;
-use App\Models\periferico;
-use App\Models\periferico_compra;
-use App\Models\ram_compra;
+use App\Models\Cable;
+use App\Models\Compra;
+use App\Models\Compra_cable;
+use App\Models\DiscoDuro;
+use App\Models\DiscoDuroCompra;
+use App\Models\Periferico;
+use App\Models\PerifericoCompra;
+use App\Models\RamCompra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -132,7 +132,7 @@ try{
         if($request->cablesId != []){
             $index = 0;
             foreach($cables->get() as $cable){
-                compra_cable::create([
+                compra_Cable::create([
                     'compra_cable_cantidad' => $request->cablesCantidad[$index],
                     'cable_id' => $cable->id,
                     'compra_cable_descuento' => $cable->cable_descuento,
@@ -238,7 +238,7 @@ try{
             ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
             ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
-            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->join('CapacidadRam','CapacidadRam.id','=','ram.CapacidadRam_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
             #->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
             #->where('estado.estado_nombre', '!=', 'Para repuesto')
@@ -251,7 +251,7 @@ try{
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
-                'capacidad_ram.capacidad_ram_capacidad',
+                'CapacidadRam.CapacidadRam_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
                 'marca.marca_nombre')
@@ -341,7 +341,7 @@ try{
             ->join('velocidad_ram','velocidad_ram.id','=','ram.velocidad_ram_id')
             ->join('tipo_ram','tipo_ram.id','=','ram.tipo_ram_id')
             ->join('tamano_ram','tamano_ram.id','=','ram.tamano_ram_id')
-            ->join('capacidad_ram','capacidad_ram.id','=','ram.capacidad_ram_id')
+            ->join('CapacidadRam','CapacidadRam.id','=','ram.CapacidadRam_id')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Vendido')
             ->where('disponibilidad.disponibilidad_nombre', '!=', 'Reparacion pendiente')
             ->where('estado.estado_nombre', '!=', 'Para repuesto')
@@ -353,7 +353,7 @@ try{
                 'disponibilidad.disponibilidad_nombre',
                 'tipo_ram.tipo_ram_nombre',
                 'tamano_ram.tamano_ram_nombre',
-                'capacidad_ram.capacidad_ram_capacidad',
+                'CapacidadRam.CapacidadRam_capacidad',
                 'velocidad_ram.velocidad_ram_velocidad',
                 'estado.estado_nombre',
                 'marca.marca_nombre')

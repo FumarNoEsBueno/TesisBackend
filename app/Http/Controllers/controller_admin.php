@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Mail\EstadoCompraActualizado;
 use App\Mail\Mailablee;
-use App\Models\cable;
-use App\Models\compra;
-use App\Models\compra_cable;
-use App\Models\disco_duro;
-use App\Models\model_estado_compra;
-use App\Models\periferico;
-use App\Models\ram;
+use App\Models\Cable;
+use App\Models\Compra;
+use App\Models\Compra_cable;
+use App\Models\DiscoDuro;
+use App\Models\EstadoCompra;
+use App\Models\Periferico;
+use App\Models\Ram;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class controller_admin extends Controller
 {
     public function update_estado_compra(Request $request)
     {
-        $estado = model_estado_compra::where('id','=',$request->estadoId)
+        $estado = estado_compra::where('id','=',$request->estadoId)
             ->first();
 
         $disponibilidad = DB::table('disponibilidad')
@@ -58,7 +58,7 @@ class controller_admin extends Controller
                 $query->where('compra.id', $request->compraId);
             })->update(['disponibilidad_id' => $disponibilidad->id]);
 
-            $cable = cable::
+            $cable = Cable::
                 join('compra_cable','compra_cable.cable_id','cable.id')
                 ->join('compra','compra.id','compra_cable.compra_id')
                 ->where('compra.id', $request->compraId);

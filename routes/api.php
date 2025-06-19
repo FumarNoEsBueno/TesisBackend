@@ -165,8 +165,8 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 
 Route::middleware('auth:api')->group(function() {
-    Route::get('/get_all_almacen', [controller_almacen::class, 'index'] ?? ''); 
-    Route::get('/almacen', [controller_almacen::class, 'get_all_almacen']);
+    Route::get('/get_all_almacen', [controller_Almacen::class, 'index'] ?? ''); 
+    Route::get('/almacen', [controller_Almacen::class, 'get_all_almacen']);
     
     // Ajustar si tu controlador y método difieren
 });
@@ -242,7 +242,7 @@ Route::prefix('parametros')->group(function() {
     Route::get('/tipo_periferico', [controller_parametros::class, 'tipo_periferico']);
     Route::get('/tipo_entrada', [controller_parametros::class, 'tipo_entrada']);
     Route::get('/despacho', [controller_parametros::class, 'despacho']);
-    Route::get('/capacidad_ram', [controller_parametros::class, 'capacidad_ram']);
+    Route::get('/CapacidadRam', [controller_parametros::class, 'CapacidadRam']);
 });
 
 // -----------------------------------------

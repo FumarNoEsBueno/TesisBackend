@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cable;
+use App\Models\Cable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,17 +40,17 @@ class CableController extends Controller
 
     public function get_cable_by_id(Request $request)
     {
-        return cable::where('id','=',$request->id)->first();
+        return Cable::where('id','=',$request->id)->first();
     }
 
     public function get_every_cable(Request $request)
     {
-        return cable::all()->select('id', 'cable_nombre');
+        return Cable::all()->select('id', 'cable_nombre');
     }
 
     public function delete_cable(Request $request)
     {
-        $cable = cable::where('id', $request->id)
+        $cable = Cable::where('id', $request->id)
             ->first()
             ->delete();
         return $cable;
@@ -58,7 +58,7 @@ class CableController extends Controller
 
     public function modify_cable(Request $request)
     {
-        $cable = cable::where('id', $request->id)
+        $cable = Cable::where('id', $request->id)
             ->first()
             ->update([
             'cable_nombre' => $request->cable_nombre,
@@ -80,7 +80,7 @@ class CableController extends Controller
     public function post_cable(Request $request)
     {
 
-        $cable = cable::create([
+        $cable = Cable::create([
             'cable_nombre' => $request->cable_nombre,
             'cable_cantidad' => $request->cable_cantidad,
             'cable_precio' =>$request->cable_precio,

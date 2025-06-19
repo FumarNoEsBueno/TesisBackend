@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\recepcion_estado;
+use App\Models\RecepcionEstado;
 use App\Models\solicitud_recepcion;
 use Illuminate\Http\Request;
 
