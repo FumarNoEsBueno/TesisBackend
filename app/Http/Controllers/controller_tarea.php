@@ -16,7 +16,7 @@ class controller_tarea extends Controller
      */
     public function urgente()
     {
-        $tareaUrgente = tarea::where('nivel_urgencia', 'alto')
+        $tareaUrgente = Tarea::where('nivel_urgencia', 'alto')
                               ->orderBy('created_at', 'desc')
                               ->get();
 
@@ -43,7 +43,7 @@ class controller_tarea extends Controller
 
     public function tasar_producto(Request $request, $id)
     {
-        $tarea = tarea::findOrFail($id);
+        $tarea = Tarea::findOrFail($id);
         $tarea->precio = $request->input('precio');
         $tarea->save();
 

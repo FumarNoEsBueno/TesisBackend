@@ -175,9 +175,9 @@ Route::middleware('auth:api')->group(function() {
 // RUTAS TRANSPORTE (controller_transporte)
 // -----------------------------------------
 
-Route::get('/get_all_transportes', [controller_transporte::class, 'getAllTransportes']);
-Route::put('/transportes/{id}', [controller_transporte::class, 'update']);
-Route::middleware('auth:api')->post('/solicitar_transporte', [controller_transporte::class, 'solicitarTransporte']);
+Route::get('/get_all_transportes', [controller_Transporte::class, 'getAllTransportes']);
+Route::put('/transportes/{id}', [controller_Transporte::class, 'update']);
+Route::middleware('auth:api')->post('/solicitar_transporte', [controller_Transporte::class, 'solicitarTransporte']);
 
 // -----------------------------------------
 // RUTAS RESIDUO (controller_residuo)

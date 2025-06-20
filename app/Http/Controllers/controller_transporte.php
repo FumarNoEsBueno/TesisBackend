@@ -26,7 +26,7 @@ class controller_transporte extends Controller
         ]);
 
         // Guardar en base de datos
-        $transporte = transporte::create($validated);
+        $transporte = Transporte::create($validated);
 
         // Respuesta exitosa
         return response()->json([
@@ -42,7 +42,7 @@ class controller_transporte extends Controller
         \Log::info("getAllTransportes ejecutado"); // Log para debug
 
         // Obtener todos los registros de transporte
-        $transportes = transporte::all();
+        $transportes = Transporte::all();
 
         // Respuesta exitosa
         return response()->json([
@@ -63,7 +63,7 @@ class controller_transporte extends Controller
             'transporte_descripcion'=> 'nullable|string',
         ]);
 
-        $transporte = transporte::findOrFail($id);
+        $transporte = Transporte::findOrFail($id);
         $transporte->update($validated);
 
         return response()->json([
