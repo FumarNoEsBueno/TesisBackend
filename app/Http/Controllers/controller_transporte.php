@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\transporte; // Asegúrate de importar el modelo
+use App\Models\Transporte; 
 
 class controller_transporte extends Controller
 {
