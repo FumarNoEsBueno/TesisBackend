@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use App\Models\upgradeo;
+use App\Models\Upgradeo;
 
 class UpgradeoController extends Controller
 {
@@ -77,7 +77,7 @@ class UpgradeoController extends Controller
 
         $data['user_id'] = $request->user()->id;
 
-        $item = upgradeo::create($data);
+        $item = Upgradeo::create($data);
         return response()->json(['message' => 'upgradeo creado', 'data' => $item], 201);
     }
 
@@ -86,7 +86,7 @@ class UpgradeoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = upgradeo::findOrFail($id);
+        $item = Upgradeo::findOrFail($id);
         $data = $request->validate([
             'detalle_upgradeo' => 'sometimes|string',
             'observaciones' => 'nullable|string',
@@ -102,7 +102,7 @@ class UpgradeoController extends Controller
      */
     public function destroy($id)
     {
-        $item = upgradeo::find($id);
+        $item = Upgradeo::find($id);
         if (!$item) {
             return response()->json(['error' => 'upgradeo no encontrado'], 404);
         }
