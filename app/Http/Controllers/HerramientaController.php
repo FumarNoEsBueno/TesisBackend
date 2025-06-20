@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\herramienta;
+use App\Models\Herramienta;
 
 class HerramientaController extends Controller
 {
@@ -25,13 +25,13 @@ class HerramientaController extends Controller
             'users_id' => 'required|exists:users,id',
         ]);
 
-        $herramienta = herramienta::create($data);
+        $herramienta = Herramienta::create($data);
         return response()->json(['message' => 'Herramienta creada', 'data' => $herramienta], 201);
     }
 
     public function update(Request $request, $id)
     {
-        $herramienta = herramienta::findOrFail($id);
+        $herramienta = Herramienta::findOrFail($id);
         $herramienta->update($request->all());
 
         return response()->json(['message' => 'Herramienta actualizada', 'data' => $herramienta]);
@@ -39,7 +39,7 @@ class HerramientaController extends Controller
 
     public function destroy($id)
     {
-        herramienta::destroy($id);
+        Herramienta::destroy($id);
         return response()->json(['message' => 'Herramienta eliminada']);
     }
 }
