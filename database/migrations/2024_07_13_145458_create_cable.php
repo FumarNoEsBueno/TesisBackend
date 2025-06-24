@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('cable_precio_unitario', 10, 2);
             $table->decimal('cable_precio_final', 10, 2);
             $table->string('cable_foto')->nullable();
-            $table->boolean('cable_descuento')->default(false);
+            $table->decimal('cable_descuento', 10, 2)->default(0.00);
             $table->boolean('cable_destacado')->default(false);
 
             $table->text('comentario')->nullable();

@@ -40,7 +40,7 @@ class Producto extends Model
 
     public function cable()
     {
-        return $this->hasOne(Cable::class, 'id_objeto'); // o la relación inversa si `cable` tiene `producto_id`
+        return $this->belongsTo(Cable::class, 'id_objeto');
     }
 
 }

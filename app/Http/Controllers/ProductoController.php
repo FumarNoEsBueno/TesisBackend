@@ -9,24 +9,40 @@ use App\Models\Cable;
 
 class ProductoController extends Controller
 {
-    public function index() {
-        $productos = DB::table('producto')
-            ->join('estado', 'producto.estado_id', '=', 'estado.id')
-            ->join('almacen', 'producto.almacen_id', '=', 'almacen.id')
-            ->select(
-                'producto.id',
-                'producto.tipo',
-                'producto.descripcion',
-                'producto.peso',
-                'producto.fecha',
-                'producto.hora',
-                'estado.estado_nombre',
-                'almacen.almacen_nombre'
-            )
+    public function index()
+    {
+        // Cargar relaciones: almacen, estado y cable (si existe)
+        $productos = Producto::with(['almacen', 'estado', 'cable'])
             ->get();
 
-        return response()->json(['data' => $productos]);
+        // Mapear productos y agregar datos de cables si aplica
+        $mappedProductos = $productos->map(function ($producto) {
+            $item = [
+                'id' => $producto->id,
+                'tipo_objeto' => $producto->tipo_objeto,
+                'id_objeto' => $producto->id_objeto,
+                'descripcion' => $producto->descripcion,
+                'peso' => $producto->peso,
+                'fecha' => $producto->fecha,
+                'hora' => $producto->hora,
+                'almacen_nombre' => $producto->almacen->almacen_nombre,
+                'estado_nombre' => $producto->estado->estado_nombre,
+            ];
+
+            // Agregar campos específicos de cables
+            if ($producto->tipo_objeto === 'cable' && $producto->cable) {
+                $item['cable_nombre'] = $producto->cable->cable_nombre;
+                $item['tipo_entrada_1_id'] = $producto->cable->tipo_entrada_1_id;
+                $item['tipo_entrada_2_id'] = $producto->cable->tipo_entrada_2_id;
+                $item['largo'] = $producto->cable->largo;
+            }
+
+            return $item;
+        });
+
+        return response()->json(['data' => $mappedProductos]);
     }
+
 
     // Otros métodos store, show, update, delete si se necesitan
     public function store(Request $request)
@@ -38,7 +54,7 @@ class ProductoController extends Controller
             $producto = Producto::create([
                 'nombre' => $request->input('nombre'),
                 'descripcion' => $request->input('descripcion'),
-                'tipo' => 'cable', // o lo que uses para diferenciar productos
+                'tipo_objeto' => 'cable', // o lo que uses para diferenciar productos
                 // otros campos del producto
             ]);
 

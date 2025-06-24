@@ -3,63 +3,111 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CableSeeder extends Seeder
 {
     public function run(): void
     {
         // Mapeos de estado y disponibilidad
-        $estadoMap = ['Sin abrir' => 1, 'Bueno' => 2];
-        $disponibilidadMap = ['Si' => 1, 'NO' => 2];
+        $estadoMap = ['Nuevo' => 1, 'Bueno' => 2, 'Usado' => 3, 'Dañado' => 4];
+        $disponibilidadMap = ['Disponible' => 1, 'Reservado' => 2, 'Vendido' => 3];
         
         // Mapeo de tipos de entrada para diferentes cables
         $tipoEntradaMap = [
-            'VGA'          => [1, 2],   // VGA a VGA
-            'Epson a USB'  => [3, 4],   // Epson a USB
+            'VGA a VGA'          => [1, 1],
+            'HDMI a HDMI'         => [2, 2],
+            'USB-C a USB-C'       => [3, 3],
+            'USB-A a USB-C'       => [4, 3],
+            'Ethernet'            => [5, 5],
+            'DisplayPort'         => [6, 6],
+            'Lightning a USB-A'   => [7, 4],
+            'HDMI a DisplayPort'  => [2, 6],
+            'VGA a HDMI'          => [1, 2],
+            'USB-C a HDMI'        => [3, 2]
         ];
 
-        $rows = [
-            // nombre         | disponibilidad | estado     | largo | descripcion                         | unitario | final | foto             | tipo_entrada
-            ['Cable VGA',     'Si',            'Sin abrir', 1.00, 'VGA nuevo empacado y sellado',       4500, 4000, 'vga.jpg',        'VGA'],
-            ['Cable VGA',     'Si',            'Sin abrir', 1.75, 'VGA usado en buenas condiciones',    4500, 4000, 'vga.jpg',        'VGA'],
-            ['Cable VGA',     'NO',            'Bueno',     1.45, 'VGA usado en buenas condiciones',    4500, 4000, 'vga.jpg',        'VGA'],
-            ['Cable VGA',     'Si',            'Bueno',     1.80, 'VGA usado en buenas condiciones',    4500, 4000, 'vga.jpg',        'VGA'],
-            ['Epson a USB',   'Si',            'Sin abrir', 1.20, 'Cable epson a USB nuevo',            3000, 2500, 'epson_usb.jpg',  'Epson a USB'],
+        $cables = [
+            // nombre                 | disponibilidad   | estado   | largo | descripción                                     | unitario | final | foto              | tipo_entrada
+            ['Cable VGA 1m',           'Disponible',     'Nuevo',    1.0,   'VGA nuevo en empaque original',                4500,     4000,   'vga1.jpg',        'VGA a VGA'],
+            ['Cable HDMI 2.0',         'Disponible',     'Bueno',    2.0,   'HDMI de alta velocidad para 4K',               8000,     7500,   'hdmi2.jpg',       'HDMI a HDMI'],
+            ['Cable USB-C',            'Reservado',      'Usado',    1.0,   'USB-C para carga rápida de dispositivos',      3500,     3000,   'usbc.jpg',        'USB-C a USB-C'],
+            ['Cable Ethernet Cat6',    'Disponible',     'Nuevo',    3.0,   'Cable de red Cat6 blindado',                   6500,     6000,   'ethernet.jpg',    'Ethernet'],
+            ['Cable USB-A a USB-C',    'Disponible',     'Bueno',    1.5,   'Cable para carga y transferencia de datos',    2500,     2200,   'usb_a_c.jpg',     'USB-A a USB-C'],
+            ['Cable DisplayPort',      'Disponible',     'Nuevo',    1.8,   'DisplayPort 1.4 para alta resolución',         7000,     6500,   'displayport.jpg', 'DisplayPort'],
+            ['Cable Lightning',        'Vendido',        'Bueno',    1.0,   'Cargador original para iPhone',                5000,     4500,   'lightning.jpg',   'Lightning a USB-A'],
+            ['Cable HDMI 5m',          'Disponible',     'Usado',    5.0,   'HDMI largo para instalaciones',                10000,    9000,   'hdmi5.jpg',       'HDMI a HDMI'],
+            ['Cable VGA 3m',           'Disponible',     'Dañado',   3.0,   'VGA con conector dañado pero funcional',       3500,     2500,   'vga3.jpg',        'VGA a VGA'],
+            ['Adaptador HDMI a DP',    'Reservado',      'Nuevo',    0.3,   'Adaptador de HDMI a DisplayPort',              4500,     4000,   'hdmi_dp.jpg',     'HDMI a DisplayPort'],
+            ['Cable USB-C Largo',      'Disponible',     'Bueno',    2.0,   'USB-C de 2m para carga rápida',                4000,     3500,   'usbc_long.jpg',   'USB-C a USB-C'],
+            ['Cable VGA a HDMI',       'Disponible',     'Usado',    1.5,   'Conversor de VGA a HDMI con audio',            5500,     5000,   'vga_hdmi.jpg',    'VGA a HDMI'],
+            ['Cable Ethernet Cat5e',   'Disponible',     'Bueno',    2.0,   'Cable de red Cat5e',                          4000,     3500,   'cat5e.jpg',       'Ethernet'],
+            ['Cable USB-C a HDMI',     'Vendido',        'Nuevo',    1.0,   'Adaptador USB-C a HDMI 4K',                    6000,     5500,   'usbc_hdmi.jpg',   'USB-C a HDMI'],
+            ['Cable USB Extensión',   'Disponible',     'Bueno',    3.0,   'Extensión USB 3.0',                           3000,     2500,   'usb_ext.jpg',     'USB-A a USB-C'],
+            ['Cable HDMI Premium',    'Reservado',      'Nuevo',    1.5,   'HDMI de alta calidad con revestimiento oro',  12000,    11000,  'hdmi_gold.jpg',   'HDMI a HDMI'],
+            ['Cable VGA 2m',          'Disponible',     'Usado',    2.0,   'VGA para monitores secundarios',              3000,     2500,   'vga2.jpg',        'VGA a VGA'],
+            ['Cable USB-C Braided',   'Disponible',     'Nuevo',    1.2,   'USB-C trenzado resistente',                  4500,     4000,   'usbc_braid.jpg',  'USB-C a USB-C'],
+            ['Cable Lightning Largo', 'Vendido',        'Bueno',    2.0,   'Cable Lightning de 2m',                      5500,     5000,   'lightning2m.jpg','Lightning a USB-A'],
+            ['Cable DisplayPort 2m',  'Disponible',     'Nuevo',    2.0,   'DisplayPort para gaming',                    7500,     7000,   'dp2m.jpg',        'DisplayPort']
         ];
 
-        $data = array_map(function($r) use ($estadoMap, $disponibilidadMap, $tipoEntradaMap) {
-            // Extraer los dos tipos de entrada
-            $tipoEntradaKey = $r[8];
-            $tipoEntradaIds = $tipoEntradaMap[$tipoEntradaKey] ?? [1, 2];
+        $data = [];
+        $now = Carbon::now();
 
-            // Generar un peso aproximado: 0.2 kg por metro
-            $largo = $r[3];
-            $peso = is_numeric($largo) ? round($largo * 0.2, 2) : null;
-
-            return [
-                'cable_nombre'           => $r[0],
-                'disponibilidad_id'      => $disponibilidadMap[$r[1]] ?? 1,
-                'estado_id'              => $estadoMap[$r[2]] ?? 1,
-                'almacen_id'             => 1,  // Ajusta si tienes varios almacenes
-                'marca_id'               => 1,  // Marca por defecto
+        foreach ($cables as $cable) {
+            $tipoEntradaKey = $cable[8];
+            $tipoEntradaIds = $tipoEntradaMap[$tipoEntradaKey] ?? [1, 1];
+            
+            $largo = $cable[3];
+            $peso = $this->calculateWeight($cable[0], $largo);
+            $descuento = ($cable[5] - $cable[6]) > 0 ? ($cable[5] - $cable[6]) : 0;
+            
+            $createdAt = $now->copy()->subDays(rand(0, 90));
+            
+            $data[] = [
+                'cable_nombre'           => $cable[0],
+                'disponibilidad_id'      => $disponibilidadMap[$cable[1]],
+                'estado_id'              => $estadoMap[$cable[2]],
+                'almacen_id'             => rand(1, 3),
+                'marca_id'               => rand(1, 5),
                 'tipo_entrada_1_id'      => $tipoEntradaIds[0],
                 'tipo_entrada_2_id'      => $tipoEntradaIds[1],
-                'comentario'             => "Estado: {$r[2]}. {$r[4]}",
-                'test'                   => true,
+                'comentario'             => $cable[4],
+                'test'                   => $cable[2] !== 'Dañado' ? true : (rand(0, 1) == 1),
                 'largo'                  => $largo,
-                'peso'                   => $r[3] ?? 0,
-                'descripcion'            => $r[4],
-                'cable_precio_unitario'  => $r[5],
-                'cable_precio_final'     => $r[6],
-                'cable_foto'             => $r[7],
-                'cable_descuento'        => 0,
-                'cable_destacado'        => 0,
+                'peso'                   => $peso,
+                'descripcion'            => $cable[4],
+                'cable_precio_unitario'  => $cable[5],
+                'cable_precio_final'     => $cable[6],
+                'cable_foto'             => $cable[7],
+                'cable_descuento'        => min(255, $descuento),
+                'cable_destacado'        => rand(0, 1),
                 'solicitud_recepcion_id' => null,
-                'created_at'             => now(),
-                'updated_at'             => now(),
+                'created_at'             => $createdAt,
+                'updated_at'             => $createdAt->copy()->addDays(rand(1, 30))
             ];
-        }, $rows);
+        }
 
         DB::table('cable')->insert($data);
+    }
+    
+    private function calculateWeight($nombre, $largo)
+    {
+        $pesoBase = 0.1;
+        
+        if (str_contains($nombre, 'VGA')) {
+            return round(0.25 * $largo, 2);
+        }
+        if (str_contains($nombre, 'HDMI') || str_contains($nombre, 'DisplayPort')) {
+            return round(0.15 * $largo, 2);
+        }
+        if (str_contains($nombre, 'Ethernet')) {
+            return round(0.20 * $largo, 2);
+        }
+        if (str_contains($nombre, 'USB')) {
+            return round(0.12 * $largo, 2);
+        }
+        
+        return round($pesoBase * $largo, 2);
     }
 }

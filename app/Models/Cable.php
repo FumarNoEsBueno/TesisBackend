@@ -47,7 +47,8 @@ class Cable extends Model
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class, 'id_objeto'); // si cable guarda el id del producto
+        // Un cable TIENE UN producto asociado
+        return $this->hasOne(Producto::class, 'id_objeto');
     }
 
 }

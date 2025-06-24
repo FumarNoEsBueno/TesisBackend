@@ -130,6 +130,19 @@ class ProductoSeeder extends Seeder
                 'created_at'  => $now,
                 'updated_at'  => $now,
             ],
+             [
+                'tipo_objeto' => 'cable',
+                'id_objeto'   => 10,  // ID del cable en la tabla cables
+                'almacen_id'  => 1,   // Almacén ID
+                'user_id'     => 1,   // Usuario ID
+                'estado_id'   => 1,   // Estado ID (1 = disponible)
+                'fecha'       => $now->toDateString(),
+                'hora'        => $now->toTimeString(),
+                'descripcion' => 'Cable HDMI de alta velocidad',
+                'peso'        => 0.3, // Peso en kg
+                'created_at'  => $now,
+                'updated_at'  => $now,
+            ],
         ];
 
         DB::table('producto')->insert($items);
