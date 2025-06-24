@@ -143,8 +143,7 @@ Route::get('/cable/{id}', [CableController::class, 'show']);
 
 Route::middleware('auth:api')->group(function() 
 {
-    Route::post('/cable', [CableController::class, 'store']);
-
+    Route::post('/cable', [CableController::class, 'store']);    
     Route::post('/post_cable', [CableController::class, 'post_cable']);
     Route::post('/modify_cable', [CableController::class, 'modify_cable']);
     Route::post('/delete_cable', [CableController::class, 'delete_cable']);

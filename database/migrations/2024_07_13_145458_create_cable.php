@@ -24,14 +24,14 @@ return new class extends Migration
 
             $table->decimal('largo', 8, 2)->nullable();
             $table->decimal('test', 8, 2)->nullable();
+            $table->decimal('peso', 8, 2)->nullable();
 
             // Foraneas
             $table->unsignedBigInteger('solicitud_recepcion_id')->nullable();
             $table->unsignedBigInteger('disponibilidad_id');
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('estado_id');
-            $table->unsignedBigInteger('marca_id');
-            $table->unsignedBigInteger('tipo_entrada_id');
+            $table->unsignedBigInteger('marca_id');            
             $table->unsignedBigInteger('tipo_entrada_1_id')->nullable();
             $table->unsignedBigInteger('tipo_entrada_2_id')->nullable();
 
@@ -40,8 +40,7 @@ return new class extends Migration
             $table->foreign('disponibilidad_id')->references('id')->on('disponibilidad');
             $table->foreign('almacen_id')->references('id')->on('almacen');
             $table->foreign('estado_id')->references('id')->on('estado');
-            $table->foreign('marca_id')->references('id')->on('marca');
-            $table->foreign('tipo_entrada_id')->references('id')->on('tipo_entrada');
+            $table->foreign('marca_id')->references('id')->on('marca');            
             $table->foreign('tipo_entrada_1_id')->references('id')->on('tipo_entrada');
             $table->foreign('tipo_entrada_2_id')->references('id')->on('tipo_entrada');
         });

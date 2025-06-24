@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('producto', function (Blueprint $table) {
             $table->id();
             // Tipo de producto: disco duro, ram, cargador, periferico, etc.
-            $table->string('tipo');
+            $table->string('tipo_objeto');
             $table->unsignedBigInteger('id_objeto')->nullable();
 
 

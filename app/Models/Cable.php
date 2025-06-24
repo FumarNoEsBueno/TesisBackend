@@ -14,22 +14,23 @@ class Cable extends Model
         'cable_nombre',
         'marca_id',
         'disponibilidad_id',
-        'comentario',  // Nuevo
         'estado_id',
-        'test',        // Nuevo
-        'largo',       // Nuevo
         'almacen_id',
+        'tipo_entrada_1_id',
+        'tipo_entrada_2_id',
+        'largo',
+        'peso',
+        'test',
         'descripcion',
-        'cable_precio_unitario',  // Renombrado
-        'cable_precio_final',     // Renombrado
+        'comentario',
+        'cable_precio_unitario',
+        'cable_precio_final',
         'cable_foto',
         'cable_descuento',
         'cable_destacado',
         'solicitud_recepcion_id',
-        'tipo_entrada_id',
-        'tipo_entrada_1_id',      // Nuevo
-        'tipo_entrada_2_id'       // Nuevo
     ];
+
 
     // ... (las relaciones existentes se mantienen)
 
@@ -42,13 +43,7 @@ class Cable extends Model
     public function tipoEntrada2()
     {
         return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_2_id');
-    }
-    
-    // Actualizar relación existente
-    public function tipoEntrada()
-    {
-        return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_id');
-    }
+    }    
 
     public function producto()
     {

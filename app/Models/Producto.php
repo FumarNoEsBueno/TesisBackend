@@ -12,7 +12,7 @@ class Producto extends Model
     protected $table = 'producto'; // especifica el nombre exacto si no es plural
 
     protected $fillable = [
-        'tipo',
+        'tipo_objeto',
         'id_objeto',
         'fecha',
         'hora',
@@ -20,8 +20,7 @@ class Producto extends Model
         'peso',
         'almacen_id',
         'user_id',
-        'estado_id',
-        'id_objeto',
+        'estado_id',    
     ];
 
     public function almacen()

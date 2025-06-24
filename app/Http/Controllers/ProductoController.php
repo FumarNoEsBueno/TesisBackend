@@ -48,13 +48,15 @@ class ProductoController extends Controller
                 'cable_nombre' => $request->input('cable_nombre'),
                 'estado_id' => $request->input('estado_id'),
                 'marca_id' => $request->input('marca_id'),
-                'tipo_entrada_id' => $request->input('tipo_entrada_id'),
+                'tipo_entrada_1_id' => $request->input('tipo_entrada_1_id'),
+                'tipo_entrada_2_id' => $request->input('tipo_entrada_2_id'),
                 'disponibilidad_id' => $request->input('disponibilidad_id'),
                 'almacen_id' => $request->input('almacen_id'),
                 'comentario' => $request->input('comentario'),
                 'test' => $request->input('test'),
                 'largo' => $request->input('largo'),
-                'cable_foto' => $request->input('cable_foto')
+                'cable_foto' => $request->input('cable_foto'),
+                'peso' => $request->input('peso'),
             ]);
 
             // Actualiza el producto con el id del cable si es necesario
