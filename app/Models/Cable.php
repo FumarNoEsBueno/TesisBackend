@@ -49,4 +49,10 @@ class Cable extends Model
     {
         return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_id');
     }
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_objeto'); // si cable guarda el id del producto
+    }
+
 }

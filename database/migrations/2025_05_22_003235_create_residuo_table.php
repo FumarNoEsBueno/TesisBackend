@@ -26,7 +26,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             // ingresado por
-            $table->foreignId('users_id')
+            $table->foreignId('user_id')
                 ->constrained('users')       // tabla real 'users', no 'user'
                 ->cascadeOnDelete();
 

@@ -10,7 +10,7 @@ class EstadoController extends Controller
 {
     public function index()
     {
-        $estados = Estado::all();
-        return response()->json($estados); // Devuelve directamente la colección
+        $estado = Estado::all();
+        return response()->json($estado); // Devuelve directamente la colección
     }
 }

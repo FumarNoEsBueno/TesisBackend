@@ -16,7 +16,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'cargador',
                 'id_objeto' => 1,
                 'almacen_id' => 1,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 1,
                 'fecha' => Carbon::now()->subDays(10)->toDateString(),
                 'hora' => '10:00',
@@ -29,7 +29,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'disco duro',
                 'id_objeto' => 2,
                 'almacen_id' => 1,
-                'users_id' => 2,
+                'user_id' => 2,
                 'estado_id' => 2,
                 'fecha' => Carbon::now()->subDays(5)->toDateString(),
                 'hora' => '12:30',
@@ -42,7 +42,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'periferico',
                 'id_objeto' => 3,
                 'almacen_id' => 2,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 3,
                 'fecha' => Carbon::now()->subDays(2)->toDateString(),
                 'hora' => '09:15',
@@ -55,7 +55,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'periferico',
                 'id_objeto' => 3,
                 'almacen_id' => 2,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 3,
                 'fecha' => Carbon::now()->subDays(2)->toDateString(),
                 'hora' => '09:15',
@@ -68,7 +68,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'cargador',
                 'id_objeto' => 4,
                 'almacen_id' => 3,
-                'users_id' => 2,
+                'user_id' => 2,
                 'estado_id' => 1,
                 'fecha' => Carbon::now()->subDays(1)->toDateString(),
                 'hora' => '14:00',
@@ -81,7 +81,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'disco duro',
                 'id_objeto' => 5,
                 'almacen_id' => 3,
-                'users_id' => 3,
+                'user_id' => 3,
                 'estado_id' => 2,
                 'fecha' => Carbon::now()->subDays(3)->toDateString(),
                 'hora' => '16:45',
@@ -94,7 +94,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'periferico',
                 'id_objeto' => 6,
                 'almacen_id' => 1,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 3,
                 'fecha' => Carbon::now()->toDateString(),
                 'hora' => Carbon::now()->toTimeString(),
@@ -107,7 +107,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'cargador',
                 'id_objeto' => 7,
                 'almacen_id' => 2,
-                'users_id' => 2,
+                'user_id' => 2,
                 'estado_id' => 1,
                 'fecha' => Carbon::now()->toDateString(),
                 'hora' => Carbon::now()->toTimeString(),
@@ -120,7 +120,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'disco duro',
                 'id_objeto' => 8,
                 'almacen_id' => 3,
-                'users_id' => 3,
+                'user_id' => 3,
                 'estado_id' => 2,
                 'fecha' => Carbon::now()->toDateString(),
                 'hora' => Carbon::now()->toTimeString(),
@@ -131,7 +131,7 @@ class ProductoSeeder extends Seeder
             ],
         ]);
 
-        // Generar 15 cables con fecha y hora actuales
+        // Generar 15 cable con fecha y hora actuales
         $nowDate = Carbon::now()->toDateString();
         $nowTime = Carbon::now()->toTimeString();
 
@@ -140,7 +140,7 @@ class ProductoSeeder extends Seeder
                 'tipo' => 'cargador',
                 'id_objeto' => 1,
                 'almacen_id' => 1,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 1,
                 'fecha' => Carbon::now()->subDays(10)->toDateString(),
                 'hora' => '10:00',
@@ -152,12 +152,12 @@ class ProductoSeeder extends Seeder
             // ... otras entradas existentes ...
         ];
 
-        $cables = array_map(function ($id) use ($nowDate, $nowTime) {
+        $cable = array_map(function ($id) use ($nowDate, $nowTime) {
             return [
                 'tipo' => 'cable',
                 'id_objeto' => $id,
                 'almacen_id' => 1,
-                'users_id' => 1,
+                'user_id' => 1,
                 'estado_id' => 1,
                 'fecha' => $nowDate,
                 'hora' => $nowTime,
@@ -168,7 +168,7 @@ class ProductoSeeder extends Seeder
             ];
         }, range(1, 15));
 
-        DB::table('producto')->insert(array_merge($base, $cables));
+        DB::table('producto')->insert(array_merge($base, $cable));
 
 
     }

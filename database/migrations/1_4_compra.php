@@ -21,13 +21,13 @@ return new class extends Migration
             $table->unsignedBigInteger('direccion_id')->nullable();
             $table->unsignedBigInteger('metodo_pago_id');
             $table->unsignedBigInteger('metodo_despacho_id');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('estado_compra_id')->references('id')->on('estado_compra');
             $table->foreign('direccion_id')->references('id')->on('direccion');
             $table->foreign('metodo_pago_id')->references('id')->on('metodo_pago');
             $table->foreign('metodo_despacho_id')->references('id')->on('metodo_despacho');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

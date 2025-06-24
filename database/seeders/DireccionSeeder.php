@@ -20,7 +20,7 @@ class DireccionSeeder extends Seeder
             return [
                 'direccion_nombre' => $direccion[0],
                 'ciudad_id' => $direccion[1],
-                'users_id' => $direccion[2],
+                'user_id' => $direccion[2],
             ];
         }, $direcciones);
 

@@ -10,7 +10,7 @@ class EstadoCompraSeeder extends Seeder
 {
     public function run(): void
     {
-        $estados = [
+        $estado = [
             ['Esperando pago','esperando'],
             ['Preparando pedido','preparando'],
             ['Listo para retirar','listo'],
@@ -20,13 +20,13 @@ class EstadoCompraSeeder extends Seeder
             ['Cancelado','cancelado']
         ];
 
-        $estados = array_map(function ($estado) {
+        $estado = array_map(function ($estado) {
             return [
                 'estado_compra_nombre' => $estado[0],
                 'estado_compra_slug' => $estado[1],
             ];
-        }, $estados);
+        }, $estado);
 
-        EstadoCompra::insert($estados);
+        EstadoCompra::insert($estado);
     }
 }

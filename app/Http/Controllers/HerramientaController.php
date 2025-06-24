@@ -22,7 +22,7 @@ class HerramientaController extends Controller
             'peso' => 'nullable|numeric',
             'fecha' => 'nullable|date',
             'hora' => 'nullable',
-            'users_id' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         $herramienta = Herramienta::create($data);

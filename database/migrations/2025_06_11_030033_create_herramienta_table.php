@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('peso', 8, 2)->nullable();
             $table->date('fecha')->nullable();
             $table->time('hora')->nullable();
-            $table->foreignId('users_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

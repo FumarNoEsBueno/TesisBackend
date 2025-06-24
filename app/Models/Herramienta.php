@@ -17,7 +17,7 @@ class Herramienta extends Model
         'peso', 
         'fecha', 
         'hora', 
-        'users_id'
+        'user_id'
     ];
 
     public function estado()

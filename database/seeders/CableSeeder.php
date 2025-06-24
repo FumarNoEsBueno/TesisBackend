@@ -8,11 +8,11 @@ class CableSeeder extends Seeder
 {
     public function run(): void
     {
-        // Mapeos de estados y disponibilidad
+        // Mapeos de estado y disponibilidad
         $estadoMap = ['Sin abrir' => 1, 'Bueno' => 2];
         $disponibilidadMap = ['Si' => 1, 'NO' => 2];
         
-        // Mapeo de tipos de entrada para diferentes cables
+        // Mapeo de tipos de entrada para diferentes cable
         $tipoEntradaMap = [
             'VGA' => [1, 2],    // VGA a VGA
             'Epson a USB' => [3, 4] // USB a otro conector

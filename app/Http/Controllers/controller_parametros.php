@@ -21,81 +21,82 @@ use Illuminate\Http\Request;
 
 class controller_parametros extends Controller
 {
-    public function Almacen()
+    public function almacen()
     {
         return Almacen::all();
     }
 
-    public function TipoEntrada()
+    public function tipo_entrada()
     {
         return TipoEntrada::all();
     }
 
-    public function CapacidadRam()
+    public function capacidad_ram()
     {
         return CapacidadRam::all();
     }
 
-    public function MetodoDespacho()
+    public function metodo_despacho()
     {
         return MetodoDespacho::all();
     }
 
-    public function TipoPeriferico()
+    public function tipo_periferico()
     {
         return TipoPeriferico::all();
     }
 
-    public function TipoRam()
+    public function tipo_ram()
     {
         return TipoRam::all();
     }
 
-    public function VelocidadRam()
+    public function velocidad_ram()
     {
         return VelocidadRam::all();
     }
 
-    public function TamanoRam()
+    public function tamano_ram()
     {
         return TamanoRam::all();
     }
 
-    public function Marca()
+    public function marca()
     {
         return Marca::all();
     }
 
-    public function Disponibilidad()
+    public function disponibilidad()
     {
         return Disponibilidad::all();
     }
-    
-    public function SistemaArchivos()
+
+    public function sistema_archivos()
     {
         return SistemaArchivos::all();
     }
-    public function Tamano()
+
+    public function tamano()
     {
         return Tamano::all();
     }
-    
-    public function EstadoCompra()
+
+    public function estado_compra()
     {
-        return Estado::with('compra')->get();
+        return Estado::with('compras')->get();//este si con compras. hay 2 funciones aqui
     }
 
-    public function EstadoVenta()
+    public function estado_venta()
     {
         return Estado::with('venta')->get();
     }
 
-    public function EstadoRecepcion()
+    public function estado_recepcion()
     {
         return RecepcionEstado::all(); 
     }
 
-    public function EstadoProducto(Request $request)
+    public function estado_producto(Request $request)
     {
         $producto = $request->input('producto');
         return Estado::with($producto)->get();

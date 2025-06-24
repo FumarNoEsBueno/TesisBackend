@@ -10,18 +10,18 @@ class RecepcionEstadoSeeder extends Seeder
 {
     public function run(): void
     {
-        $estados = [
+        $estado = [
             'No recepcionado',
             'Recepcionado',
             'Recepcion cancelada'
         ];
 
-        $estados = array_map(function ($estado) {
+        $estado = array_map(function ($estado) {
             return [
                 'recepcion_estado_nombre' => $estado,
             ];
-        }, $estados);
+        }, $estado);
 
-        RecepcionEstado::insert($estados);
+        RecepcionEstado::insert($estado);
     }
 }

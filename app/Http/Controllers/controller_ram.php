@@ -76,7 +76,7 @@ class controller_ram extends Controller
 
     public function get_all_ram(Request $request)
     {
-        $rams = DB::table('ram')
+        $ram= DB::table('ram')
             ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
             ->join('estado','estado.id','=','ram.estado_id')
             ->join('marca','marca.id','=','ram.marca_id')
@@ -99,25 +99,25 @@ class controller_ram extends Controller
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
-        if($request->estado != null) $rams = $rams->whereIn('estado.id',$request->estado);
-        if($request->marca != null) $rams = $rams->whereIn('marca.id',$request->marca);
-        if($request->capacidad != null) $rams = $rams->whereIn('CapacidadRam.id',$request->capacidad);
-        if($request->tipo != null) $rams = $rams->whereIn('tipo_ram.id',$request->tipo);
-        if($request->tamano != null) $rams = $rams->whereIn('tamano_ram.id',$request->tamano);
-        if($request->velocidad != null) $rams = $rams->whereIn('velocidad_ram.id',$request->velocidad);
+        if($request->estado != null) $ram= $ram->whereIn('estado.id',$request->estado);
+        if($request->marca != null) $ram= $ram->whereIn('marca.id',$request->marca);
+        if($request->capacidad != null) $ram= $ram->whereIn('CapacidadRam.id',$request->capacidad);
+        if($request->tipo != null) $ram= $ram->whereIn('tipo_ram.id',$request->tipo);
+        if($request->tamano != null) $ram= $ram->whereIn('tamano_ram.id',$request->tamano);
+        if($request->velocidad != null) $ram= $ram->whereIn('velocidad_ram.id',$request->velocidad);
         if($request->precio != null){
             foreach ($request->precio as $precio) {
-                $rams = $rams->where('ram_precio','>', ($precio - 1) * $this->intervalo_precio);
-                $rams = $rams->where('ram_precio','<', $precio * $this->intervalo_precio);
+                $ram= $ram->where('ram_precio','>', ($precio - 1) * $this->intervalo_precio);
+                $ram= $ram->where('ram_precio','<', $precio * $this->intervalo_precio);
             }
         }
 
-        $rams = $rams->paginate(12);
-        return $rams;
+        $ram= $ram->paginate(12);
+        return $ram;
     }
     public function ramPaginated(Request $request)
     {
-        $rams = DB::table('ram')
+        $ram= DB::table('ram')
             ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
             ->join('estado','estado.id','=','ram.estado_id')
             ->join('marca','marca.id','=','ram.marca_id')
@@ -141,20 +141,20 @@ class controller_ram extends Controller
                 'estado.estado_nombre',
                 'marca.marca_nombre');
 
-        if($request->estado != null) $rams = $rams->whereIn('estado.id',$request->estado);
-        if($request->marca != null) $rams = $rams->whereIn('marca.id',$request->marca);
-        if($request->capacidad != null) $rams = $rams->whereIn('CapacidadRam.id',$request->capacidad);
-        if($request->tipo != null) $rams = $rams->whereIn('tipo_ram.id',$request->tipo);
-        if($request->tamano != null) $rams = $rams->whereIn('tamano_ram.id',$request->tamano);
-        if($request->velocidad != null) $rams = $rams->whereIn('velocidad_ram.id',$request->velocidad);
+        if($request->estado != null) $ram= $ram->whereIn('estado.id',$request->estado);
+        if($request->marca != null) $ram= $ram->whereIn('marca.id',$request->marca);
+        if($request->capacidad != null) $ram= $ram->whereIn('CapacidadRam.id',$request->capacidad);
+        if($request->tipo != null) $ram= $ram->whereIn('tipo_ram.id',$request->tipo);
+        if($request->tamano != null) $ram= $ram->whereIn('tamano_ram.id',$request->tamano);
+        if($request->velocidad != null) $ram= $ram->whereIn('velocidad_ram.id',$request->velocidad);
         if($request->precio != null){
             foreach ($request->precio as $precio) {
-                $rams = $rams->where('ram_precio','>', ($precio - 1) * $this->intervalo_precio);
-                $rams = $rams->where('ram_precio','<', $precio * $this->intervalo_precio);
+                $ram= $ram->where('ram_precio','>', ($precio - 1) * $this->intervalo_precio);
+                $ram= $ram->where('ram_precio','<', $precio * $this->intervalo_precio);
             }
         }
 
-        $rams = $rams->paginate(12);
-        return $rams;
+        $ram= $ram->paginate(12);
+        return $ram;
     }
 }

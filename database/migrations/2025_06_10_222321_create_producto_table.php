@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             // Tipo de producto: disco duro, ram, cargador, periferico, etc.
             $table->string('tipo');
-            $table->unsignedBigInteger('id_objeto');
+            $table->unsignedBigInteger('id_objeto')->nullable();
+
 
             $table->date('fecha');
-            $table->string('hora');
+            $table->time('hora');
+
             $table->text('descripcion');
             $table->float('peso');
             
@@ -26,7 +28,7 @@ return new class extends Migration
                 ->constrained('almacen')
                 ->cascadeOnDelete();
 
-            $table->foreignId('users_id')
+            $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
 

@@ -18,7 +18,7 @@ class Residuo extends Model
         'descripcion',
         'peso',
         'almacen_id',
-        'users_id'
+        'user_id'
     ];
 
     // Relación con almacen
@@ -30,6 +30,6 @@ class Residuo extends Model
     // Relación con User
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

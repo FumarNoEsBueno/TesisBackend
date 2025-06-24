@@ -13,12 +13,12 @@ class Compra extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function cables()
+    public function cable()
     {
         return $this->belongsToMany(Cable::class, 'compra_cable', 'compra_id', 'cable_id')->withPivot('compra_cable_cantidad');
     }
 
-    public function rams()
+    public function ram()
     {
         return $this->belongsToMany(Ram::class, 'ram_compra', 'compra_id', 'ram_id');
     }

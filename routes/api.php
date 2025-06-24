@@ -106,7 +106,7 @@ Route::get('/get_lotes_recepcionados', [controller_recepcion::class, 'get_lotes_
 Route::get('/get_all_ram', [controller_ram::class, 'get_all_ram']);
 Route::get('/get_every_ram', [controller_ram::class, 'get_every_ram']);
 Route::get('/get_ram_by_id', [controller_ram::class, 'get_ram_by_id']);
-Route::get('/rams', [controller_ram::class, 'ramPaginated']);
+Route::get('/ram', [controller_ram::class, 'ramPaginated']);
 
 Route::middleware('auth:api')->group(function() {
     Route::post('/post_ram', [controller_ram::class, 'post_ram']);
@@ -132,14 +132,19 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 // RUTAS CABLE (CableController)
 // -----------------------------------------
-Route::get('/cable', [CableController::class, 'get_all_cable']);
+Route::get('/list_cable', [CableController::class, 'get_all_cable']);
 Route::get('/get_all_cable', [CableController::class, 'get_all_cable']);
 Route::get('/get_every_cable', [CableController::class, 'get_every_cable']);
 Route::get('/get_cable_by_id', [CableController::class, 'get_cable_by_id']);
-Route::get('/cables', [CableController::class, 'getCablesPaginated']);
+Route::get('/list_cable_paginated', [CableController::class, 'getCablesPaginated']);
 Route::get('/get_cable_recomendado', [CableController::class, 'get_cable_recomendado']);
 
-Route::middleware('auth:api')->group(function() {
+Route::get('/cable/{id}', [CableController::class, 'show']);
+
+Route::middleware('auth:api')->group(function() 
+{
+    Route::post('/cable', [CableController::class, 'store']);
+
     Route::post('/post_cable', [CableController::class, 'post_cable']);
     Route::post('/modify_cable', [CableController::class, 'modify_cable']);
     Route::post('/delete_cable', [CableController::class, 'delete_cable']);
@@ -149,7 +154,7 @@ Route::middleware('auth:api')->group(function() {
 // RUTAS DISCO DURO (controller_disco_duro)
 // -----------------------------------------
 
-Route::get('/get_all_discos_duros', [controller_disco_duro::class, 'get_all_discos_duros']);
+Route::get('/get_all_disco_duro', [controller_disco_duro::class, 'get_all_disco_duro']);
 Route::get('/get_every_disco_duro', [controller_disco_duro::class, 'get_every_disco_duro']);
 Route::get('/get_disco_duro_by_id', [controller_disco_duro::class, 'get_disco_duro_by_id']);
 Route::get('/discosDuros', [controller_disco_duro::class, 'discosDurosPaginated']);
@@ -227,23 +232,24 @@ Route::middleware('auth:api')->group(function() {
 // -----------------------------------------
 
 Route::prefix('parametros')->group(function() {
-    Route::get('/estado', [controller_parametros::class, 'estado']);
-    Route::get('/estado_compra', [controller_parametros::class, 'estado_compra']);
-    Route::get('/estado_venta', [controller_parametros::class, 'estado_venta']);
-    Route::get('/estado_recepcion', [controller_parametros::class, 'estado_recepcion']);
-    Route::get('/almacen', [controller_parametros::class, 'almacen']);
-    Route::get('/marca', [controller_parametros::class, 'marca']);
-    Route::get('/disponibilidad', [controller_parametros::class, 'disponibilidad']);
-    Route::get('/sistema-archivos', [controller_parametros::class, 'sistemaArchivos']);
-    Route::get('/tamano', [controller_parametros::class, 'tamano']);
-    Route::get('/tamano_ram', [controller_parametros::class, 'tamano_ram']);
-    Route::get('/velocidad_ram', [controller_parametros::class, 'velocidad_ram']);
-    Route::get('/tipo_ram', [controller_parametros::class, 'tipo_ram']);
-    Route::get('/tipo_periferico', [controller_parametros::class, 'tipo_periferico']);
-    Route::get('/tipo_entrada', [controller_parametros::class, 'tipo_entrada']);
-    Route::get('/despacho', [controller_parametros::class, 'despacho']);
-    Route::get('/CapacidadRam', [controller_parametros::class, 'CapacidadRam']);
+    Route::get('almacen',           [controller_parametros::class, 'almacen']);
+    Route::get('tipo_entrada',      [controller_parametros::class, 'tipo_entrada']);
+    Route::get('capacidad_ram',     [controller_parametros::class, 'capacidad_ram']);
+    Route::get('metodo_despacho',   [controller_parametros::class, 'metodo_despacho']);
+    Route::get('tipo_periferico',   [controller_parametros::class, 'tipo_periferico']);
+    Route::get('tipo_ram',          [controller_parametros::class, 'tipo_ram']);
+    Route::get('velocidad_ram',     [controller_parametros::class, 'velocidad_ram']);
+    Route::get('tamano_ram',        [controller_parametros::class, 'tamano_ram']);
+    Route::get('marca',             [controller_parametros::class, 'marca']);
+    Route::get('disponibilidad',    [controller_parametros::class, 'disponibilidad']);
+    Route::get('sistema_archivos',  [controller_parametros::class, 'sistema_archivos']);
+    Route::get('tamano',            [controller_parametros::class, 'tamano']);
+    Route::get('estado_compra',     [controller_parametros::class, 'estado_compra']);
+    Route::get('estado_venta',      [controller_parametros::class, 'estado_venta']);
+    Route::get('estado_recepcion',  [controller_parametros::class, 'estado_recepcion']);
+    Route::post('estado_producto',  [controller_parametros::class, 'estado_producto']);
 });
+
 
 // -----------------------------------------
 // RUTAS HERRAMIENTA (HerramientaController)
@@ -267,10 +273,11 @@ Route::apiResource('producto', ProductoController::class);
 // Si requieres auth:
 Route::middleware('auth:api')->group(function() {
     Route::get('/producto', [ProductoController::class, 'index']);
-    Route::post('/producto', [ProductoController::class, 'store']);
+    //Route::post('/producto', [ProductoController::class, 'store']);
     Route::put('/producto/{id}', [ProductoController::class, 'update']);
     Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
 });
+Route::post('/producto', [ProductoController::class, 'store']);
 
 // -----------------------------------------
 // RUTAS REPARACIÓN (ReparacionController)

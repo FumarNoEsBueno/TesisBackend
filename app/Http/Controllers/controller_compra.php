@@ -56,22 +56,22 @@ try{
                 return response()->json("Periferico no disponible", 500);
         }
 
-        if($request->rams != []){
-            $rams = DB::table('ram')
+        if($request->ram!= []){
+            $ram= DB::table('ram')
                 ->where('disponibilidad_id', '!=', $disponibilidad->id)
-                ->whereIn('id',$request->rams);
+                ->whereIn('id',$request->ram);
 
-            if($rams->count() != count($request->rams))
+            if($ram->count() != count($request->ram))
                 return response()->json("Ram/s no disponibles", 500);
         }
 
         if($request->cablesId != []){
-            $cables = DB::table('cable')
+            $cable = DB::table('cable')
                 ->where('disponibilidad_id', '!=', $disponibilidad->id)
                 ->whereIn('id',$request->cablesId);
 
-            if($cables->count() != count($request->cablesId))
-                return response()->json("Cables no disponibles", 500);
+            if($cable->count() != count($request->cablesId))
+                return response()->json("cable no disponibles", 500);
         }
 
         $despacho = DB::table('metodo_despacho')
@@ -92,7 +92,7 @@ try{
         $compra->direccion_id = $request->direccionId;
         $compra->metodo_despacho_id = $despacho->id;
         $compra->metodo_pago_id = $pago->id;
-        $compra->users_id = $request->user()->id;
+        $compra->user_id = $request->user()->id;
 
         $compra->save();
 
@@ -118,20 +118,20 @@ try{
             $perifericos->update(['disponibilidad_id' => $disponibilidad->id]);
         }
 
-        if($request->rams != []){
-            foreach($rams->get() as $ram){
+        if($request->ram!= []){
+            foreach($ram->get() as $ram){
                 ram_compra::create([
                     'ram_id' => $ram->id,
                     'ram_compra_descuento' => $ram->ram_descuento,
                     'compra_id' => $compra->id
                 ]);
             }
-            $rams->update(['disponibilidad_id' => $disponibilidad->id]);
+            $ram->update(['disponibilidad_id' => $disponibilidad->id]);
         }
 
         if($request->cablesId != []){
             $index = 0;
-            foreach($cables->get() as $cable){
+            foreach($cable->get() as $cable){
                 compra_Cable::create([
                     'compra_cable_cantidad' => $request->cablesCantidad[$index],
                     'cable_id' => $cable->id,
@@ -169,8 +169,8 @@ try{
             with('discos')
             ->with('usuario')
             ->with('perifericos')
-            ->with('rams')
-            ->with('cables')
+            ->with('ram')
+            ->with('cable')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
@@ -183,13 +183,13 @@ try{
         return $compras;
     }
 
-    public function get_compras_by_users_id(Request $request){
-        $compras = Compra::where('users_id', $request->user()->id)
+    public function get_compras_by_user_id(Request $request){
+        $compras = Compra::where('user_id', $request->user()->id)
             ->with('usuario')
             ->with('discos')
             ->with('perifericos')
-            ->with('rams')
-            ->with('cables')
+            ->with('ram')
+            ->with('cable')
             ->with('estado_compra')
             ->with('metodo_despacho')
             ->with('metodo_pago')
@@ -203,8 +203,8 @@ try{
         $compras = Compra::
             with('discos')
             ->with('perifericos')
-            ->with('rams')
-            ->with('cables')
+            ->with('ram')
+            ->with('cable')
             ->with('usuario')
             ->with('estado_compra')
             ->with('metodo_despacho')
@@ -217,7 +217,7 @@ try{
 
     public function get_productos_destacados(Request $request)
     {
-        $cables = DB::table('cable')
+        $cable = DB::table('cable')
             ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
@@ -231,7 +231,7 @@ try{
             ->limit(3)
             ->get();
 
-        $rams = DB::table('ram')
+        $ram= DB::table('ram')
             ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
             ->join('estado','estado.id','=','ram.estado_id')
             ->join('marca','marca.id','=','ram.marca_id')
@@ -314,14 +314,14 @@ try{
             ->orderBy('periferico.id', 'desc')
             ->get();
 
-        $response = [$rams, $discos, $perifericos, $cables];
+        $response = [$ram, $discos, $perifericos, $cable];
 
         return response()->json($response, 200);
     }
 
     public function get_productos_nuevos(Request $request)
     {
-        $cables = DB::table('cable')
+        $cable = DB::table('cable')
             ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
@@ -334,7 +334,7 @@ try{
             ->limit(3)
             ->get();
 
-        $rams = DB::table('ram')
+        $ram= DB::table('ram')
             ->join('disponibilidad','disponibilidad.id','=','ram.disponibilidad_id')
             ->join('estado','estado.id','=','ram.estado_id')
             ->join('marca','marca.id','=','ram.marca_id')
@@ -417,7 +417,7 @@ try{
             ->limit(3)
             ->get();
 
-        $response = [$rams, $discos, $perifericos, $cables];
+        $response = [$ram, $discos, $perifericos, $cable];
 
         return response()->json($response, 200);
     }

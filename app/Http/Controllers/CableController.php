@@ -3,17 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cable;
+use App\Models\Producto;
+use App\Models\Almacen;
+use App\Models\Disponibilidad;
+use App\Models\Estado;
+use App\Models\Marca;
+use App\Models\TipoEntrada;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CableController extends Controller
 {
     private $intervalo_precio = 10000;
 
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cable_nombre' => 'required|string|max:255',
+            'marca_id' => 'required|integer',
+            'disponibilidad_id' => 'required|integer',
+            'estado_id' => 'required|integer',
+            'almacen_id' => 'required|integer',
+            'tipo_entrada_id' => 'required|integer',
+            'largo' => 'required|numeric',
+            'peso' => 'required|numeric',
+            'tipo' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = $request->all();
+        
+        // Asegurar valores numéricos
+        $intFields = ['marca_id', 'disponibilidad_id', 'estado_id', 'almacen_id', 'tipo_entrada_id'];
+        foreach ($intFields as $field) {
+            $data[$field] = (int) $data[$field];
+        }
+        
+        // Crear cable
+        $cable = Cable::create([
+            'cable_nombre' => $data['cable_nombre'],
+            'marca_id' => $data['marca_id'],
+            'disponibilidad_id' => $data['disponibilidad_id'],
+            'estado_id' => $data['estado_id'],
+            'almacen_id' => $data['almacen_id'],
+            'tipo_entrada_id' => $data['tipo_entrada_id'],
+            'largo' => $data['largo'],
+            'descripcion' => $data['descripcion'] ?? '',
+            'comentario' => $data['comentario'] ?? '',
+            'cable_precio_unitario' => 0,
+            'cable_precio_final' => 0,
+            'cable_foto' => 'default.jpg'
+        ]);
+
+        // Crear producto asociado
+        $producto = Producto::create([
+            'tipo' => $data['tipo'],
+            'id_objeto' => $cable->id,
+            'fecha' => now()->format('Y-m-d'),
+            'hora' => now()->format('H:i:s'),
+            'descripcion' => $data['descripcion'] ?? 'Cable registrado',
+            'peso' => $data['peso'],
+            'almacen_id' => $data['almacen_id'],
+            'user_id' => $request->user()->id,
+            'estado_id' => $data['estado_id']
+        ]);
+
+        return response()->json([
+            'cable' => $cable,
+            'producto' => $producto
+        ], 201);
+    }
+
+
+    public function show($id)
+    {
+        return Cable::findOrFail($id);
+    }
+
 
     public function index()
     {
-        $cables = Cable::select(
+        $cable = Cable::select(
                 'cable.id',
                 'cable.cable_nombre',
                 'cable.test',
@@ -34,7 +109,7 @@ class CableController extends Controller
             ->leftJoin('tipo_entrada',  'cable.tipo_entrada_id',   '=', 'tipo_entrada.id')
             ->get();
 
-        return response()->json(['data' => $cables]);
+        return response()->json(['data' => $cable]);
     }
 
 
@@ -124,14 +199,14 @@ class CableController extends Controller
         
 
         // Paginamos 12 por página
-        $cables = $query->paginate(12);
+        $cable = $query->paginate(12);
 
-        return response()->json($cables);
+        return response()->json($cable);
     }
 
     public function getCablesPaginated(Request $request)
     {
-        $cables = DB::table('cable')
+        $cable = DB::table('cable')
             ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
@@ -150,24 +225,24 @@ class CableController extends Controller
                 'marca.marca_nombre',
                 );
 
-        if($request->estado != null) $cables = $cables->whereIn('estado.id',$request->estado);
-        if($request->marca != null) $cables = $cables->whereIn('marca.id',$request->marca);
-        if($request->tipoEntrada != null) $cables = $cables->whereIn('tipo_entrada.id',$request->tipoEntrada);
+        if($request->estado != null) $cable = $cable->whereIn('estado.id',$request->estado);
+        if($request->marca != null) $cable = $cable->whereIn('marca.id',$request->marca);
+        if($request->tipoEntrada != null) $cable = $cable->whereIn('tipo_entrada.id',$request->tipoEntrada);
         if($request->precio != null){
             foreach ($request->precio as $precio) {
-                $cables = $cables->where('cable_precio','>', ($precio - 1) * $this->intervalo_precio);
-                $cables = $cables->where('cable_precio','<', $precio * $this->intervalo_precio);
+                $cable = $cable->where('cable_precio','>', ($precio - 1) * $this->intervalo_precio);
+                $cable = $cable->where('cable_precio','<', $precio * $this->intervalo_precio);
             }
         }
 
 
-        $cables = $cables->paginate(12);
-        return $cables;
+        $cable = $cable->paginate(12);
+        return $cable;
     }
 
     public function get_cable_recomendado(Request $request)
     {
-        $cables = DB::table('cable')
+        $cable = DB::table('cable')
             ->join('disponibilidad','disponibilidad.id','=','cable.disponibilidad_id')
             ->join('estado','estado.id','=','cable.estado_id')
             ->join('marca','marca.id','=','cable.marca_id')
@@ -190,7 +265,7 @@ class CableController extends Controller
                 );
 
 
-        $cables = $cables->limit(3)->get();
-        return $cables;
+        $cable = $cable->limit(3)->get();
+        return $cable;
     }
 }

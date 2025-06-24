@@ -81,7 +81,7 @@ class controller_disco_duro extends Controller
         return $disco;
     }
 
-    public function get_all_discos_duros(Request $request)
+    public function get_all_disco_duro(Request $request)
     {
         $discos = DB::table('disco_duro')
             ->join('disponibilidad','disponibilidad.id','=','disco_duro.disponibilidad_id')

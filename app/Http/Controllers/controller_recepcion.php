@@ -65,7 +65,7 @@ class controller_recepcion extends Controller
 
     public function get_recepcion_paginated_by_user_id(Request $request)
     {
-        $recepcion = solicitud_recepcion::where('users_id', $request->user()->id)
+        $recepcion = solicitud_recepcion::where('user_id', $request->user()->id)
             ->with('recepcion_estado')
             ->latest()
             ->paginate(5);
@@ -78,7 +78,7 @@ class controller_recepcion extends Controller
         $recepcion = new solicitud_recepcion();
         $randomCode = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'), 0, 6);
 
-        $recepcion->users_id = $request->user()->id;
+        $recepcion->user_id = $request->user()->id;
         $recepcion->solicitud_recepcion_volumen_aproximado = $request->volumen;
         $recepcion->recepcion_estado_id = 1;
         $recepcion->solicitud_recepcion_peso_aproximado = $request->peso;

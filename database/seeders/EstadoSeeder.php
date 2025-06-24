@@ -10,7 +10,7 @@ class EstadoSeeder extends Seeder
 {
     public function run(): void
     {
-        $estados = [//almacena los estados de los productos
+        $estado = [//almacena los estado de los productos
             ['Nuevo','nuevo'],
             ['Usado','usado'],
             ['Para repuesto','repuesto'],
@@ -37,13 +37,13 @@ class EstadoSeeder extends Seeder
             ['En espera de revisión técnica','espera_revision_tecnica'],
         ];
 
-        $estados = array_map(function ($estado) {
+        $estado = array_map(function ($estado) {
             return [
                 'estado_nombre' => $estado[0],
                 'estado_descripcion' => $estado[1],
             ];
-        }, $estados);
+        }, $estado);
 
-        Estado::insert($estados);
+        Estado::insert($estado);
     }
 }

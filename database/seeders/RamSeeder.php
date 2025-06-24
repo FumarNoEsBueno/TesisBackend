@@ -10,7 +10,7 @@ class RamSeeder extends Seeder
 {
     public function run(): void
     {
-        $rams = [
+        $ram= [
             ['Drescripcion de la ram',
             9999,
             1,
@@ -309,7 +309,7 @@ class RamSeeder extends Seeder
             1,
             1]
         ];
-        $rams = array_map(function ($ram) {
+        $ram= array_map(function ($ram) {
             return [
                 'ram_descripcion' => $ram[0],
                 'ram_nombre' => "Ram pulenta",
@@ -324,8 +324,8 @@ class RamSeeder extends Seeder
                 'tamano_ram_id' => $ram[7],
                 'velocidad_ram_id' => $ram[8],
             ];
-        }, $rams);
+        }, $ram);
 
-        Ram::insert($rams);
+        Ram::insert($ram);
     }
 }

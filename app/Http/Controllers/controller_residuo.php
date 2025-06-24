@@ -22,7 +22,7 @@ class controller_residuo extends Controller
             'descripcion' => 'required|string',
             'peso'        => 'required|numeric',
             'almacen_id'  => 'required|exists:almacen,id',
-            'users_id'    => 'required|exists:users,id',
+            'user_id'    => 'required|exists:users,id',
         ]);
 
         if ($validated->fails()) {
@@ -91,7 +91,7 @@ class controller_residuo extends Controller
             'descripcion' => 'required|string',
             'peso'        => 'required|numeric',
             'almacen_id'  => 'required|exists:almacen,id',
-            'users_id'    => 'required|exists:users,id',
+            'user_id'    => 'required|exists:users,id',
         ]);
 
         if ($validated->fails()) {
