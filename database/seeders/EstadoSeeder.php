@@ -13,22 +13,35 @@ class EstadoSeeder extends Seeder
         $estado = [//almacena los estado de los productos
             ['Nuevo','nuevo'],
             ['Usado','usado'],
-            ['Para repuesto','repuesto'],
-            ['Por revisar','revisar'],
+
+            ['Desmontar','desmontar'],            
+            ['Destruir','destruir'],
+            ['Destruido','destruido'],
+
+            ['Revisar','revisar'],
+            ['Revisado','revisado'],
+
             ['Perdido','perdido'],
             ['Robado','robado'],
-            ['En reparación','reparacion'],
-            ['En préstamo','prestamo'],
-            ['En venta','venta'],
-            ['En donación','donacion'],
-            ['En mantenimiento','mantenimiento'],
-            ['En espera de revisión','espera_revision'],
+
+            ['Reparar','reparar'],
+            ['Reparado','reparado'],
+
+            ['Upgradear','upgradear'],
+            ['Upgradeado','upgradeado'],
+
+            ['Pedido','pedido'],                        
+
+            ['Donar','donar'],
+            ['Donado','donado'],            
+            
             ['En cuarentena','cuarentena'],
             ['Obsoleto','obsoleto'],
             ['Descontinuado','descontinuado'],
             ['En espera de entrega','espera_entrega'],
             ['En espera de pago','espera_pago'],
             ['En espera de aprobación','espera_aprobacion'],
+            
             ['En espera de inspección','espera_inspeccion'],
             ['En espera de reparación','espera_reparacion'],
             ['En espera de actualización','espera_actualizacion'],
