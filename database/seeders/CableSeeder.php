@@ -29,26 +29,20 @@ class CableSeeder extends Seeder
 
         $cables = [
             // nombre                 | disponibilidad   | estado   | largo | descripción                               | unitario | final | foto              | tipo_entrada
-            ['Cable VGA 1m',           'Disponible',     'Nuevo',    1.0,   'VGA nuevo en empaque original',                0,        0,   'desconocido.jpg',        'VGA a VGA'],
+            ['Cable VGA 1m',           'Disponible',     'Usado',    1.0,   'VGA nuevo en empaque original',                0,        0,   'desconocido.jpg',        'VGA a VGA'],
             ['Cable HDMI 2.0',         'Disponible',     'Bueno',    2.0,   'HDMI de alta velocidad para 4K',               0,        0,   'desconocido.jpg',       'HDMI a HDMI'],
             ['Cable USB-C',            'Reservado',      'Usado',    1.0,   'USB-C para carga rápida de dispositivos',      0,        0,   'desconocido.jpg',        'USB-C a USB-C'],
-            ['Cable Ethernet Cat6',    'Disponible',     'Nuevo',    3.0,   'Cable de red Cat6 blindado',                   0,        0,   'desconocido.jpg',    'Ethernet'],
-            ['Cable USB-A a USB-C',    'Disponible',     'Bueno',    1.5,   'Cable para carga y transferencia de datos',    0,        0,   'desconocido.jpg',     'USB-A a USB-C'],
-            ['Cable DisplayPort',      'Disponible',     'Nuevo',    1.8,   'DisplayPort 1.4 para alta resolución',         0,        0,   'desconocido.jpg', 'DisplayPort'],
-            ['Cable Lightning',        'Vendido',        'Bueno',    1.0,   'Cargador original para iPhone',                0,        0,   'desconocido.jpg',   'Lightning a USB-A'],
+            ['Cable Ethernet Cat5e',    'Disponible',     'Nuevo',    3.0,   'Cable de red Cat5e',                          0,        0,   'desconocido.jpg',    'Ethernet'],
+            ['Cable USB-A a USB-C',    'Disponible',     'Bueno',    1.5,   'Cable para carga y transferencia de datos',    0,        0,   'desconocido.jpg',     'USB-A a USB-C'],                        
             ['Cable HDMI 5m',          'Disponible',     'Usado',    5.0,   'HDMI largo para instalaciones',                0,        0,   'desconocido.jpg',       'HDMI a HDMI'],
-            ['Cable VGA 3m',           'Disponible',     'Dañado',   3.0,   'VGA con conector dañado pero funcional',       0,        0,   'desconocido.jpg',        'VGA a VGA'],
-            ['Adaptador HDMI a DP',    'Reservado',      'Nuevo',    0.3,   'Adaptador de HDMI a DisplayPort',              0,        0,   'desconocido.jpg',     'HDMI a DisplayPort'],
+            ['Cable VGA 3m',           'Disponible',     'Dañado',   3.0,   'VGA con conector con los pines doblados',      0,        0,   'desconocido.jpg',        'VGA a VGA'],            
             ['Cable USB-C Largo',      'Disponible',     'Bueno',    2.0,   'USB-C de 2m para carga rápida',                0,        0,   'desconocido.jpg',   'USB-C a USB-C'],
-            ['Cable VGA a HDMI',       'Disponible',     'Usado',    1.5,   'Conversor de VGA a HDMI con audio',            0,        0,   'desconocido.jpg',    'VGA a HDMI'],
+            ['Cable VGA a HDMI',       'Disponible',     'Usado',    1.5,   'Adaptador inseparable',                        0,        0,   'desconocido.jpg',    'VGA a HDMI'],
             ['Cable Ethernet Cat5e',   'Disponible',     'Bueno',    2.0,   'Cable de red Cat5e',                           0,        0,   'desconocido.jpg',       'Ethernet'],
             ['Cable USB-C a HDMI',     'Vendido',        'Nuevo',    1.0,   'Adaptador USB-C a HDMI 4K',                    0,        0,   'desconocido.jpg',   'USB-C a HDMI'],
             ['Cable USB Extensión',   'Disponible',     'Bueno',    3.0,   'Extensión USB 3.0',                             0,        0,   'desconocido.jpg',     'USB-A a USB-C'],
-            ['Cable HDMI Premium',    'Reservado',      'Nuevo',    1.5,   'HDMI de alta calidad con revestimiento oro',    0,        0,  'desconocido.jpg',   'HDMI a HDMI'],
-            ['Cable VGA 2m',          'Disponible',     'Usado',    2.0,   'VGA para monitores secundarios',                0,        0,   'desconocido.jpg',        'VGA a VGA'],
-            ['Cable USB-C Braided',   'Disponible',     'Nuevo',    1.2,   'USB-C trenzado resistente',                     0,        0,   'desconocido.jpg',  'USB-C a USB-C'],
-            ['Cable Lightning Largo', 'Vendido',        'Bueno',    2.0,   'Cable Lightning de 2m',                         0,        0,   'desconocido.jpg','Lightning a USB-A'],
-            ['Cable DisplayPort 2m',  'Disponible',     'Nuevo',    2.0,   'DisplayPort para gaming',                       0,        0,   'desconocido.jpg',        'DisplayPort']
+            ['Cable HDMI Premium',    'Reservado',      'Nuevo',    1.5,   'HDMI de alta calidad con revestimiento de oro', 0,        0,  'desconocido.jpg',   'HDMI a HDMI'],
+            ['Cable USB-C Trenzado',   'Disponible',     'Nuevo',    1.2,   'USB-C trenzado resistente',                    0,        0,   'desconocido.jpg',  'USB-C a USB-C'],            
         ];
 
         $data = [];
