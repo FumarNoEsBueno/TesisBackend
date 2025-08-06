@@ -20,11 +20,29 @@ use App\Http\Controllers\controller_cargador;
 use App\Http\Controllers\controller_tarea;
 use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\HerramientaController;
-use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UpgradeoController;
 
+use App\Http\Controllers\CableFotoController;
 use App\Http\Controllers\ProductoFotoController;
-Route::get('/producto/{tipo}/{id}/fotos', [ProductoFotoController::class, 'index']);
+use App\Http\Controllers\ProductoController;
+
+
+    
+// Rutas API públicas para pruebas
+Route::get('test', function() {
+    return response()->json([
+        'status' => 'success',
+        'message' => '¡La ruta de prueba funciona!',
+        'data' => [
+            'server_time' => now()->toDateTimeString(),
+            'laravel_version' => app()->version()
+        ]
+    ]);
+});
+
+Route::get('cable/{id}/fotos', [CableFotoController::class, 'index']);
+
+
 
 // -----------------------------------------
 // RUTAS DE AUTENTICACIÓN / PERFIL

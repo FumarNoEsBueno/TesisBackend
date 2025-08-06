@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductoSeeder::class);
         $this->call(HerramientaSeeder::class);
         $this->call(UpgradeoSeeder::class);
+        $this->call(CableFotoSeeder::class);
         
         // Relle
         $this->call(CableToProductoSeeder::class);

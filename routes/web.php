@@ -2,19 +2,22 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
-Auth::routes(['verify' => true]);
+Auth::routes([
+    'reset'  => false,
+    'verify' => false,
+]);
 
 Route::get('/', function () {
-    print("Wena los k");
+    return 'Wena los k';
 });
 
 Route::get('/test-storage', function() {
-    // Guardar un archivo de prueba
     Storage::disk('public')->put('test.txt', 'Contenido de prueba');
-    
-    // Generar URL
     $url = Storage::disk('public')->url('test.txt');
-    
     return "Archivo creado: <a href='$url'>$url</a>";
 });
+
+Route::get('storage/cables/{filename}', [FileController::class, 'serveCableImage'])
+     ->where('filename', '.*');
