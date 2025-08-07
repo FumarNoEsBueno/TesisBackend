@@ -23,9 +23,15 @@ use App\Http\Controllers\HerramientaController;
 use App\Http\Controllers\UpgradeoController;
 
 use App\Http\Controllers\CableFotoController;
+use App\Http\Controllers\CargadorFotoController;
+use App\Http\Controllers\PerifericoFotoController;
+
 use App\Http\Controllers\ProductoFotoController;
 use App\Http\Controllers\ProductoController;
 
+Route::get('producto/{tipo}/{id}/fotos', [ProductoFotoController::class, 'index']);
+
+Route::middleware('auth:api')->get('/producto', [ProductoController::class, 'index']);
 
     
 // Rutas API públicas para pruebas
@@ -40,8 +46,8 @@ Route::get('test', function() {
     ]);
 });
 
-Route::get('cable/{id}/fotos', [CableFotoController::class, 'index']);
-
+Route::get('cargador/{id}/fotos', [CargadorFotoController::class, 'index']);
+Route::get('periferico/{id}/fotos', [PerifericoFotoController::class, 'index']);
 
 
 // -----------------------------------------
@@ -289,9 +295,10 @@ Route::middleware('auth:api')->group(function() {
 
 Route::apiResource('producto', ProductoController::class);
 // Si requieres auth:
+Route::get('/producto', [ProductoController::class, 'index']);
+
 Route::middleware('auth:api')->group(function() {
-    Route::get('/producto', [ProductoController::class, 'index']);
-    //Route::post('/producto', [ProductoController::class, 'store']);
+        //Route::post('/producto', [ProductoController::class, 'store']);
     Route::put('/producto/{id}', [ProductoController::class, 'update']);
     Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
 });

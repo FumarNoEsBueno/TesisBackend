@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\RegistrarEnProducto;
 
 class DiscoDuro extends Model
 {
+    use RegistrarEnProducto;
 
     public function recepcion()
     {
@@ -53,6 +55,7 @@ class DiscoDuro extends Model
     }
 
     protected $table='disco_duro';
+    
     protected $fillable = [
         'disco_duro_memoria',
         'disco_duro_nombre',

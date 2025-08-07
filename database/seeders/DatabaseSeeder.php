@@ -31,20 +31,37 @@ class DatabaseSeeder extends Seeder
         $this->call(MarcaSeeder::class);
         $this->call(EstadoSeeder::class);
         $this->call(DisponibilidadSeeder::class);
-        $this->call(PerifericoSeeder::class);
-        $this->call(CableSeeder::class);
-        $this->call(DiscoDuroSeeder::class);
-        $this->call(RamSeeder::class);
+        
+        
+        
         $this->call(MetodoPagoSeeder::class);
         $this->call(MetodoDespachoSeeder::class);
         $this->call(TransporteSeeder::class);
         $this->call(TareaSeeder::class);
-        $this->call(ResiduoSeeder::class);
+
         $this->call(ReparacionSeeder::class);
         $this->call(ProductoSeeder::class);
         $this->call(HerramientaSeeder::class);
         $this->call(UpgradeoSeeder::class);
+
+
+
+        $this->call(PerifericoSeeder::class);
+
+
+        $this->call(DiscoDuroSeeder::class);
+
+        $this->call(RamSeeder::class);
+
+        $this->call(ResiduoSeeder::class);
+        $this->call(ResiduoFotoSeeder::class);
+
+
+        $this->call(CableSeeder::class);
         $this->call(CableFotoSeeder::class);
+
+        $this->call(CargadorSeeder::class);
+        $this->call(CargadorFotoSeeder::class);       
         
         // Relle
         $this->call(CableToProductoSeeder::class);

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,17 +8,10 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'producto'; // especifica el nombre exacto si no es plural
-
+    protected $table = 'producto';
     protected $fillable = [
-        'tipo_objeto',
-        'id_objeto',
-        'fecha',
-        'hora',
-        'descripcion',
-        'peso',        
-        'user_id',
-        'estado_id',    
+        'tipo_objeto', 'id_objeto', 'fecha', 'hora',
+        'descripcion', 'peso', 'user_id', 'estado_id',
     ];
 
     public function estado()
@@ -32,9 +24,11 @@ class Producto extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cable()
+    /**
+     * Relación polimórfica al objeto real (Cable o Cargador).
+     */
+    public function objeto()
     {
-        return $this->belongsTo(Cable::class, 'id_objeto');
+        return $this->morphTo(__FUNCTION__, 'tipo_objeto', 'id_objeto');
     }
-
 }

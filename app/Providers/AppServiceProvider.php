@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Laravel\Passport\Passport;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Models\Cable;
+use App\Models\Cargador;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,8 +15,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-//        Passport::tokensExpireIn(now()->addDays(7));
-  //      Passport::refreshTokensExpireIn(now()->addDays(7));
-    //    Passport::personalAccessTokensExpireIn(now()->addDays(31));
+        Relation::morphMap([
+            'cable'    => Cable::class,
+            'cargador' => Cargador::class,
+        ]);
     }
 }

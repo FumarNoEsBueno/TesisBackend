@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,37 +13,39 @@ use App\Models\CableFoto;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Cargar relaciones: estado y cable (si existe)
-        $productos = Producto::with(['estado', 'cable'])
+        $query = Producto::query();
+
+        if ($request->filled('tipo_objeto')) {
+            $query->where('tipo_objeto', $request->input('tipo_objeto'));
+        }
+
+        // Eager-load de estado y de la relación polimórfica + su almacén
+        $productos = $query
+            ->with(['estado', 'objeto.almacen'])
             ->get();
 
-        // Mapear productos y agregar datos de cables si aplica
-        $mappedProductos = $productos->map(function ($producto) {
-            $item = [
-                'id' => $producto->id,
-                'tipo_objeto' => $producto->tipo_objeto,
-                'id_objeto' => $producto->id_objeto,
-                'descripcion' => $producto->descripcion,
-                'peso' => $producto->peso,
-                'fecha' => $producto->fecha,
-                'hora' => $producto->hora,                
-                'estado_nombre' => $producto->estado->estado_nombre,
+        // Mapeamos para inyectar almacen_id y almacen_nombre
+        $data = $productos->map(function(Producto $p) {
+            $obj = $p->objeto; // instancia de Cable o Cargador
+
+            return [
+                'id'              => $p->id,
+                'tipo_objeto'     => $p->tipo_objeto,
+                'id_objeto'       => $p->id_objeto,
+                'descripcion'     => $p->descripcion,
+                'peso'            => $p->peso,
+                'fecha'           => $p->fecha,
+                'hora'            => $p->hora,
+                'estado_id'       => $p->estado_id,
+                'estado_nombre'   => optional($p->estado)->estado_nombre,
+                'almacen_id'      => optional($obj)->almacen_id,
+                'almacen_nombre'  => optional($obj->almacen)->almacen_nombre ?? 'Desconocido',
             ];
-
-            // Agregar campos específicos de cables
-            if ($producto->tipo_objeto === 'cable' && $producto->cable) {
-                $item['cable_nombre'] = $producto->cable->cable_nombre;
-                $item['tipo_entrada_1_id'] = $producto->cable->tipo_entrada_1_id;
-                $item['tipo_entrada_2_id'] = $producto->cable->tipo_entrada_2_id;
-                $item['largo'] = $producto->cable->largo;
-            }
-
-            return $item;
         });
 
-        return response()->json(['data' => $mappedProductos]);
+        return response()->json(['data' => $data]);
     }
 
 

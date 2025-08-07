@@ -4,30 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CableFoto;
+use App\Models\CargadorFoto;
+
 
 class ProductoFotoController extends Controller
 {
     public function index($tipo, $id)
     {
-        switch (strtolower($tipo)) {
-            case 'cable':
-                $fotos = CableFoto::where('cable_id', $id)->get();
-                break;
-            // Agrega más casos aquí cuando tengas otras tablas
-            default:
-                $fotos = collect();
-                break;
+        if (strtolower($tipo) === 'cable') {
+            $fotos = CableFoto::where('cable_id', $id)->get();
+        }
+        else if (strtolower($tipo) === 'cargador') {
+            $fotos = CargadorFoto::where('cargador_id', $id)->get();
+        }
+        else {
+            $fotos = collect();
         }
 
-        // Transformamos para que retorne la URL
-        return response()->json([
-            'data' => $fotos->map(function($foto) {
-                return [
-                    'id' => $foto->id,
-                    'nombre_archivo' => $foto->nombre_archivo,
-                    'url' => $foto->url
-                ];
-            })
-        ]);
+        $data = $fotos->map(function($f) {
+            return [
+                'id'             => $f->id,
+                'nombre_archivo' => $f->nombre_archivo,
+                'ruta'           => $f->ruta,
+                'url'            => asset("storage/{$f->ruta}")
+            ];
+        });
+
+        return response()->json(['data' => $data]);
     }
 }

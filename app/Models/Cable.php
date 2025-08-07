@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\RegistrarEnProducto;
 
 class Cable extends Model
 {
+    use RegistrarEnProducto;
     use HasFactory;
     protected $table = 'cable';
 
@@ -53,6 +55,11 @@ class Cable extends Model
     public function fotos()
     {
         return $this->hasMany(CableFoto::class);
+    }
+
+    public function almacen()
+    {
+        return $this->belongsTo(Almacen::class, 'almacen_id');
     }
 
 }

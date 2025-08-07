@@ -54,14 +54,14 @@ class CableSeeder extends Seeder
             
             $largo = $cable[3];
             $peso = $this->calculateWeight($cable[0], $largo);
-            $descuento = ($cable[5] - $cable[6]) > 0 ? ($cable[5] - $cable[6]) : 0;
-            
-            $createdAt = $now->copy()->subDays(rand(0, 90));
-            
+            $descuento = ($cable[5] - $cable[6]) > 0 ? ($cable[5] - $cable[6]) : 0;        
+
+            $createdAt = $now->copy()->subDays(rand(0, 90));                        
+
             $data[] = [
                 'cable_nombre'           => $cable[0],
                 'disponibilidad_id'      => $disponibilidadMap[$cable[1]],
-                'estado_id'              => $estadoMap[$cable[2]],
+                'estado_id'              => $estadoMap[$cable[2]],                
                 'almacen_id'             => rand(1, 3),
                 'marca_id'               => rand(1, 5),
                 'tipo_entrada_1_id'      => $tipoEntradaIds[0],

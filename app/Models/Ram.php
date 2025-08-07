@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\RegistrarEnProducto;
 
 class Ram extends Model
 {
+    use RegistrarEnProducto;
+    
     public function compras()
     {
         return $this->belongsToMany(Compra::class, 'ram_compra');
