@@ -13,39 +13,30 @@ use App\Models\CableFoto;
 
 class ProductoController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = Producto::query();
+        $productos = DB::table('producto')->get();
 
-        if ($request->filled('tipo_objeto')) {
-            $query->where('tipo_objeto', $request->input('tipo_objeto'));
-        }
+        $productos = $productos->map(function ($producto) {
+            $tabla = $producto->tipo_objeto;
 
-        // Eager-load de estado y de la relación polimórfica + su almacén
-        $productos = $query
-            ->with(['estado', 'objeto.almacen'])
-            ->get();
+            $objeto = DB::table($tabla)->where('id', $producto->id_objeto)->first();
 
-        // Mapeamos para inyectar almacen_id y almacen_nombre
-        $data = $productos->map(function(Producto $p) {
-            $obj = $p->objeto; // instancia de Cable o Cargador
+            if ($objeto) {
+                $producto->objeto = $objeto;
 
-            return [
-                'id'              => $p->id,
-                'tipo_objeto'     => $p->tipo_objeto,
-                'id_objeto'       => $p->id_objeto,
-                'descripcion'     => $p->descripcion,
-                'peso'            => $p->peso,
-                'fecha'           => $p->fecha,
-                'hora'            => $p->hora,
-                'estado_id'       => $p->estado_id,
-                'estado_nombre'   => optional($p->estado)->estado_nombre,
-                'almacen_id'      => optional($obj)->almacen_id,
-                'almacen_nombre'  => optional($obj->almacen)->almacen_nombre ?? 'Desconocido',
-            ];
+                // Si es celular, cargar también sus fotos
+                if ($tabla === 'celular') {
+                    $producto->fotos = DB::table('celular_foto')
+                        ->where('celular_id', $objeto->id)
+                        ->pluck('ruta');
+                }
+            }
+
+            return $producto;
         });
 
-        return response()->json(['data' => $data]);
+        return response()->json($productos);
     }
 
 

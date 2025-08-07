@@ -29,6 +29,22 @@ use App\Http\Controllers\PerifericoFotoController;
 use App\Http\Controllers\ProductoFotoController;
 use App\Http\Controllers\ProductoController;
 
+use App\Http\Controllers\Api\CelularController;
+use App\Http\Controllers\CelularFotoController;
+
+// Obtener fotos (GET)
+Route::get('producto/celular/{id}/fotos', [CelularFotoController::class, 'index']);
+
+// Subir foto (POST)
+Route::post('producto/celular/{id}/fotos', [CelularFotoController::class, 'subir']);
+
+
+Route::post('/celular/{id}/foto', [CelularFotoController::class, 'subir']);
+
+
+Route::get('/celular', [CelularController::class, 'index']);
+Route::get('/celular/{id}', [CelularController::class, 'show']);
+
 Route::get('producto/{tipo}/{id}/fotos', [ProductoFotoController::class, 'index']);
 
 Route::middleware('auth:api')->get('/producto', [ProductoController::class, 'index']);

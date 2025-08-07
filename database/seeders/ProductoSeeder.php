@@ -17,21 +17,17 @@ class ProductoSeeder extends Seeder
             // Obtener IDs de objetos específicos
             $objetos = DB::table($tipo)->pluck('id');
             
-            foreach ($objetos as $objetoId) {
-                // Obtener almacen_id de la tabla específica
+            foreach ($objetos as $objetoId) {            
                 $almacenId = DB::table($tipo)
                     ->where('id', $objetoId)
                     ->value('almacen_id');
                 
                 DB::table('producto')->updateOrInsert(
+                    ['tipo_objeto' => 'celular', 'id_objeto' => 1],
                     [
-                        'tipo_objeto' => $tipo,
-                        'id_objeto' => $objetoId
-                    ],
-                    [
-                        'almacen_id' => $almacenId,
-                        'created_at' => $now,
-                        'updated_at' => $now
+                        'fecha' => now(), // ← Esto es lo que faltaba
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ]
                 );
             }
