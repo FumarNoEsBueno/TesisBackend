@@ -23,6 +23,7 @@ class controller_residuo extends Controller
             'peso'        => 'required|numeric',
             'almacen_id'  => 'required|exists:almacen,id',
             'user_id'    => 'required|exists:users,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validated->fails()) {
@@ -32,7 +33,13 @@ class controller_residuo extends Controller
             ], 422);
         }
 
-        $residuo = Residuo::create($validated->validated());
+        $data = $validated->validated();
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('residuos', 'public');
+        }
+
+        $residuo = Residuo::create($data);
 
         return response()->json([
             'message' => 'Residuo registrado correctamente',

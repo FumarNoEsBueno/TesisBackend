@@ -23,7 +23,12 @@ class HerramientaController extends Controller
             'fecha' => 'nullable|date',
             'hora' => 'nullable',
             'user_id' => 'required|exists:users,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('herramientas', 'public');
+        }
 
         $herramienta = Herramienta::create($data);
         return response()->json(['message' => 'Herramienta creada', 'data' => $herramienta], 201);
